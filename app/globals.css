@@ -1,26 +1,352 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Design tokens — PRD §6 (blue / black / beige identity)
+   Dark is the primary mode; beige light mode via media query.
+   Semantic vars (--bg, --text, …) swap per mode so every
+   pairing stays WCAG AA in both modes.
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ---- Raw palette ---- */
+  --color-ink: #0e0e0e;
+  --color-surface-dark: #14161a;
+  --color-beige: #faf6ef;
+  --color-beige-2: #efe9dc;
+  --color-blue-raw: #2d6bff;
+  --color-blue-600-raw: #1e4fd0;
+  --color-blue-200-raw: #afc6ff;
+
+  /* ---- Semantic (dark mode defaults) ---- */
+  --bg: var(--color-ink);
+  --surface: var(--color-surface-dark);
+  --surface-2: #1b1e24;
+  --text: #f5f3ee;
+  /* muted: 7.2:1 on --surface, large/secondary use only */
+  --text-muted: #a7a39b;
+  --border: #2c2f36;
+  --accent: var(--color-blue-raw); /* fills + large text only on dark */
+  --accent-strong: var(--color-blue-600-raw);
+  /* link/text accent on dark: blue-200 (11.4:1). Raw blue is only 4.3:1 on ink. */
+  --link: var(--color-blue-200-raw);
+  --on-accent: #ffffff; /* 4.5:1 on --accent, 6.8:1 on --accent-strong */
+  /* focus ring: 8.3:1 on ink */
+  --focus: #7fa8ff;
+  --glow: 0 0 80px rgb(45 107 255 / 0.25);
+
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --shadow-1: 0 2px 8px rgb(0 0 0 / 0.25);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.2s;
+  --dur-base: 0.5s;
+  --dur-slow: 0.9s;
+
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: var(--color-beige);
+    --surface: var(--color-beige-2);
+    --surface-2: #e4ddcc;
+    --text: #1a1a1a;
+    /* 7.0:1 on beige */
+    --text-muted: #57534a;
+    --border: #d4ccb9;
+    --accent: var(--color-blue-600-raw); /* 6.8:1 with white text */
+    --accent-strong: #173da3;
+    /* 5.6:1 on beige */
+    --link: var(--color-blue-600-raw);
+    --on-accent: #ffffff;
+    /* focus ring: 6.4:1 on beige (PRD #7FA8FF is only 2.2:1 here) */
+    --focus: #1e4fd0;
+    --glow: 0 0 80px rgb(45 107 255 / 0.15);
+    --shadow-1: 0 2px 8px rgb(0 0 0 / 0.12);
+
+    color-scheme: light;
   }
 }
 
+@theme inline {
+  /* Colors — semantic, mode-aware */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border-soft: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-link: var(--link);
+  --color-on-accent: var(--on-accent);
+  --color-focus: var(--focus);
+  --color-ink: var(--color-ink);
+  --color-beige: var(--color-beige);
+
+  /* Type */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-clash), var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
+
+  --text-display: clamp(2.5rem, 6vw, 6rem);
+  --text-display--line-height: 1.05;
+  --text-h1: clamp(2rem, 4vw, 3.5rem);
+  --text-h1--line-height: 1.1;
+  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --text-h2--line-height: 1.15;
+
+  /* Radius */
+  --radius-card: var(--radius-card);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-card: var(--shadow-1);
+  --shadow-glow: var(--glow);
+
+  --ease-out-expo: var(--ease-out);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible focus everywhere — 3px ring, never removed without replacement */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Skip link: first focusable element; visually hidden until focused */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-strong);
+  color: var(--on-accent);
+  font-weight: 600;
+  transform: translateY(-150%);
+  opacity: 0;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  opacity: 1;
+}
+
+/* Screen-reader-only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Reduced motion — global gate. Anything animated must also be
+   gated in JS via useReducedMotion; this is the CSS backstop.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Playground masonry — CSS columns, zero JS (PRD §5.3)
+   ============================================================ */
+
+.masonry {
+  columns: 1;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masonry {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry {
+    columns: 3;
+  }
+}
+
+.masonry > li {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   Folder CTA (Juan Mora's "Check out my Work" folder, CSS-only).
+   Opens on hover AND :focus-visible; the global reduced-motion
+   backstop zeroes the transitions, so the open state is instant
+   but motion-free for prm users.
+   ============================================================ */
+
+.folder-stage {
+  perspective: 1000px;
+}
+
+.folder {
+  position: relative;
+  width: 240px;
+  height: 180px;
+  transform-style: preserve-3d;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.folder-back {
+  position: absolute;
+  inset: 14px 0 0 0;
+  border-radius: 18px;
+  background: var(--accent-strong);
+}
+
+.folder-back::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 0;
+  width: 44%;
+  height: 30px;
+  border-radius: 12px 16px 0 0;
+  background: var(--accent-strong);
+}
+
+.folder-papers {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 4px;
+  height: 62%;
+  border-radius: 8px 8px 0 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    #ffffff 0 10px,
+    #d9d6cf 10px 12px
+  );
+  box-shadow: 0 -2px 8px rgb(0 0 0 / 0.18);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.folder-front {
+  position: absolute;
+  inset: 38px 0 0 0;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  transform-origin: 50% 100%;
+  transition: transform var(--dur-base) var(--ease-out);
+  box-shadow: var(--shadow-1);
+}
+
+.folder-link:hover .folder,
+.folder-link:focus-visible .folder {
+  transform: scale(1.05);
+}
+
+.folder-link:hover .folder-front,
+.folder-link:focus-visible .folder-front {
+  transform: rotateX(-34deg);
+}
+
+.folder-link:hover .folder-papers,
+.folder-link:focus-visible .folder-papers {
+  transform: translateY(-30px) rotate(-2deg);
+}
+
+/* masked line reveal (SplitText-style); the hidden state is applied
+   by GSAP only when motion is allowed — static render is fully visible */
+.line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.line-inner {
+  display: block;
+  will-change: transform;
+}
+
+/* ============================================================
+   3D hero scene (PRD §5.1) — CSS transforms only, no canvas.
+   The whole scene is decorative: aria-hidden + inert in JSX.
+   ============================================================ */
+
+.hero-stage {
+  perspective: 1200px;
+  perspective-origin: 50% 35%;
+}
+
+.hero-plane {
+  transform-style: preserve-3d;
+  transform: rotateX(20deg) rotateZ(-4deg) scale(0.92);
+  will-change: transform;
+}
+
+.hero-panel {
+  transform-style: preserve-3d;
+  box-shadow: var(--shadow-1), var(--glow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-panel {
+    animation: panel-rise var(--dur-slow) var(--ease-out) both;
+    animation-delay: var(--panel-delay, 0s);
+  }
+
+  @keyframes panel-rise {
+    from {
+      opacity: 0;
+      transform: translateZ(-60px) translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateZ(var(--panel-z, 0)) translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-panel {
+    opacity: 1;
+    transform: translateZ(var(--panel-z, 0));
+  }
 }
