@@ -103,21 +103,18 @@ export function HomeIntro() {
               );
           });
 
-          // 3 — folder CTA: giant word drifts, folder pops in
-          gsap.fromTo(
-            ".cta-big-word",
-            { yPercent: 18 },
-            {
-              yPercent: -10,
-              ease: "none",
-              scrollTrigger: {
-                trigger: ".intro-folder-cta",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.5,
-              },
+          // 3 — folder CTA: big "W … ork" letters rise, folder pops in
+          gsap.from(".work-letter", {
+            opacity: 0,
+            y: 50,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".intro-folder-cta",
+              start: "top 70%",
+              once: true,
             },
-          );
+          });
           gsap.from(".folder-stage", {
             scale: 0.7,
             y: 60,
@@ -235,38 +232,22 @@ export function HomeIntro() {
         </ul>
       </section>
 
-      {/* ---- Folder CTA (Juan's "Curious?… Check out my Work") ---- */}
+      {/* ---- Folder CTA (Juan's "Work" word with the folder between letters) ---- */}
       <section
         aria-label="See my work"
         className="intro-folder-cta relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-24"
       >
-        {/* giant decorative background word — SVG keeps it out of
-            contrast checks; it's pure texture, like Juan's peach "Work" */}
+        {/* Giant faded "W … ork" spanning the full width, folder in the gap */}
         <div
           aria-hidden="true"
-          className="cta-big-word pointer-events-none absolute inset-0 flex items-center justify-center"
+          className="pointer-events-none absolute inset-0 flex items-center justify-between px-[1vw]"
         >
-          <svg
-            viewBox="0 0 1200 360"
-            className="h-auto w-[140%] max-w-none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <text
-              x="600"
-              y="268"
-              textAnchor="middle"
-              fontSize="340"
-              fontWeight="600"
-              fill="var(--accent)"
-              fillOpacity="0.13"
-              style={{ fontFamily: "var(--font-clash), sans-serif" }}
-            >
-              Work
-            </text>
-          </svg>
+          <span className="work-letter">W</span>
+          <span className="work-letter">ork</span>
         </div>
 
-        <div className="relative flex flex-col items-center gap-10 text-center">
+        {/* centre column: Curious? / folder / keep scrolling (on top) */}
+        <div className="relative flex flex-col items-center gap-8 text-center">
           <p className="text-lg font-medium">Curious?… Check out my</p>
 
           <Link href="/work" className="folder-link rounded-card no-underline">

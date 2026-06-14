@@ -91,7 +91,74 @@ test("work index sets aria-current and moves focus on activation", async ({
   await page.waitForLoadState("networkidle");
   const secondLink = page.getByRole("navigation", { name: "Projects" }).getByRole("link").nth(1);
   await secondLink.click();
-  const heading = page.locator("#project-screen-reader-analytics");
+  const heading = page.locator("#project-albertsons-wcag-program");
   await expect(heading).toBeFocused();
   await expect(secondLink).toHaveAttribute("aria-current", "true");
+});
+
+test.describe("theme toggle", () => {
+  test("is keyboard-operable and persists across reload", async ({ page }) => {
+    await page.goto("/");
+    const toggle = page.getByRole("button", { name: /switch to (light|dark) theme/i });
+    await expect(toggle).toBeVisible();
+
+    await toggle.focus();
+    await expect(toggle).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    // an explicit choice is now recorded on <html> and in localStorage
+    const chosen = await page.evaluate(() => document.documentElement.dataset.theme);
+    expect(chosen === "light" || chosen === "dark").toBe(true);
+    const stored = await page.evaluate(() => localStorage.getItem("theme"));
+    expect(stored).toBe(chosen);
+
+    // ...and survives a reload (no-FOUC init script re-applies it)
+    await page.reload();
+    const afterReload = await page.evaluate(() => document.documentElement.dataset.theme);
+    expect(afterReload).toBe(chosen);
+  });
+
+  test("explicit light theme still passes axe on home", async ({ page }) => {
+    await page.goto("/");
+    await page.evaluate(() => {
+      document.documentElement.dataset.theme = "light";
+    });
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"])
+      .analyze();
+    expect(results.violations.map((v) => v.id)).toEqual([]);
+  });
+});
+
+test.describe("reduced motion safety", () => {
+  test("no story-line and no custom cursor under reduced motion", async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    // the scroll story-line is not rendered
+    await expect(page.getByTestId("story-line")).toHaveCount(0);
+    // the custom cursor never mounts
+    await expect(page.locator(".custom-cursor")).toHaveCount(0);
+    // the diorama is present but static (the desk is decorative, aria-hidden)
+    await expect(page.locator(".scene .diorama")).toHaveCount(1);
+  });
+});
+
+test("project without a public link shows a context badge, not a live button", async ({
+  page,
+}) => {
+  await page.goto("/work");
+  const section = page.locator("#accessibility-ai-platform");
+  await expect(
+    section.getByText("Internal platform", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    section.getByRole("link", { name: /view live/i }),
+  ).toHaveCount(0);
+  await expect(
+    section.getByRole("link", { name: /view repo/i }),
+  ).toHaveCount(0);
 });

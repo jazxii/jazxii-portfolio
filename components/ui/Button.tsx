@@ -19,18 +19,27 @@ export function ButtonLink({
   variant = "primary",
   external = false,
   className = "",
+  cursor,
 }: {
   href: string;
   children: ReactNode;
   variant?: Variant;
   external?: boolean;
   className?: string;
+  /** Optional custom-cursor label hint (e.g. "email", "view"). */
+  cursor?: string;
 }) {
   const cls = `inline-flex items-center gap-2 rounded-pill px-5 py-2.5 text-sm font-semibold no-underline transition-colors ${styles[variant]} ${className}`;
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cls}
+        data-cursor={cursor}
+      >
         {children}
         <span className="sr-only"> (opens in new tab)</span>
         <span aria-hidden="true">↗</span>
@@ -39,7 +48,7 @@ export function ButtonLink({
   }
 
   return (
-    <Link href={href} className={cls}>
+    <Link href={href} className={cls} data-cursor={cursor}>
       {children}
     </Link>
   );

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 980" width="1280" height="980" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2D6BFF"/>
+      <stop offset="1" stop-color="#1E4FD0"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1e24"/>
+      <stop offset="1" stop-color="#0E0E0E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="980" fill="#0E0E0E"/>
+  <rect x="50" y="50" width="1180" height="880" rx="22" fill="url(#g)" opacity="0.9"/>
+  <circle cx="640.0" cy="450.0" r="90" fill="#0E0E0E" opacity="0.4"/>
+  <path d="M612.0 406.0 L692.0 450.0 L612.0 494.0 Z" fill="#F5F3EE" opacity="0.9"/>
+  <text x="100" y="830" font-family="monospace" font-size="24" fill="#F5F3EE" opacity="0.7">250 pieces · 2.5k IG / 4k YT</text>
+  <text x="100" y="890" font-family="sans-serif" font-weight="700" font-size="40" fill="#F5F3EE">House of Alt Campaign</text>
+</svg>

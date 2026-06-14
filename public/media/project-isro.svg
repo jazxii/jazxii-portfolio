@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2D6BFF"/>
+      <stop offset="1" stop-color="#1E4FD0"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1e24"/>
+      <stop offset="1" stop-color="#0E0E0E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="800" fill="#0E0E0E"/>
+  <rect x="60" y="60" width="1160" height="680" rx="24" fill="url(#paper)"/>
+  <rect x="60" y="60" width="1160" height="680" rx="24" fill="none" stroke="#2D6BFF" stroke-opacity="0.25"/>
+  <line x1="160" y1="160" x2="160" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="250" y1="160" x2="250" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="340" y1="160" x2="340" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="430" y1="160" x2="430" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="520" y1="160" x2="520" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="610" y1="160" x2="610" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="700" y1="160" x2="700" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="790" y1="160" x2="790" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="880" y1="160" x2="880" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="970" y1="160" x2="970" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="1060" y1="160" x2="1060" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="1150" y1="160" x2="1150" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="120" y1="200" x2="1160" y2="200" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="120" y1="280" x2="1160" y2="280" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="120" y1="360" x2="1160" y2="360" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="120" y1="440" x2="1160" y2="440" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="120" y1="520" x2="1160" y2="520" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <line x1="120" y1="600" x2="1160" y2="600" stroke="#2D6BFF" stroke-opacity="0.08"/>
+  <path d="M120 520 L120 520 L120 240 L190 240 L190 520 L220 520 L290 520 L290 240 L360 240 L360 520 L390 520 L460 520 L460 240 L530 240 L530 520 L560 520 L630 520 L630 240 L700 240 L700 520 L730 520 L800 520 L800 240 L870 240 L870 520 L900 520 L970 520 L970 240 L1040 240 L1040 520 L1070 520 " fill="none" stroke="url(#g)" stroke-width="5" stroke-linejoin="round"/>
+  <text x="120" y="150" font-family="monospace" font-size="26" fill="#A7A39B">Stable 70KV pulse · +15% radar efficacy</text>
+  <text x="120" y="700" font-family="sans-serif" font-weight="700" font-size="44" fill="#F5F3EE">ISRO · SiC IGBT Switch Matrix</text>
+</svg>

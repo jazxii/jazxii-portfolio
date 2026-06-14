@@ -6,8 +6,8 @@
 |---|---|
 | **Author** | Jassim M. Shamim |
 | **LinkedIn** | https://www.linkedin.com/in/jassim-m-shamim/ |
-| **Status** | Draft v1.0 |
-| **Last updated** | 10 June 2026 |
+| **Status** | Draft v1.2 |
+| **Last updated** | 13 June 2026 |
 | **Inspiration** | williamle.design (spatial 3D entry + Playground), juanmora.co (scroll-driven Work) |
 
 ---
@@ -64,11 +64,14 @@ Shared persistent pill-style top nav and a shared bookend footer (CTA + wordmark
 ## 5. Signature Features (functional + a11y spec)
 
 ### 5.1 — 3D Spatial Hero (inspired by William Le)
-A tilted "creative technologist's desk" diorama: floating panels for an AI/agent terminal, a Figma frame, an accessibility audit/contrast checker, and a code editor, arranged on a plane rotated ~20deg on X with layered depth + subtle mouse-parallax.
+A tilted "creative technologist's desk" diorama on the right of a two-column first screen: a neo4j **WCAG knowledge-graph** card, a **Figma ADA-review** frame (selection handles + "Add to cart" + spec ✓s), an **auditor terminal** (`$ auditor run --pods 5 … ✓ 22 patches drafted`), and a floating **contrast chip** (`Aa 17.2 : 1 ✓`) — the desk that tells the AI-accessibility story at a glance. The left column carries the eyebrow, a giant peach `jazxii` wordmark, a meta row (Agentic AI × Inclusive Design · Chennai, India 2026), the `<h1>` ("Building a digital world that's beautiful — and built for everyone."), and a mono sub-line linking to the proof.
 
-- **Implementation:** CSS 3D transforms, NOT WebGL. (Verified: William's scene uses per-element `matrix3d` encoding `rotateX(20deg)` + `scale(0.5)` with baked perspective and `will-change: transform`; zero `<canvas>`.) Keeps bundle + complexity low.
-- **Behavior:** scene assembles on load; "camera" eases inward on scroll toward the work teaser.
-- **A11y:** scene is decorative -> `aria-hidden="true"`; real `<h1>` + tagline as text. Under `prefers-reduced-motion: reduce`, parallax/assembly disabled and a static composed image shown. No info conveyed by animation alone.
+- **Implementation:** **CSS 3D transforms only, no WebGL/canvas** (`components/hero/Diorama.tsx`). Each layer sits on a `preserve-3d` plane at its own `translateZ` depth; the plane's resting tilt is `rotateX(12deg) rotateY(-11deg)`. (The earlier v1.1 WebGL/React-Three-Fiber monogram was removed — `three/@react-three/fiber/@react-three/drei` are no longer dependencies.)
+- **Behavior:** the plane tilts toward the **mouse position anywhere on the page** (rAF-throttled, `pointer: fine` only); reduced motion / touch hold the resting tilt. The Figma frame is a filled, rounded card whose "Add to cart" button wears a focus-ring (the ADA demo). No entrance opacity fade (keeps the decorative text at full contrast for axe).
+- **A11y:** the whole diorama is decorative -> `aria-hidden="true"`; it contains no focusable elements. The real `<h1>` is text and the LCP. The giant `jazxii` wordmark is decorative (`aria-hidden`, the name is in the nav + eyebrow). Diorama colours hold WCAG AA even though hidden (tag/button use `--color-blue-600`).
+
+### 5.1a — Scroll story-line (inspired by Juan Mora)
+Juan's "grow-line" reimagined as an accessible SVG thread (`StoryLine.tsx`): a curvy line that **draws from the top of the first screen down the entire home route as you scroll** (ScrollTrigger scrub on `stroke-dashoffset`, spanning the whole page), led by a glowing **pen-tip pointer** that descends with the scroll. Decorative, `pointer-events:none`, desktop-only, and **not rendered under reduced motion** (separators carry structure). *(The earlier hand-drawn signature was removed.)*
 
 ### 5.2 — Work Showcase (inspired by Juan Mora)
 Two-column layout: a sticky left index (`position: sticky; top: 0`) + scrolling content. Each project block: Title, Year pill, "View live / repo" button, then **Challenge / Services (tag chips) / Role**, plus media (looping muted video or images).
@@ -86,7 +89,11 @@ Two-column layout: a sticky left index (`position: sticky; top: 0`) + scrolling 
 A single repeated CTA card ("Let's build something inclusive together") + large wordmark/monogram footer on every route (Juan resolves Home and Work to the identical closing moment). Contains `mailto:`, LinkedIn, GitHub, optional contact form. No downloads or sharing flows.
 
 ### 5.5 — Global Chrome
-Persistent pill-style top nav (Home / Work / Playground / About) with a left monogram; optional live clock (William detail). Custom cursor is optional + progressive: never replaces the real cursor for keyboard/touch; disabled under reduced-motion.
+Persistent top nav: a left `jazxii.` wordmark (peach dot), a centred **iPhone-style "dynamic island"**, and a right cluster of `Email` / `in` / `gh` links + a live clock (12-hour) + the theme toggle. Plus a **custom cursor**.
+- **Dynamic island (`Nav.tsx`):** collapsed, it's a black pill showing simple album art + an animated equaliser. On hover, keyboard focus, or tap it morphs/expands downward to reveal the nav links (Home / Work / Playground / About). The links live in a real `<nav aria-label="Main">` that's always in the DOM and focusable (focusing one triggers `:focus-within` to expand); a trigger `<button aria-expanded aria-controls>` opens it for touch; Escape + outside-tap dismiss (WCAG 1.4.13). The EQ is decorative (`aria-hidden`) and static under reduced motion. *(Album art is a placeholder gradient for now — a richer 3D/media treatment is planned.)*
+- **Ambient backdrop:** the blue top-glow + film grain renders on **every route** (in `layout.tsx`), fixed and decorative, behind content; never affects measured text contrast.
+- **Theme toggle (`ThemeToggle.tsx` + `lib/theme.ts`):** dark is primary; the site follows the system scheme by default and the toggle overrides it (persisted to localStorage, mirrored on `<html data-theme>`). A no-FOUC init script in `layout.tsx` applies a stored choice before paint. Accessible `<button>` whose name states the action ("Switch to light/dark theme"); shows a **"Light mode"/"Dark mode" text label** on desktop and a sun/moon icon on mobile — never colour alone.
+- **Custom cursor (`Cursor.tsx`):** dot + trailing ring that grows over interactive elements and shows a contextual label from `data-cursor` ("view" / "email"). Progressive — mounts only on `pointer: fine` + motion-allowed; keyboard/touch keep the native cursor and focus rings; inputs keep their caret. Decorative (`aria-hidden`).
 
 ---
 
@@ -103,6 +110,7 @@ Built from a **blue / black / beige** identity, blending Juan's warm beige light
 --color-blue:     #2D6BFF; /* primary brand / action */
 --color-blue-600: #1E4FD0; /* hover / pressed */
 --color-blue-200: #AFC6FF; /* accents on dark */
+--color-peach:    #F5A97E; /* warm peach accent: wordmark, diorama, brand dot (darkens to #B3501F for AA text on beige) */
 --color-text-hi:  #F5F3EE; /* high-emphasis text on dark */
 --color-text-lo:  #A7A39B; /* muted text (large/secondary only) */
 --color-text-ink: #1A1A1A; /* text on beige */
@@ -148,11 +156,12 @@ Built from a **blue / black / beige** identity, blending Juan's warm beige light
 | Framework | Next.js (App Router) + TS | SSG, image optimization, routing |
 | Styling | Tailwind + CSS variables (tokens) | tokens map to Tailwind theme |
 | Motion | GSAP + ScrollTrigger + Lenis | matches Juan's verified stack |
+| 3D hero | CSS 3D transforms (no WebGL) | `Diorama.tsx`; pointer parallax, zero deps |
 | Content | MDX / typed content files | add a file = add a project |
 | Hosting | Vercel | free, CI-friendly |
 | Optional backend | Next route handler or FastAPI | only if/when needed |
 
-No WebGL, no UnicornStudio required. (If the cinematic pre-rendered hero look is ever wanted, render the scene to a muted `.mp4` and scroll-scrub it — Juan's approach — but start with the lighter CSS-3D hero.)
+**No WebGL (v1.2):** the hero diorama is pure CSS 3D transforms — no `three`/`@react-three/fiber`/`@react-three/drei` (a v1.1 WebGL monogram experiment was reverted). This keeps the hero on the perf budget with zero 3D dependencies and a static, reduced-motion-safe fallback for free.
 
 ---
 
@@ -174,7 +183,7 @@ Target **WCAG 2.2 AA**. Must-haves:
 
 ## 9. Performance Budget
 
-- JS <= ~120KB gzipped on the hero route; Lenis/GSAP load only where needed.
+- JS <= ~120KB gzipped on the hero route; Lenis/GSAP load lazily where needed. The CSS-3D diorama adds no JS beyond a tiny pointer-parallax handler.
 - Images via `<picture>` AVIF/WebP with width/height set (avoid CLS).
 - All video `preload="none"`, lazy-played in view, with posters.
 - Fonts self-hosted, `font-display: swap`, subset.
@@ -201,10 +210,24 @@ Target **WCAG 2.2 AA**. Must-haves:
 
 ---
 
-## 12. Open Questions
+## 12. Content provenance (v1.1)
 
-1. Monogram/wordmark: do you want a "JS" or "JMS" mark (like William's "W")?
-2. Display typeface: Clash Display (proposed) or another?
-3. Contact: email-only link, or a form (adds a serverless handler)?
-4. Do you want individual deep case-study pages later, or keep links-to-live only?
-5. Custom domain + analytics (privacy-friendly, e.g. Plausible)?
+Real content sourced from the author's LinkedIn profile. `/work` projects:
+**Accessibility AI Platform** (Cognizant — Graph RAG over a WCAG knowledge
+graph, LLM auditor over DOM+screenshots; internal, no public link),
+**Albertsons WCAG 2.2 Program** (web + Unified Mobile App, 5 pods),
+**ENIGMA 8.0** (IEEE-VIT Android app, public Play Store link, 2,400+
+registrations from 75+ countries), **ISRO — 70KV SiC IGBT Switch Matrix**
+(Marx modulator, +15% radar efficacy; research, no public link). Projects
+without a public URL render a context badge ("Internal platform" / "Research
+project") instead of a live/repo button. Media SVGs remain on-brand
+placeholders pending real screenshots/recordings.
+
+## 13. Open Questions
+
+1. ~~Monogram: "JS" or "JMS"?~~ → the brand mark is the **`jazxii` wordmark** (giant in the hero, `jazxii.` with a peach dot in the nav).
+2. Display typeface: Clash Display (current) or another?
+3. Contact: email-only link (current) — add a form later? (`/accessibility` already has one.)
+4. Individual deep case-study pages later, or keep links-to-live only?
+5. Custom domain + privacy-friendly analytics (e.g. Plausible)?
+6. Replace placeholder project/playground media with real captures.

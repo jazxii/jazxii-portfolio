@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2D6BFF"/>
+      <stop offset="1" stop-color="#1E4FD0"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1e24"/>
+      <stop offset="1" stop-color="#0E0E0E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#0E0E0E"/>
+  <rect x="50" y="50" width="1180" height="620" rx="22" fill="url(#g)" opacity="0.9"/>
+  <rect x="180" y="220.0" width="400" height="26" rx="13" fill="#F5F3EE" opacity="0.80"/>
+  <rect x="180" y="280.0" width="520" height="26" rx="13" fill="#F5F3EE" opacity="0.70"/>
+  <rect x="180" y="340.0" width="300" height="26" rx="13" fill="#F5F3EE" opacity="0.60"/>
+  <rect x="180" y="400.0" width="460" height="26" rx="13" fill="#F5F3EE" opacity="0.50"/>
+  <rect x="180" y="460.0" width="360" height="26" rx="13" fill="#F5F3EE" opacity="0.40"/>
+  <text x="100" y="570" font-family="monospace" font-size="24" fill="#F5F3EE" opacity="0.7">front-end · maintenance</text>
+  <text x="100" y="630" font-family="sans-serif" font-weight="700" font-size="40" fill="#F5F3EE">First MLA Website</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2D6BFF"/>
+      <stop offset="1" stop-color="#1E4FD0"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1e24"/>
+      <stop offset="1" stop-color="#0E0E0E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="820" fill="#0E0E0E"/>
+  <rect x="50" y="50" width="1180" height="720" rx="22" fill="url(#g)" opacity="0.9"/>
+  <path d="M120 410.0 L120 410 L132 430 L144 451 L156 471 L168 488 L180 500 L192 503 L204 498 L216 483 L228 459 L240 418 L252 400 L264 378 L276 356 L288 337 L300 322 L312 314 L324 316 L336 327 L348 347 L360 393 L372 411 L384 432 L396 455 L408 477 L420 494 L432 506 L444 509 L456 502 L468 486 L480 435 L492 418 L504 397 L516 374 L528 351 L540 331 L552 316 L564 309 L576 311 L588 323 L600 378 L612 393 L624 412 L636 436 L648 460 L660 482 L672 501 L684 512 L696 514 L708 506 L720 449 L732 436 L744 418 L756 395 L768 370 L780 346 L792 325 L804 310 L816 303 L828 306 L840 365 L852 376 L864 392 L876 414 L888 439 L900 464 L912 488 L924 507 L936 518 L948 520 L960 460 L972 452 L984 437 L996 417 L1008 393 L1020 366 L1032 341 L1044 319 L1056 303 L1068 297 L1080 356 L1092 361 L1104 373 L1116 392 L1128 416 L1140 442 L1152 469 " fill="none" stroke="#F5F3EE" stroke-opacity="0.8" stroke-width="4"/>
+  <text x="100" y="670" font-family="monospace" font-size="24" fill="#F5F3EE" opacity="0.7">Playwright · axe-core · LLM</text>
+  <text x="100" y="730" font-family="sans-serif" font-weight="700" font-size="40" fill="#F5F3EE">AI Agents for A11y Testing</text>
+</svg>

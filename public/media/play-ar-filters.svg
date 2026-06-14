@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 940" width="1280" height="940" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2D6BFF"/>
+      <stop offset="1" stop-color="#1E4FD0"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1e24"/>
+      <stop offset="1" stop-color="#0E0E0E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="940" fill="#0E0E0E"/>
+  <rect x="50" y="50" width="1180" height="840" rx="22" fill="url(#g)" opacity="0.9"/>
+  <circle cx="640.0" cy="410.0" r="150" fill="none" stroke="#F5F3EE" stroke-opacity="0.25" stroke-width="3"/>
+  <circle cx="640.0" cy="410.0" r="110" fill="none" stroke="#F5F3EE" stroke-opacity="0.4" stroke-width="3"/>
+  <circle cx="640.0" cy="410.0" r="70" fill="none" stroke="#F5F3EE" stroke-opacity="0.6" stroke-width="3"/>
+  <circle cx="640.0" cy="410.0" r="34" fill="#F5F3EE" opacity="0.85"/>
+  <text x="100" y="790" font-family="monospace" font-size="24" fill="#F5F3EE" opacity="0.7">Spark AR · creative tech</text>
+  <text x="100" y="850" font-family="sans-serif" font-weight="700" font-size="40" fill="#F5F3EE">AR Filters — Palette '21</text>
+</svg>

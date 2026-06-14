@@ -10,32 +10,39 @@ export const metadata: Metadata = {
 
 const skills = {
   "Accessibility": [
-    "WCAG 2.2",
+    "WCAG 2.2 AA",
     "ARIA",
-    "Screen reader testing",
+    "NVDA / VoiceOver / TalkBack",
     "Audit & remediation",
-    "Accessible design systems",
+    "React / Compose / SwiftUI",
   ],
-  "Engineering": [
-    "TypeScript",
-    "React / Next.js",
-    "CSS architecture",
-    "Testing & CI",
-    "Node.js",
+  "AI & Engineering": [
+    "LLM orchestration",
+    "Graph RAG",
+    "Knowledge graphs / Neo4j",
+    "Playwright + axe-core",
+    "TypeScript / React / Node",
   ],
   "Creative": [
     "Motion design (GSAP)",
     "Figma",
-    "Creative coding",
-    "AI tooling",
-    "Typography",
+    "Video editing",
+    "AR filters",
+    "Photography",
   ],
 };
+
+const languages = ["English", "Malayalam", "Hindi"];
 
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 pt-16 sm:px-6">
       <h1 className="font-display text-h1 font-semibold">About</h1>
+
+      <p className="mt-4 font-mono text-sm text-text-muted">
+        Digital Accessibility Engineer @ Cognizant · AI &amp; LLM R&amp;D ·
+        Ex-ISRO · Chennai, India
+      </p>
 
       <section aria-labelledby="story-heading" className="mt-10">
         <h2 id="story-heading" className="font-display text-h2 font-semibold">
@@ -44,16 +51,23 @@ export default function AboutPage() {
         <div className="mt-4 space-y-4 max-w-prose">
           <p>
             I’m Jassim — a digital accessibility engineer and creative
-            technologist. I spend my days making sure that the most ambitious
-            interfaces on the web are also the most usable ones, for every
-            person and every input method.
+            technologist who builds inclusive tech with AI workflows. My
+            background in QA and accessibility testing gave me a user-first
+            mindset; my work now lives at the crossover of accessibility, AI,
+            and design, where I architect LLM systems and knowledge graphs to
+            make the most ambitious interfaces usable for everyone.
           </p>
           <p>
-            Most portfolios in this space make you choose: visually stunning
-            or genuinely accessible. This site is my argument that the choice
-            is false. Every animation here has a reduced-motion path, every
-            interaction works from a keyboard, and every page holds WCAG 2.2
-            AA — without giving up the craft.
+            At Cognizant I designed and built an internal Accessibility AI
+            Platform — Graph RAG over a WCAG knowledge graph, an LLM auditor
+            over live DOM and screenshots — that unifies the whole ADA workflow
+            in one place. Before that I led a high-voltage project at ISRO. I
+            care about writing better code, designing cleaner interfaces, and
+            experimenting with intelligent systems that make life easier — and
+            more inclusive.
+          </p>
+          <p className="font-medium text-text">
+            Always learning. Always improving. Always creating.
           </p>
         </div>
       </section>
@@ -102,6 +116,36 @@ export default function AboutPage() {
         </dl>
       </section>
 
+      <section aria-labelledby="more-heading" className="mt-14">
+        <h2 id="more-heading" className="font-display text-h2 font-semibold">
+          Certifications &amp; languages
+        </h2>
+        <dl className="mt-6 space-y-8">
+          <div>
+            <dt className="font-mono text-xs uppercase tracking-widest text-text-muted">
+              Certification
+            </dt>
+            <dd className="mt-3">
+              <Pill>Claude Certified Architect — Foundations</Pill>
+            </dd>
+          </div>
+          <div>
+            <dt className="font-mono text-xs uppercase tracking-widest text-text-muted">
+              Languages
+            </dt>
+            <dd className="mt-3">
+              <ul className="flex flex-wrap gap-2">
+                {languages.map((language) => (
+                  <li key={language}>
+                    <Pill>{language}</Pill>
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
       <section aria-labelledby="contact-heading" className="mt-14">
         <h2 id="contact-heading" className="font-display text-h2 font-semibold">
           Contact
@@ -112,7 +156,7 @@ export default function AboutPage() {
           collaborations.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <ButtonLink href="mailto:jassimmohammed2910@gmail.com">
+          <ButtonLink href="mailto:jassimmohammed2910@gmail.com" cursor="email">
             jassimmohammed2910@gmail.com
           </ButtonLink>
           <ButtonLink

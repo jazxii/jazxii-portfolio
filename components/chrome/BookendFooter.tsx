@@ -23,7 +23,7 @@ export function BookendFooter() {
           audits, and collaborations.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <ButtonLink href={`mailto:${EMAIL}`} variant="primary">
+          <ButtonLink href={`mailto:${EMAIL}`} variant="primary" cursor="email">
             Email me
           </ButtonLink>
           <ButtonLink

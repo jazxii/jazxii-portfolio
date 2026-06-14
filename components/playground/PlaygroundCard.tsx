@@ -21,6 +21,7 @@ export function PlaygroundCard({ item }: { item: PlaygroundItem }) {
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
+      data-cursor="view"
       className="group relative block overflow-hidden rounded-card bg-surface no-underline"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}

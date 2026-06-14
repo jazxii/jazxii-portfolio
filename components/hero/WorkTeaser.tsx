@@ -30,6 +30,7 @@ export function WorkTeaser() {
           <li key={project.slug}>
             <Link
               href={`/work#${project.slug}`}
+              data-cursor="view"
               className="group block rounded-card no-underline"
             >
               <MediaFigure

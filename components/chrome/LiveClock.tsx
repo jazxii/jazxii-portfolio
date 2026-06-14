@@ -13,10 +13,10 @@ export function LiveClock() {
   useEffect(() => {
     const tick = () =>
       setTime(
-        new Intl.DateTimeFormat("en-GB", {
-          hour: "2-digit",
+        new Intl.DateTimeFormat("en-US", {
+          hour: "numeric",
           minute: "2-digit",
-          second: "2-digit",
+          hour12: true,
         }).format(new Date()),
       );
     tick();

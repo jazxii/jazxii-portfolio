@@ -29,7 +29,13 @@ export function ProjectSection({ project }: { project: Project }) {
         <Pill>{project.year}</Pill>
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-3">
+      {project.period && (
+        <p className="mt-2 font-mono text-xs uppercase tracking-widest text-text-muted">
+          {project.period}
+        </p>
+      )}
+
+      <div className="mt-5 flex flex-wrap items-center gap-3">
         {project.liveUrl && (
           <ButtonLink href={project.liveUrl} external>
             View live<span className="sr-only">: {project.title}</span>
@@ -39,6 +45,10 @@ export function ProjectSection({ project }: { project: Project }) {
           <ButtonLink href={project.repoUrl} variant="ghost" external>
             View repo<span className="sr-only">: {project.title}</span>
           </ButtonLink>
+        )}
+        {/* No public link (internal/research work): show a context badge instead */}
+        {!project.liveUrl && !project.repoUrl && project.context && (
+          <Pill>{project.context}</Pill>
         )}
       </div>
 

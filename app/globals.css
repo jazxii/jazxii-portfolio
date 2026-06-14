@@ -16,6 +16,7 @@
   --color-blue-raw: #2d6bff;
   --color-blue-600-raw: #1e4fd0;
   --color-blue-200-raw: #afc6ff;
+  --color-peach-raw: #f5a97e; /* warm peach accent (wordmark, diorama, brand dot) */
 
   /* ---- Semantic (dark mode defaults) ---- */
   --bg: var(--color-ink);
@@ -32,6 +33,8 @@
   --on-accent: #ffffff; /* 4.5:1 on --accent, 6.8:1 on --accent-strong */
   /* focus ring: 8.3:1 on ink */
   --focus: #7fa8ff;
+  /* peach used as text on dark (e.g. hero wordmark): light peach reads fine */
+  --peach: var(--color-peach-raw);
   --glow: 0 0 80px rgb(45 107 255 / 0.25);
 
   --radius-card: 16px;
@@ -46,22 +49,48 @@
   color-scheme: dark;
 }
 
+/* Beige light palette. Applied when the user explicitly picks light via the
+   nav toggle ([data-theme="light"]) OR when the system prefers light and the
+   user hasn't chosen ([data-theme] absent → no-JS still honors the system).
+   The no-FOUC init script in layout.tsx only sets data-theme when an explicit
+   choice is stored, so the media query keeps governing the default. */
+:root[data-theme="light"] {
+  --bg: var(--color-beige);
+  --surface: var(--color-beige-2);
+  --surface-2: #e4ddcc;
+  --text: #1a1a1a;
+  /* 7.0:1 on beige */
+  --text-muted: #57534a;
+  --border: #d4ccb9;
+  --accent: var(--color-blue-600-raw); /* 6.8:1 with white text */
+  --accent-strong: #173da3;
+  /* 5.6:1 on beige */
+  --link: var(--color-blue-600-raw);
+  --on-accent: #ffffff;
+  /* focus ring: 6.4:1 on beige (PRD #7FA8FF is only 2.2:1 here) */
+  --focus: #1e4fd0;
+  /* peach as text on beige needs to darken to a terracotta to hold AA */
+  --peach: #b3501f;
+  --glow: 0 0 80px rgb(45 107 255 / 0.15);
+  --shadow-1: 0 2px 8px rgb(0 0 0 / 0.12);
+
+  color-scheme: light;
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]) {
     --bg: var(--color-beige);
     --surface: var(--color-beige-2);
     --surface-2: #e4ddcc;
     --text: #1a1a1a;
-    /* 7.0:1 on beige */
     --text-muted: #57534a;
     --border: #d4ccb9;
-    --accent: var(--color-blue-600-raw); /* 6.8:1 with white text */
+    --accent: var(--color-blue-600-raw);
     --accent-strong: #173da3;
-    /* 5.6:1 on beige */
     --link: var(--color-blue-600-raw);
     --on-accent: #ffffff;
-    /* focus ring: 6.4:1 on beige (PRD #7FA8FF is only 2.2:1 here) */
     --focus: #1e4fd0;
+    --peach: #b3501f;
     --glow: 0 0 80px rgb(45 107 255 / 0.15);
     --shadow-1: 0 2px 8px rgb(0 0 0 / 0.12);
 
@@ -82,6 +111,7 @@
   --color-link: var(--link);
   --color-on-accent: var(--on-accent);
   --color-focus: var(--focus);
+  --color-peach: var(--peach);
   --color-ink: var(--color-ink);
   --color-beige: var(--color-beige);
 
@@ -167,6 +197,152 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ============================================================
+   Dynamic Island nav (Nav.tsx). Centred black pill with album art +
+   animated equaliser; morphs/expands downward on hover, focus-within,
+   or tap (data-open) to reveal the nav links. Always-in-DOM links keep
+   it keyboard-operable; reduced motion keeps the EQ static.
+   ============================================================ */
+
+.island-wrap {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+}
+
+.island {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 172px;
+  background: #0a0a0b;
+  color: #fff;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow:
+    0 10px 30px rgb(0 0 0 / 0.45),
+    inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  transition:
+    width var(--dur-base) var(--ease-out),
+    border-radius var(--dur-base) var(--ease-out);
+}
+
+.island-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.album-art {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--color-blue-raw), var(--color-peach-raw));
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.18);
+}
+
+.eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+.eq i {
+  display: block;
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: #fff;
+  transform-origin: bottom;
+  transform: scaleY(0.4);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .eq i {
+    animation: eq-bounce 1s ease-in-out infinite;
+  }
+  .eq i:nth-child(2) {
+    animation-delay: 0.18s;
+  }
+  .eq i:nth-child(3) {
+    animation-delay: 0.36s;
+  }
+  .eq i:nth-child(4) {
+    animation-delay: 0.12s;
+  }
+  @keyframes eq-bounce {
+    0%,
+    100% {
+      transform: scaleY(0.35);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+}
+
+.island-panel {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height var(--dur-base) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+.island-panel ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px 10px;
+  list-style: none;
+}
+.island-link {
+  display: block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.island-link:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+.island-link.is-current {
+  /* blue-600 keeps white text ≥4.5:1 */
+  background: var(--color-blue-600-raw);
+}
+
+/* expanded: hover, keyboard focus, or tap-toggled */
+.island:hover,
+.island:focus-within,
+.island[data-open="true"] {
+  width: min(380px, calc(100vw - 2rem));
+  border-radius: 22px;
+}
+.island:hover .island-panel,
+.island:focus-within .island-panel,
+.island[data-open="true"] .island-panel {
+  max-height: 64px;
+  opacity: 1;
 }
 
 /* ============================================================
@@ -293,6 +469,20 @@ body {
   transform: translateY(-30px) rotate(-2deg);
 }
 
+/* Giant faded "W … ork" spanning the screen (Juan Mora's big "Work" word),
+   with the folder sitting in the gap between the letters. */
+.work-letter {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: clamp(9rem, 32vw, 34rem);
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  color: var(--peach);
+  opacity: 0.16;
+  user-select: none;
+  white-space: nowrap;
+}
+
 /* masked line reveal (SplitText-style); the hidden state is applied
    by GSAP only when motion is allowed — static render is fully visible */
 .line-mask {
@@ -306,47 +496,295 @@ body {
 }
 
 /* ============================================================
-   3D hero scene (PRD §5.1) — CSS transforms only, no canvas.
-   The whole scene is decorative: aria-hidden + inert in JSX.
+   3D hero diorama (PRD §5.1) — CSS transforms only, no canvas.
+   A tilted "creative technologist's desk": knowledge graph card,
+   a Figma ADA-review frame, an auditor terminal, a contrast chip.
+   The whole scene is decorative: aria-hidden in JSX. Pointer
+   parallax sets the tilt in JS; reduced-motion holds it static.
    ============================================================ */
 
-.hero-stage {
-  perspective: 1200px;
-  perspective-origin: 50% 35%;
+.scene {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  perspective: 1400px;
+  perspective-origin: 50% 42%;
+  color: var(--text);
 }
 
-.hero-plane {
+.diorama {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 540px;
+  height: 560px;
+  margin: -280px 0 0 -270px; /* centre without disturbing the JS transform */
   transform-style: preserve-3d;
-  transform: rotateX(20deg) rotateZ(-4deg) scale(0.92);
+  transition: transform var(--dur-base) var(--ease-out);
   will-change: transform;
 }
 
-.hero-panel {
-  transform-style: preserve-3d;
+.d-layer {
+  position: absolute;
+  border-radius: 14px;
+  transform: translateZ(var(--z, 0));
+}
+
+/* ---- Graph card (neo4j WCAG knowledge graph) ---- */
+.d-graph {
+  --z: 0px;
+  left: 18px;
+  top: 96px;
+  width: 372px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow-1), var(--glow);
+  color: var(--text-muted);
+}
+.d-graph .bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.d-graph .live {
+  color: var(--color-peach-raw);
+}
+.d-graph svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--text-muted);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero-panel {
-    animation: panel-rise var(--dur-slow) var(--ease-out) both;
-    animation-delay: var(--panel-delay, 0s);
-  }
-
-  @keyframes panel-rise {
-    from {
-      opacity: 0;
-      transform: translateZ(-60px) translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: translateZ(var(--panel-z, 0)) translateY(0);
-    }
-  }
+/* ---- Figma ADA-review frame ---- */
+.d-fig {
+  --z: 64px;
+  left: 296px;
+  top: 64px;
+  width: 252px;
+  height: 182px;
+  /* filled card with rounded corners (per reference), inside the blue frame */
+  background: var(--surface);
+  border: 2px solid var(--color-blue-raw);
+  border-radius: 16px;
+  box-shadow: var(--shadow-1);
+}
+.d-fig .tag {
+  position: absolute;
+  top: -24px;
+  left: -2px;
+  /* darker blue keeps white text ≥4.5:1 (brand #2D6BFF is only ~4.5 borderline) */
+  background: var(--color-blue-600-raw);
+  color: #fff;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 6px 6px 0 0;
+}
+.d-fig .hndl {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: var(--surface);
+  border: 1.5px solid var(--color-blue-raw);
+}
+.d-fig .h1x {
+  top: -5px;
+  left: -5px;
+}
+.d-fig .h2x {
+  top: -5px;
+  right: -5px;
+}
+.d-fig .h3x {
+  bottom: -5px;
+  left: -5px;
+}
+.d-fig .h4x {
+  bottom: -5px;
+  right: -5px;
+}
+.d-fig .fbtn {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-blue-600-raw);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 11px 26px;
+  border-radius: 999px;
+  white-space: nowrap;
+  /* focus-ring demo: a gap (box bg) + a light ring that follows the pill */
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 4.5px rgb(245 243 238 / 0.9);
+}
+.d-fig .spec {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-panel {
-    opacity: 1;
-    transform: translateZ(var(--panel-z, 0));
-  }
+/* ---- Auditor terminal ---- */
+.d-term {
+  --z: 96px;
+  left: 16px;
+  top: 388px;
+  width: 320px;
+  padding: 16px 18px;
+  background: var(--color-ink);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
+  font-family: var(--font-mono), monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #cfd8e6;
+}
+.d-term .p1 {
+  color: var(--color-peach-raw);
+}
+.d-term .p2 {
+  color: var(--color-blue-200-raw);
+}
+.d-term .ok {
+  color: #6ee7a8;
+}
+
+/* ---- Contrast chip ---- */
+.d-chip {
+  --z: 140px;
+  left: 332px;
+  top: 4px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--color-peach-raw);
+  color: var(--color-ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-1);
+}
+.d-chip strong {
+  font-weight: 700;
+}
+
+/* ============================================================
+   Ambient backdrop (home) — Juan's blue top-glow + film grain.
+   Fixed, decorative, behind content; never affects text contrast
+   (axe measures against the solid surface, not this overlay).
+   ============================================================ */
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    60% 42% at 50% -6%,
+    rgb(45 107 255 / 0.2),
+    transparent 70%
+  );
+}
+
+.ambient-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* ============================================================
+   Custom cursor (Cursor.tsx) — progressive: only mounted on
+   pointer:fine + motion-allowed, so keyboard/touch are untouched.
+   ============================================================ */
+
+.cursor-hidden,
+.cursor-hidden * {
+  cursor: none !important;
+}
+/* keep a real caret where typing happens */
+.cursor-hidden input,
+.cursor-hidden textarea,
+.cursor-hidden select,
+.cursor-hidden [contenteditable="true"] {
+  cursor: auto !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) linear;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-pill);
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--accent);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1.5px solid var(--accent);
+  display: grid;
+  place-items: center;
+  transition:
+    width var(--dur-fast) var(--ease-out),
+    height var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.custom-cursor.is-hover .cursor-ring {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  background: rgb(45 107 255 / 0.12);
+}
+
+.cursor-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0;
+}
+
+.custom-cursor.has-label .cursor-label {
+  opacity: 1;
 }
