@@ -151,6 +151,11 @@ Key technical/design decisions and their rationale. Each entry: what was decided
 ### D12. Verification loop
 - Always: `npx tsc --noEmit` → `npx eslint` → `npm run build` → `npx playwright test` (server on **port 3210**, restart after rebuild) → preview screenshots. axe must be 0 violations in both themes; Lighthouse a11y = 1.0, perf ≥ 0.9.
 
+### D20. Hold the ESLint 10 major (Dependabot ignore) (2026-06-18)
+- **Decision:** pin **ESLint to `^9`** and tell Dependabot to ignore the ESLint major (`ignore` rule in `.github/dependabot.yml`). The rest of Dependabot's dev-deps PR (#7) is safe and was split into its own PR: **TypeScript 5→6, @types/node 20→25, @playwright/test 1.60→1.61, tailwind 4.3.0→4.3.1** (all pass tsc + eslint + build + Playwright).
+- **Why:** `eslint-config-next@16.2.9` (pinned to the Next version) bundles an `eslint-plugin-react` that calls the **removed `context.getFilename()`** API, so ESLint 10 crashes `eslint` outright (`TypeError: contextOrFilename.getFilename is not a function`). It's invisible in CI because Next 16's `next build` doesn't lint, but it breaks `npm run lint` / the local verification loop (D12) and the React-compiler gate (D11). Revisit when a Next / `eslint-config-next` release declares ESLint 10 support.
+- **Note:** the Playwright bump needs `npx playwright install` for the matching browser (CI does this); locally a stale browser shows as "Executable doesn't exist", not a real test failure.
+
 ---
 
 ## Still open (not yet decided)
