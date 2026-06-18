@@ -12,6 +12,13 @@ updates:
         dependency-type: production
       dev-dependencies:
         dependency-type: development
+    ignore:
+      # eslint-config-next is pinned to the Next version and bundles an
+      # eslint-plugin-react that isn't ESLint 10-ready (it calls the removed
+      # context.getFilename()), so ESLint 10 crashes `eslint`. Hold the major
+      # until a compatible eslint-config-next ships. (See decisions D20.)
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
 
   # Keep GitHub Actions versions up to date
   - package-ecosystem: github-actions
