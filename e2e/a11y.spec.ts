@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-const routes = ["/", "/work", "/playground", "/about", "/accessibility"];
+const routes = ["/", "/work", "/playground", "/about", "/accessibility", "/design-system"];
 
 // Both color schemes: dark is the primary mode, light must hold AA too.
 for (const colorScheme of ["dark", "light"] as const) {
@@ -50,6 +50,53 @@ test.describe("reduced motion", () => {
       .first()
       .evaluate((el) => getComputedStyle(el).opacity);
     expect(opacity).toBe("1");
+  });
+});
+
+test.describe("scroll reveals", () => {
+  // Under reduced motion the reveal primitives do nothing: content must render
+  // fully visible (no invisible-content trap).
+  test("reduced motion: cards render fully visible without scrolling", async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/playground");
+    await page.waitForLoadState("networkidle");
+    const card = page.locator(".masonry > li").last();
+    const opacity = await card.evaluate((el) => getComputedStyle(el).opacity);
+    expect(opacity).toBe("1");
+  });
+
+  // With motion allowed the reveals run, but must always END visible — both
+  // for content in the initial viewport and content scrolled into view.
+  test("motion: batched card reveals end fully visible, never stuck hidden", async ({
+    page,
+  }) => {
+    await page.goto("/playground");
+    await page.waitForLoadState("networkidle");
+    const first = page.locator(".masonry > li").first();
+    await expect
+      .poll(() => first.evaluate((el) => getComputedStyle(el).opacity), {
+        timeout: 4000,
+      })
+      .toBe("1");
+
+    const last = page.locator(".masonry > li").last();
+    await last.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => last.evaluate((el) => getComputedStyle(el).opacity), {
+        timeout: 4000,
+      })
+      .toBe("1");
+  });
+
+  // SplitText splits headings into per-line fragments; aria:"auto" must keep
+  // the full string as the element's accessible name for screen readers.
+  test("SplitText headings keep their accessible name", async ({ page }) => {
+    await page.goto("/about");
+    await page.waitForLoadState("networkidle");
+    await expect(page.getByRole("heading", { name: "The story" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Toolkit" })).toBeVisible();
   });
 });
 
@@ -161,4 +208,43 @@ test("project without a public link shows a context badge, not a live button", a
   await expect(
     section.getByRole("link", { name: /view repo/i }),
   ).toHaveCount(0);
+});
+
+test.describe("dynamic island nav", () => {
+  test("expands on hover to reveal the four spread nav links", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await page.locator(".island").hover();
+
+    // the four nav links are exposed in the expanded island
+    const islandNav = page.locator(".island-nav");
+    for (const name of ["Home", "Work", "Playground", "About"]) {
+      await expect(islandNav.getByRole("link", { name, exact: true })).toBeVisible();
+    }
+
+    // nav links spread edge-to-edge across the expanded bar
+    const justify = await page
+      .locator(".island-nav ul")
+      .evaluate((el) => getComputedStyle(el).justifyContent);
+    expect(justify).toBe("space-between");
+
+    // no music player remains in the island
+    await expect(page.locator(".island-player")).toHaveCount(0);
+    await expect(page.getByRole("slider", { name: "Seek" })).toHaveCount(0);
+  });
+
+  test("keyboard focus opens it and Escape collapses it", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    const trigger = page.getByRole("button", { name: /open navigation/i });
+
+    await trigger.focus();
+    await page.keyboard.press("Enter");
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+    await page.keyboard.press("Escape");
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  });
 });

@@ -33,11 +33,11 @@ export default function HomePage() {
             </span>
           </div>
 
-          <h1 className="mt-9 max-w-xl font-display text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-[1.07]">
-            Building a digital world that’s beautiful — and built for everyone.
+          <h1 className="mt-9 max-w-xl font-display text-[clamp(2rem,2.8vw,3.4rem)] font-semibold leading-[1.07]">
+            Building a digital world that’s beautiful — <br></br> and built for everyone.
           </h1>
 
-          <p className="mt-7 font-mono text-sm text-text-muted">
+          <p className="mt-7 font-mono text-xs text-text-muted">
             WCAG 2.2 AA · keyboard-first · reduced-motion safe —{" "}
             <Link
               href="/accessibility"

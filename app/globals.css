@@ -217,34 +217,46 @@ body {
 }
 
 .island {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  /* expanded corner radius — shared by the bar and the nav-link buttons so
+     the active pill reads as part of the same shape (collapsed stays 999px) */
+  --island-radius: 20px;
+  position: relative;
   width: 172px;
+  height: 40px;
   background: #0a0a0b;
   color: #fff;
   border-radius: 999px;
   overflow: hidden;
+  /* Scope layout work to this box so the size morph never reflows the page,
+     and hint the compositor to promote the element while it animates. */
+  contain: layout;
+  will-change: width, height;
   box-shadow:
     0 10px 30px rgb(0 0 0 / 0.45),
     inset 0 0 0 1px rgb(255 255 255 / 0.06);
   transition:
     width var(--dur-base) var(--ease-out),
+    height var(--dur-base) var(--ease-out),
     border-radius var(--dur-base) var(--ease-out);
 }
 
+/* Trigger + panel are stacked absolutely and crossfade on the compositor
+   (opacity / transform) instead of each animating its own height — so only
+   the container's box morphs, and the two views never fight over layout. */
 .island-trigger {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  width: 100%;
-  height: 40px;
   padding: 0 14px;
   background: transparent;
   border: 0;
   color: inherit;
   cursor: pointer;
+  overflow: hidden;
+  transition: opacity var(--dur-fast) var(--ease-out);
 }
 
 .album-art {
@@ -272,6 +284,9 @@ body {
   transform: scaleY(0.4);
 }
 
+/* EQ loops while the island is minimised (motion-allowed); the bars sit
+   static under reduced motion. The trigger (and its EQ) is hidden when the
+   island is expanded, so this only ever animates in the collapsed pill. */
 @media (prefers-reduced-motion: no-preference) {
   .eq i {
     animation: eq-bounce 1s ease-in-out infinite;
@@ -297,26 +312,41 @@ body {
 }
 
 .island-panel {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition:
-    max-height var(--dur-base) var(--ease-out),
-    opacity var(--dur-fast) var(--ease-out);
-}
-.island-panel ul {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
+  opacity: 0;
+  /* nudged down a touch so it eases up into place as it fades in */
+  transform: translateY(6px);
+  pointer-events: none;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+/* Nav links: an enlarged row that spreads edge-to-edge across the expanded
+   bar (no empty side space). nowrap keeps them on one line mid-morph. */
+.island-nav {
+  width: 100%;
+}
+.island-nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 4px;
   margin: 0;
-  padding: 0 8px 10px;
+  padding: 8px 12px;
   list-style: none;
 }
+
 .island-link {
   display: block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 0.875rem;
+  padding: 10px 18px;
+  border-radius: var(--island-radius);
+  font-size: 0.9375rem;
   font-weight: 500;
   white-space: nowrap;
   color: #fff;
@@ -335,14 +365,23 @@ body {
 .island:hover,
 .island:focus-within,
 .island[data-open="true"] {
-  width: min(380px, calc(100vw - 2rem));
-  border-radius: 22px;
+  width: min(420px, calc(100vw - 2rem));
+  height: 60px;
+  border-radius: var(--island-radius);
 }
 .island:hover .island-panel,
 .island:focus-within .island-panel,
 .island[data-open="true"] .island-panel {
-  max-height: 64px;
   opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+/* When expanded, fade out the album art + EQ; only the nav links show. */
+.island:hover .island-trigger,
+.island:focus-within .island-trigger,
+.island[data-open="true"] .island-trigger {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ============================================================
@@ -392,6 +431,102 @@ body {
 }
 
 /* ============================================================
+   About story — SDLC ⇄ STLC bridge connector + orchestration ring.
+   Decorative only (aria-hidden); the text labels + figcaption carry
+   the meaning. The flowing sheen + ring pulse are gated to motion-allowed
+   (and the global reduced-motion backstop zeroes them anyway).
+   ============================================================ */
+
+.story-bridge .bridge-track {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .story-bridge .bridge-track {
+    display: block;
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    height: 2px;
+    transform: translateY(-50%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--accent),
+      transparent
+    );
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .story-bridge .bridge-track {
+      background-size: 220% 100%;
+      animation: bridge-flow 3.6s linear infinite;
+    }
+  }
+}
+
+@keyframes bridge-flow {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .orch-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: orch-pulse 2.6s ease-in-out infinite;
+  }
+}
+
+@keyframes orch-pulse {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.7;
+  }
+}
+
+/* ============================================================
+   Work hero — a full-screen statement that stays put (sticky) while the
+   project panel scrolls up and over it, bringing the cards from below.
+   No JS/animation: just sticky + an opaque, elevated panel on top.
+   ============================================================ */
+
+.work-panel {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  border-top-left-radius: 1.75rem;
+  border-top-right-radius: 1.75rem;
+  box-shadow: 0 -28px 60px -30px rgb(0 0 0 / 0.55);
+}
+
+/* decorative scroll-progress dots down the left edge of the hero */
+.work-scroll-rail {
+  position: absolute;
+  left: clamp(1rem, 4vw, 2.5rem);
+  top: 50%;
+  width: 6px;
+  height: min(46vh, 360px);
+  transform: translateY(-50%);
+  background-image: radial-gradient(
+    circle,
+    var(--text-muted) 2px,
+    transparent 2.5px
+  );
+  background-size: 6px 34px;
+  background-repeat: repeat-y;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ============================================================
    Folder CTA (Juan Mora's "Check out my Work" folder, CSS-only).
    Opens on hover AND :focus-visible; the global reduced-motion
    backstop zeroes the transitions, so the open state is instant
@@ -430,18 +565,43 @@ body {
 
 .folder-papers {
   position: absolute;
-  left: 7%;
-  right: 7%;
-  top: 4px;
-  height: 62%;
-  border-radius: 8px 8px 0 0;
+  left: 9%;
+  right: 9%;
+  top: 0;
+  height: 66%;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+/* each "project" sheet is fanned slightly; the colored top edges peek
+   above the folder front so the folder reads as full of files */
+.paper {
+  position: absolute;
+  inset: 0;
+  border-radius: 9px 9px 4px 4px;
+  background: #fbfaf7;
+  box-shadow: 0 -2px 10px rgb(0 0 0 / 0.16);
+}
+
+.paper-1 {
+  top: -8px;
+  transform: rotate(-2.5deg);
+  background: #f6d8c4; /* warm peach sheet */
+}
+
+.paper-2 {
+  top: -4px;
+  transform: rotate(1.5deg);
+  background: #cfe0ff; /* cool blue sheet */
+}
+
+/* front-most sheet shows faint document rows */
+.paper-3 {
+  top: 1px;
   background: repeating-linear-gradient(
     to bottom,
-    #ffffff 0 10px,
-    #d9d6cf 10px 12px
+    #ffffff 0 9px,
+    #e4e1d9 9px 11px
   );
-  box-shadow: 0 -2px 8px rgb(0 0 0 / 0.18);
-  transition: transform var(--dur-base) var(--ease-out);
 }
 
 .folder-front {
@@ -452,6 +612,22 @@ body {
   transform-origin: 50% 100%;
   transition: transform var(--dur-base) var(--ease-out);
   box-shadow: var(--shadow-1);
+}
+
+/* large translucent brand mark on the folder front (reference logo) */
+.folder-mark {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  transform: translateX(-50%);
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgb(255 255 255 / 0.2);
+  user-select: none;
+  pointer-events: none;
 }
 
 .folder-link:hover .folder,
@@ -552,7 +728,18 @@ body {
   margin-bottom: 6px;
 }
 .d-graph .live {
-  color: var(--color-peach-raw);
+  color: var(--color-peach-raw); /* light peach: ~9:1 on the dark card */
+}
+/* In light mode the card is beige, where raw peach is only ~1.6:1 — darken
+   to a burnt orange that clears AA (≥4.5:1) on --surface. Mirrors the
+   three-block theme pattern (explicit choice + system fallback). */
+:root[data-theme="light"] .d-graph .live {
+  color: #9a3d12;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .d-graph .live {
+    color: #9a3d12;
+  }
 }
 .d-graph svg {
   display: block;
@@ -563,9 +750,9 @@ body {
 
 /* ---- Figma ADA-review frame ---- */
 .d-fig {
-  --z: 64px;
+  --z: 44px;
   left: 296px;
-  top: 64px;
+  top: 214px;
   width: 252px;
   height: 182px;
   /* filled card with rounded corners (per reference), inside the blue frame */

@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useReducedMotion } from "@/lib/useReducedMotion";
-import { useLenis } from "@/lib/scroll";
 
 /**
  * Juan Mora-style scroll-driven intro (his home flow: big statement →
@@ -53,7 +52,6 @@ const BENEFITS = [
 export function HomeIntro() {
   const rootRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
-  useLenis();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -197,11 +195,13 @@ export function HomeIntro() {
         <h2 className="font-display text-h1 font-semibold leading-tight">
           <span className="sr-only">{STATEMENT}</span>
           <span aria-hidden="true">
-            {STATEMENT.split(" ").map((word, i) => (
-              <span key={i} className="intro-word inline-block">
-                {word}
-                {i < STATEMENT.split(" ").length - 1 ? " " : ""}
-              </span>
+            {STATEMENT.split(" ").map((word, i, arr) => (
+              <Fragment key={i}>
+                <span className="intro-word inline-block">{word}</span>
+                {/* real space BETWEEN the inline-block boxes — a trailing space
+                    inside one gets trimmed at the box edge, jamming words */}
+                {i < arr.length - 1 ? " " : null}
+              </Fragment>
             ))}
           </span>
         </h2>
@@ -243,7 +243,7 @@ export function HomeIntro() {
           className="pointer-events-none absolute inset-0 flex items-center justify-between px-[1vw]"
         >
           <span className="work-letter">W</span>
-          <span className="work-letter">ork</span>
+          <span className="work-letter">rk</span>
         </div>
 
         {/* centre column: Curious? / folder / keep scrolling (on top) */}
@@ -255,14 +255,17 @@ export function HomeIntro() {
             <span aria-hidden="true" className="folder-stage block">
               <span className="folder block">
                 <span className="folder-back block" />
-                <span className="folder-papers block" />
-                <span className="folder-front flex items-start justify-between p-4">
-                  <span className="rounded-pill border border-white/40 px-3 py-1 font-mono text-xs font-semibold text-white">
+                {/* stacked project files peeking out of the folder top */}
+                <span className="folder-papers block">
+                  <span className="paper paper-1 block" />
+                  <span className="paper paper-2 block" />
+                  <span className="paper paper-3 block" />
+                </span>
+                <span className="folder-front block p-4">
+                  <span className="inline-block rounded-pill border border-white/40 px-3 py-1 font-mono text-xs font-semibold text-white">
                     Portfolio
                   </span>
-                  <span className="font-display text-2xl font-semibold text-white/35">
-                    jz
-                  </span>
+                  <span className="folder-mark">jz</span>
                 </span>
               </span>
             </span>

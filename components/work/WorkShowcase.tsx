@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/content/projects";
-import { useLenis, scrollToAndFocus } from "@/lib/scroll";
+import { useLenisInstance, scrollToAndFocus } from "@/lib/scroll";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { ProjectSection } from "./ProjectSection";
 
@@ -16,7 +16,7 @@ import { ProjectSection } from "./ProjectSection";
 export function WorkShowcase({ projects }: { projects: Project[] }) {
   const [activeSlug, setActiveSlug] = useState(projects[0]?.slug);
   const containerRef = useRef<HTMLDivElement>(null);
-  const lenisRef = useLenis();
+  const lenisRef = useLenisInstance();
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
     const heading = document.getElementById(`project-${slug}`);
     if (!heading) return; // fall through to default anchor behavior
     event.preventDefault();
-    scrollToAndFocus(heading, lenisRef.current, reducedMotion);
+    scrollToAndFocus(heading, lenisRef?.current ?? null, reducedMotion);
   };
 
   return (
@@ -58,7 +58,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
         aria-label="Projects"
         className="top-28 z-10 hidden self-start lg:sticky lg:block"
       >
-        <ul className="flex flex-col gap-1 border-l border-border-soft">
+        <ul className="flex flex-col gap-2">
           {projects.map((project) => {
             const active = activeSlug === project.slug;
             return (
@@ -67,13 +67,22 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
                   href={`#${project.slug}`}
                   aria-current={active ? "true" : undefined}
                   onClick={(event) => handleIndexClick(event, project.slug)}
-                  className={`-ml-px block border-l-2 py-2 pl-4 pr-2 text-sm no-underline transition-colors ${
+                  className={`group flex items-center gap-3 rounded-pill p-2 text-sm no-underline transition-colors ${
                     active
-                      ? "border-link font-semibold text-text"
-                      : "border-transparent text-text-muted hover:text-text"
+                      ? "bg-surface-2 font-semibold text-text"
+                      : "text-text-muted hover:bg-surface-2/60 hover:text-text"
                   }`}
                 >
-                  {project.title}
+                  {/* dot: blue + filled when active, hairline otherwise (decorative) */}
+                  <span
+                    aria-hidden="true"
+                    className={`size-2 shrink-0 rounded-full transition-colors ${
+                      active
+                        ? "bg-link"
+                        : "bg-border-soft group-hover:bg-text-muted"
+                    }`}
+                  />
+                  <span className="truncate">{project.title}</span>
                 </a>
               </li>
             );

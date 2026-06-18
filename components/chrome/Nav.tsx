@@ -17,16 +17,20 @@ const EMAIL = "jassimmohammed2910@gmail.com";
 
 /**
  * iPhone-style "dynamic island" nav: a centered black pill showing simple
- * album art + an animated equaliser. On hover, keyboard focus, or tap it
- * morphs/expands downward to reveal the navigation links. Logo (left) and
- * utilities + theme toggle (right) stay in the corners so the theme control
- * is always reachable.
+ * album art + a looping animated equaliser while minimised. On hover,
+ * keyboard focus, or tap it morphs/expands downward to reveal the navigation
+ * links — the album art + EQ are hidden in the expanded view, leaving only
+ * the four enlarged nav buttons. Logo (left) and utilities + theme toggle
+ * (right) stay in the corners so the theme control is always reachable.
  *
  * A11y: the links live in a real <nav aria-label="Main"> that's always in
  * the DOM and focusable — focusing one triggers :focus-within and expands
  * the island (WCAG 1.4.13: dismissable via Escape, hoverable, persistent).
  * The album art + EQ are decorative (aria-hidden); the trigger <button>
  * carries the accessible name and aria-expanded for touch users.
+ *
+ * The now-playing music player was archived (see archive/IslandPlayer.tsx);
+ * a richer 3D/animated treatment is planned (see ai-sdlc.md roadmap).
  */
 export function Nav() {
   const pathname = usePathname();
@@ -81,7 +85,7 @@ export function Nav() {
             className="island-trigger"
             aria-expanded={open}
             aria-controls="nav-island-panel"
-            aria-label="Navigation menu"
+            aria-label="Open navigation"
             onClick={() => setOpen((value) => !value)}
           >
             <span className="album-art" aria-hidden="true" />
@@ -93,25 +97,27 @@ export function Nav() {
             </span>
           </button>
 
-          <nav id="nav-island-panel" aria-label="Main" className="island-panel">
-            <ul>
-              {LINKS.map(({ href, label }) => {
-                const current = pathname === href;
-                return (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      aria-current={current ? "page" : undefined}
-                      onClick={() => setOpen(false)}
-                      className={`island-link ${current ? "is-current" : ""}`}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+          <div id="nav-island-panel" className="island-panel">
+            <nav aria-label="Main" className="island-nav">
+              <ul>
+                {LINKS.map(({ href, label }) => {
+                  const current = pathname === href;
+                  return (
+                    <li key={href}>
+                      <Link
+                        href={href}
+                        aria-current={current ? "page" : undefined}
+                        onClick={() => setOpen(false)}
+                        className={`island-link ${current ? "is-current" : ""}`}
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
 

@@ -46,8 +46,8 @@ export function BookendFooter() {
         <nav aria-label="Footer">
           <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
             <li>
-              <Link href="/accessibility" className="text-link underline underline-offset-4">
-                Accessibility
+              <Link href="/design-system" className="text-link underline underline-offset-4">
+                Design system
               </Link>
             </li>
             <li>

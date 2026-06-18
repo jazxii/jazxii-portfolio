@@ -6,6 +6,18 @@
       "runtimeExecutable": "/opt/homebrew/opt/node@20/bin/node",
       "runtimeArgs": ["node_modules/next/dist/bin/next", "start", "--port", "3210"],
       "port": 3210
+    },
+    {
+      "name": "portfolio-dev",
+      "runtimeExecutable": "/opt/homebrew/opt/node@20/bin/node",
+      "runtimeArgs": ["node_modules/next/dist/bin/next", "dev", "--port", "3210"],
+      "port": 3210
+    },
+    {
+      "name": "portfolio-preview",
+      "runtimeExecutable": "/opt/homebrew/opt/node@20/bin/node",
+      "runtimeArgs": ["node_modules/next/dist/bin/next", "dev"],
+      "autoPort": true
     }
   ]
 }

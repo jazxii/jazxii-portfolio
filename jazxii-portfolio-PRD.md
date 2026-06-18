@@ -53,7 +53,8 @@ Flat, anchor-driven structure (mirrors both references) to keep complexity low:
 | `/` | Spatial 3D hero entry + selected-work teaser + bookend CTA | William Le |
 | `/work` | Full project showcase with sticky left scroll-spy | Juan Mora |
 | `/playground` | Masonry grid of experiments, designs, curation | William Le |
-| `/about` | Story, accessibility philosophy, skills, contact | — |
+| `/about` | Story, "How I work" principles, toolkit, + the accessibility statement at `#accessibility` | — |
+| `/design-system` | Living style guide: tokens, contrast math (both themes), type, components, ADA rules — linked from the footer | — |
 
 Shared persistent pill-style top nav and a shared bookend footer (CTA + wordmark) appear on every route, so the site feels continuous regardless of entry point.
 
@@ -73,6 +74,11 @@ A tilted "creative technologist's desk" diorama on the right of a two-column fir
 ### 5.1a — Scroll story-line (inspired by Juan Mora)
 Juan's "grow-line" reimagined as an accessible SVG thread (`StoryLine.tsx`): a curvy line that **draws from the top of the first screen down the entire home route as you scroll** (ScrollTrigger scrub on `stroke-dashoffset`, spanning the whole page), led by a glowing **pen-tip pointer** that descends with the scroll. Decorative, `pointer-events:none`, desktop-only, and **not rendered under reduced motion** (separators carry structure). *(The earlier hand-drawn signature was removed.)*
 
+### 5.1b — Work folder CTA (inspired by Juan Mora)
+Juan's "Curious?… Check out my **Work**" beat, rebuilt in CSS (`HomeIntro.tsx`). A **full-bleed faded "Work"** spans the home route — `W` pinned far-left, `ork` far-right — with the CTA column (the line "Curious?… Check out my", a folder, "Or keep scrolling") centred in the gap, so the folder reads as `W | folder | ork` rather than overlaying the word. The folder is layered CSS (no image assets): a back panel, a stack of three fanned/staggered "project" sheets whose coloured top edges peek out, and a front flap with a "Portfolio" pill + a large translucent brand mark.
+- **Behavior:** one `<Link href="/work">` that **opens on hover and on keyboard `:focus-visible`** (front flap tilts `rotateX`, sheets lift); the reduced-motion backstop makes the open instant and motionless.
+- **A11y:** the whole folder/word is decorative (`aria-hidden`); the link carries sr-only text ("work — view all projects") and the section an `aria-label`. The folder's text sits on a gradient, so axe reports it *incomplete*, never a contrast violation.
+
 ### 5.2 — Work Showcase (inspired by Juan Mora)
 Two-column layout: a sticky left index (`position: sticky; top: 0`) + scrolling content. Each project block: Title, Year pill, "View live / repo" button, then **Challenge / Services (tag chips) / Role**, plus media (looping muted video or images).
 
@@ -86,11 +92,11 @@ Two-column layout: a sticky left index (`position: sticky; top: 0`) + scrolling 
 - **A11y:** semantic list; each card is one focusable link with a clear accessible name; videos lazy-play in view, pause off-view; visible focus rings; keyboard-only operable.
 
 ### 5.4 — Bookend Footer
-A single repeated CTA card ("Let's build something inclusive together") + large wordmark/monogram footer on every route (Juan resolves Home and Work to the identical closing moment). Contains `mailto:`, LinkedIn, GitHub, optional contact form. No downloads or sharing flows.
+A single repeated CTA card ("Let's build something inclusive together") + large wordmark/monogram footer on every route (Juan resolves Home and Work to the identical closing moment). The CTA carries `mailto:`, LinkedIn, GitHub; the footer nav links **Design system** · About · email. No downloads or sharing flows.
 
 ### 5.5 — Global Chrome
 Persistent top nav: a left `jazxii.` wordmark (peach dot), a centred **iPhone-style "dynamic island"**, and a right cluster of `Email` / `in` / `gh` links + a live clock (12-hour) + the theme toggle. Plus a **custom cursor**.
-- **Dynamic island (`Nav.tsx`):** collapsed, it's a black pill showing simple album art + an animated equaliser. On hover, keyboard focus, or tap it morphs/expands downward to reveal the nav links (Home / Work / Playground / About). The links live in a real `<nav aria-label="Main">` that's always in the DOM and focusable (focusing one triggers `:focus-within` to expand); a trigger `<button aria-expanded aria-controls>` opens it for touch; Escape + outside-tap dismiss (WCAG 1.4.13). The EQ is decorative (`aria-hidden`) and static under reduced motion. *(Album art is a placeholder gradient for now — a richer 3D/media treatment is planned.)*
+- **Dynamic island (`Nav.tsx`):** collapsed, it's a black pill showing album art + a **looping animated equaliser**. On hover, keyboard focus, or tap it morphs/expands downward to reveal **only the four enlarged nav buttons** (Home / Work / Playground / About) — the album art + EQ are hidden in the expanded view. The links live in a real `<nav aria-label="Main">`, always in the DOM and focusable (focus triggers `:focus-within` to expand); a trigger `<button aria-expanded aria-controls>` opens it for touch; Escape + outside-tap dismiss (WCAG 1.4.13). The EQ animates in a loop while minimised (motion-allowed) and is static under reduced motion. The island lives in the layout so it stays continuous across client-side navigation. *(A functional "now playing" music player previously lived in the expanded island; it was reverted on 2026-06-17 and archived to `archive/IslandPlayer.tsx` — original royalty-free loops remain in `public/audio/`. A richer 3D-character / GSAP-scroll treatment is planned; see `ai-sdlc.md`.)*
 - **Ambient backdrop:** the blue top-glow + film grain renders on **every route** (in `layout.tsx`), fixed and decorative, behind content; never affects measured text contrast.
 - **Theme toggle (`ThemeToggle.tsx` + `lib/theme.ts`):** dark is primary; the site follows the system scheme by default and the toggle overrides it (persisted to localStorage, mirrored on `<html data-theme>`). A no-FOUC init script in `layout.tsx` applies a stored choice before paint. Accessible `<button>` whose name states the action ("Switch to light/dark theme"); shows a **"Light mode"/"Dark mode" text label** on desktop and a sun/moon icon on mobile — never colour alone.
 - **Custom cursor (`Cursor.tsx`):** dot + trailing ring that grows over interactive elements and shows a contextual label from `data-cursor` ("view" / "email"). Progressive — mounts only on `pointer: fine` + motion-allowed; keyboard/touch keep the native cursor and focus rings; inputs keep their caret. Decorative (`aria-hidden`).
@@ -177,7 +183,7 @@ Target **WCAG 2.2 AA**. Must-haves:
 - Text alternatives for meaningful media; decorative media `aria-hidden`.
 - Color is never the only signal.
 - Global, respected `prefers-reduced-motion: reduce` path: disables parallax, autoplay, scroll-jacking; offers equally-polished static fallbacks.
-- **Bonus credibility:** a visible footer "Accessibility" link with a short conformance statement + contact for issues.
+- **Bonus credibility:** a visible footer **"Design system"** link to a living style guide that publishes its own contrast math and ADA rules and is itself axe-clean in both themes. The conformance statement + contact lives on `about#accessibility` (and the standalone `/accessibility` route, linked from the home hero).
 
 ---
 

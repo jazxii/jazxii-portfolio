@@ -2,6 +2,7 @@ import type { Project } from "@/content/projects";
 import { ButtonLink } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
 import { MediaFigure } from "@/components/ui/MediaFigure";
+import { Reveal } from "@/components/motion/Reveal";
 import { TagChips } from "./TagChips";
 
 /**
@@ -52,7 +53,7 @@ export function ProjectSection({ project }: { project: Project }) {
         )}
       </div>
 
-      <div className="mt-8 grid gap-8 sm:grid-cols-[2fr_1fr]">
+      <Reveal as="div" className="mt-8 grid gap-8 sm:grid-cols-[2fr_1fr]">
         <div>
           <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted">
             Challenge
@@ -75,9 +76,11 @@ export function ProjectSection({ project }: { project: Project }) {
             <p className="mt-2 text-sm">{project.role}</p>
           </div>
         </div>
-      </div>
+      </Reveal>
 
-      <MediaFigure media={project.media} className="mt-10" />
+      <Reveal className="mt-10">
+        <MediaFigure media={project.media} />
+      </Reveal>
     </section>
   );
 }

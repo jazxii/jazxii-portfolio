@@ -1,45 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import type Lenis from "lenis";
-import { useReducedMotion } from "./useReducedMotion";
 
-/**
- * Smooth scrolling via Lenis, only where a page opts in and only
- * when the user allows motion. Returns a ref to the live instance
- * so callers can scrollTo through it.
- */
-export function useLenis(): React.RefObject<Lenis | null> {
-  const lenisRef = useRef<Lenis | null>(null);
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (reducedMotion) return;
-
-    let cancelled = false;
-    let rafId = 0;
-
-    import("lenis").then(({ default: LenisCtor }) => {
-      if (cancelled) return;
-      const lenis = new LenisCtor();
-      lenisRef.current = lenis;
-      const raf = (time: number) => {
-        lenis.raf(time);
-        rafId = requestAnimationFrame(raf);
-      };
-      rafId = requestAnimationFrame(raf);
-    });
-
-    return () => {
-      cancelled = true;
-      cancelAnimationFrame(rafId);
-      lenisRef.current?.destroy();
-      lenisRef.current = null;
-    };
-  }, [reducedMotion]);
-
-  return lenisRef;
-}
+// Smooth scrolling is now provided once, globally, by <SmoothScroll>
+// (components/motion/SmoothScroll.tsx). Components that need the live instance
+// read it from context via useLenisInstance — re-exported here so existing
+// callers keep importing scroll helpers from one place.
+export { useLenisInstance } from "./lenisContext";
 
 /**
  * Scroll to an element and move focus to it — anchor navigation must
@@ -51,10 +18,15 @@ export function scrollToAndFocus(
   lenis: Lenis | null,
   reducedMotion: boolean,
 ) {
+  // Compute the target's absolute document position numerically (rect + scroll)
+  // minus the sticky-header offset. We pass a NUMBER — not the element — to
+  // Lenis, because a positioned ancestor (the Work content panel) makes the
+  // element's offsetTop relative to the panel, which mis-resolves the scroll.
+  const top = target.getBoundingClientRect().top + window.scrollY - 96;
   if (lenis && !reducedMotion) {
-    lenis.scrollTo(target, { offset: -96 });
+    lenis.scrollTo(top, { offset: 0 });
   } else {
-    target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+    window.scrollTo({ top, behavior: reducedMotion ? "auto" : "smooth" });
   }
   target.focus({ preventScroll: true });
 }

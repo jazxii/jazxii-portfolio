@@ -5,6 +5,7 @@ import { SkipLink } from "@/components/chrome/SkipLink";
 import { Nav } from "@/components/chrome/Nav";
 import { BookendFooter } from "@/components/chrome/BookendFooter";
 import { Cursor } from "@/components/chrome/Cursor";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import "./globals.css";
 
 // Applies a stored explicit theme choice before first paint (no FOUC).
@@ -69,7 +70,7 @@ export default function RootLayout({
         <SkipLink />
         <Nav />
         <main id="main" className="flex-1">
-          {children}
+          <SmoothScroll>{children}</SmoothScroll>
         </main>
         <BookendFooter />
         <Cursor />

@@ -31,7 +31,7 @@ export function PlaygroundCard({ item }: { item: PlaygroundItem }) {
         width={item.media.width}
         height={item.media.height}
         loading="lazy"
-        className="block h-auto w-full transition-transform duration-500 ease-out-expo group-hover:scale-[1.03]"
+        className="block h-auto w-full transition-transform duration-500 ease-out-expo motion-safe:group-hover:scale-[1.03]"
       />
       <span
         aria-hidden="true"

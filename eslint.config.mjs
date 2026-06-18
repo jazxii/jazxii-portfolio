@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Archived experiments, kept for reference but out of the build pipeline.
+    "archive/**",
   ]),
 ]);
 
