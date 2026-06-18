@@ -6,8 +6,8 @@
 |---|---|
 | **Author** | Jassim M. Shamim |
 | **LinkedIn** | https://www.linkedin.com/in/jassim-m-shamim/ |
-| **Status** | Draft v1.2 |
-| **Last updated** | 13 June 2026 |
+| **Status** | Draft v1.3 |
+| **Last updated** | 18 June 2026 |
 | **Inspiration** | williamle.design (spatial 3D entry + Playground), juanmora.co (scroll-driven Work) |
 
 ---
@@ -51,7 +51,7 @@ Flat, anchor-driven structure (mirrors both references) to keep complexity low:
 | Route | Purpose | Inspiration |
 |---|---|---|
 | `/` | Spatial 3D hero entry + selected-work teaser + bookend CTA | William Le |
-| `/work` | Full project showcase with sticky left scroll-spy | Juan Mora |
+| `/work` | Full-screen hero headline → content panel scrolls over it; full project showcase with sticky left scroll-spy | Juan Mora |
 | `/playground` | Masonry grid of experiments, designs, curation | William Le |
 | `/about` | Story, "How I work" principles, toolkit, + the accessibility statement at `#accessibility` | — |
 | `/design-system` | Living style guide: tokens, contrast math (both themes), type, components, ADA rules — linked from the footer | — |
@@ -80,10 +80,12 @@ Juan's "Curious?… Check out my **Work**" beat, rebuilt in CSS (`HomeIntro.tsx`
 - **A11y:** the whole folder/word is decorative (`aria-hidden`); the link carries sr-only text ("work — view all projects") and the section an `aria-label`. The folder's text sits on a gradient, so axe reports it *incomplete*, never a contrast violation.
 
 ### 5.2 — Work Showcase (inspired by Juan Mora)
-Two-column layout: a sticky left index (`position: sticky; top: 0`) + scrolling content. Each project block: Title, Year pill, "View live / repo" button, then **Challenge / Services (tag chips) / Role**, plus media (looping muted video or images).
+**Opens as a full-screen hero** (v1.3): a small `Work` eyebrow `<h1>`, the muted display tagline **"Passionate about the craft and little details"** with a decorative blue **folder + "iii"** icon, and a decorative left scroll-dots rail. The hero is `position: sticky; top: 0; min-height: 100vh`; the project content lives in a `.work-panel` (`position: relative; z-index: 1`, opaque `--bg`, rounded top + soft shadow) that **scrolls up and over** the held hero — the cards rise from below (Juan-Mora overlap, done in pure CSS, no scroll-jacking).
+
+Inside the panel: a two-column layout — a sticky left index (`position: sticky; top: 0`) + scrolling content. Each project block: Title, Year pill, "View live / repo" button (or a context badge when there's no public link), then **Challenge / Services (tag chips) / Role**, plus media (looping muted video or images), revealed via the shared transform-only reveal primitives (§5.6).
 
 - **Behavior:** active project highlights in the index as you scroll (verified pattern on Juan's site).
-- **A11y implementation:** index is a real `<nav aria-label="Projects">`; active state driven by IntersectionObserver, also sets `aria-current="true"`; clicking smooth-scrolls (Lenis) and moves focus to the section heading. Each project = `<section aria-labelledby>` with a heading. Videos `muted loop playsinline preload="none"` with poster + text alternative; only play in view and when motion allowed.
+- **A11y implementation:** the hero `<h1>` keeps the page identity (the tagline is a decorative `<p>`, folder `aria-hidden`); the sticky overlap works under reduced motion (Lenis off → native scroll). Index is a real `<nav aria-label="Projects">`; active state driven by IntersectionObserver, also sets `aria-current="true"`. Clicking smooth-scrolls (Lenis) and moves focus to the section heading — the scroll target is computed as an **absolute `getBoundingClientRect().top + scrollY − 96` number** passed to `lenis.scrollTo` (not the element), so the positioned `.work-panel` becoming the sections' `offsetParent` can't mis-resolve it (see decisions D19). Each project = `<section aria-labelledby>` with a `tabIndex={-1}` heading. Videos `muted loop playsinline preload="none"` with poster + text alternative; only play in view and when motion allowed.
 
 ### 5.3 — Playground (inspired by William Le)
 3-column masonry (verified: William's is 3 fixed columns ~495px wide) mixing design experiments, Figma concepts, AI-tool demos, and curation. Each card: preview (image/muted video), title, medium/tool, date tag; newest first.
@@ -96,10 +98,24 @@ A single repeated CTA card ("Let's build something inclusive together") + large 
 
 ### 5.5 — Global Chrome
 Persistent top nav: a left `jazxii.` wordmark (peach dot), a centred **iPhone-style "dynamic island"**, and a right cluster of `Email` / `in` / `gh` links + a live clock (12-hour) + the theme toggle. Plus a **custom cursor**.
-- **Dynamic island (`Nav.tsx`):** collapsed, it's a black pill showing album art + a **looping animated equaliser**. On hover, keyboard focus, or tap it morphs/expands downward to reveal **only the four enlarged nav buttons** (Home / Work / Playground / About) — the album art + EQ are hidden in the expanded view. The links live in a real `<nav aria-label="Main">`, always in the DOM and focusable (focus triggers `:focus-within` to expand); a trigger `<button aria-expanded aria-controls>` opens it for touch; Escape + outside-tap dismiss (WCAG 1.4.13). The EQ animates in a loop while minimised (motion-allowed) and is static under reduced motion. The island lives in the layout so it stays continuous across client-side navigation. *(A functional "now playing" music player previously lived in the expanded island; it was reverted on 2026-06-17 and archived to `archive/IslandPlayer.tsx` — original royalty-free loops remain in `public/audio/`. A richer 3D-character / GSAP-scroll treatment is planned; see `ai-sdlc.md`.)*
+- **Dynamic island (`Nav.tsx`):** collapsed, it's a black pill showing album art + a **looping animated equaliser**. On hover, keyboard focus, or tap it **morphs (a smooth container box-morph — width/height transitioned with `contain: layout`; trigger + panel crossfade on the compositor, no jank)** to reveal **the four nav buttons spread edge-to-edge** (`justify-content: space-between`; Home / Work / Playground / About) — the album art + EQ are hidden in the expanded view, and the active link shares the bar's `--island-radius` so it nests concentrically. The links live in a real `<nav aria-label="Main">`, always in the DOM and focusable (focus triggers `:focus-within` to expand); a trigger `<button aria-expanded aria-controls>` opens it for touch; Escape + outside-tap dismiss (WCAG 1.4.13). The EQ animates in a loop while minimised (motion-allowed) and is static under reduced motion. The island lives in the layout so it stays continuous across client-side navigation. *(A functional "now playing" music player previously lived in the expanded island; it was reverted on 2026-06-17 and archived to `archive/IslandPlayer.tsx` — original royalty-free loops remain in `public/audio/`. A richer 3D-character / GSAP-scroll treatment is planned; see `ai-sdlc.md`.)*
 - **Ambient backdrop:** the blue top-glow + film grain renders on **every route** (in `layout.tsx`), fixed and decorative, behind content; never affects measured text contrast.
 - **Theme toggle (`ThemeToggle.tsx` + `lib/theme.ts`):** dark is primary; the site follows the system scheme by default and the toggle overrides it (persisted to localStorage, mirrored on `<html data-theme>`). A no-FOUC init script in `layout.tsx` applies a stored choice before paint. Accessible `<button>` whose name states the action ("Switch to light/dark theme"); shows a **"Light mode"/"Dark mode" text label** on desktop and a sun/moon icon on mobile — never colour alone.
 - **Custom cursor (`Cursor.tsx`):** dot + trailing ring that grows over interactive elements and shows a contextual label from `data-cursor` ("view" / "email"). Progressive — mounts only on `pointer: fine` + motion-allowed; keyboard/touch keep the native cursor and focus rings; inputs keep their caret. Decorative (`aria-hidden`).
+
+### 5.6 — Site-wide scroll reveals (GSAP, v1.3)
+Every route layers on the home page's "text loads up / cards appear on scroll" feel via three reusable client primitives in `components/motion/`, built on `@gsap/react`'s `useGSAP` (GSAP is 100% free since v3.13 — SplitText ships in the public package):
+- **`RevealText`** — per-line text reveal via **SplitText** (`aria:"auto"` keeps the full string as the accessible name; `autoSplit` re-splits after the web font swaps). Headings only.
+- **`Reveal`** — a single block rises into place.
+- **`RevealStagger`** — a list/grid reveals in staggered batches via `ScrollTrigger.batch` (cards, chips, swatches, rows).
+- **Smooth scroll:** one global Lenis instance (`components/motion/SmoothScroll.tsx`, mounted in the layout) synced to ScrollTrigger (`lenis.on("scroll", ScrollTrigger.update)` + `gsap.ticker` drives `lenis.raf`).
+- **A11y/perf:** all gate on `useReducedMotion` (reduced motion = final state instantly); reveals are **transform-only (no opacity/visibility)** so content is never hidden from axe, the tab order, or the a11y tree, and never trips color-contrast. Content stays server-rendered (LCP = real text); `gsap`/`ScrollTrigger`/`SplitText` ship in one shared client chunk. (See decisions D17.)
+
+### 5.7 — About "The story" (v1.3)
+The `/about` story section conveys the persona — an **AI orchestrator for accessibility bridging ADA across the SDLC (build) and STLC (test) lifecycles**, with a keen eye for design/authenticity/aesthetics, and an active musician — via copy plus two graphics in `components/about/`:
+- **`StoryBridge`** — an accessible **SDLC ⇄ STLC bridge** `<figure>`: real text lanes (Plan→Build→Ship ⇄ AI-orchestration hub ⇄ Strategy→Execute→Verify) + a `<figcaption>` carrying the meaning; the connector track + flowing sheen are decorative (`aria-hidden`) and motion-gated.
+- **`OrchestrationGraph`** — a decorative neo4j-style node-cluster motif (shapes only, no text → nothing to contrast-check; `aria-hidden`) in the heading rail, echoing the hero diorama's graph card.
+- **A11y:** brand peach appears only as non-text accents (a dot, the `--accent` track) to avoid the peach-text-on-beige AA shortfall; all labels meet AA. (See decisions D18.)
 
 ---
 
@@ -161,7 +177,7 @@ Built from a **blue / black / beige** identity, blending Juan's warm beige light
 |---|---|---|
 | Framework | Next.js (App Router) + TS | SSG, image optimization, routing |
 | Styling | Tailwind + CSS variables (tokens) | tokens map to Tailwind theme |
-| Motion | GSAP + ScrollTrigger + Lenis | matches Juan's verified stack |
+| Motion | GSAP + ScrollTrigger + SplitText + `@gsap/react` + Lenis | matches Juan's verified stack; one global Lenis↔ScrollTrigger + reusable reveal primitives (§5.6). GSAP free since v3.13 |
 | 3D hero | CSS 3D transforms (no WebGL) | `Diorama.tsx`; pointer parallax, zero deps |
 | Content | MDX / typed content files | add a file = add a project |
 | Hosting | Vercel | free, CI-friendly |

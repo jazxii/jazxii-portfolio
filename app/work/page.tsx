@@ -60,7 +60,7 @@ export default function WorkPage() {
                 <rect x="17.4" y="11.5" width="1.7" height="5" rx="0.85" />
               </g>
             </svg>
-            Passionate about the craft and little details
+            Driven by the craft. Defined by the details.
           </Reveal>
         </div>
       </section>

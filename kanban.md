@@ -34,6 +34,9 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 - [x] CARD-021–025 · Site-wide GSAP scroll-reveal system (Phase 10, decisions D17)
 - [x] CARD-026 · Home statement word-spacing fix (Phase 11)
 - [x] CARD-034 · About "The story" persona rework + SDLC⇄STLC bridge + orchestration node-graph (Phase 11, decisions D18)
+- [x] CARD-035 · Work hero headline "Passionate about the craft and little details" + folder icon (Phase 12)
+- [x] CARD-036 · Revert out-of-session 4-column / LiveCta ProjectSection rewrite to committed 2-column layout (Phase 12)
+- [x] CARD-037 · Work opens as full-screen hero; content panel scrolls up over it (sticky) + scroll-spy `offsetParent` fix (Phase 12, decisions D19)
 
 ## 🧊 Icebox / Parked (validate value first)
 - [ ] CARD-R8 · Audio re-introduction as explicit opt-in toggle (reuse archived `IslandPlayer.tsx`)
@@ -96,4 +99,4 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 
 ---
 
-_Last updated: 2026-06-17. Source of truth for cards; mirror status to [session-log.md](session-log.md) phases._
+_Last updated: 2026-06-18. Source of truth for cards; mirror status to [session-log.md](session-log.md) phases._
