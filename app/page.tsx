@@ -14,8 +14,7 @@ export default function HomePage() {
       <section className="mx-auto grid min-h-[calc(100svh-5.5rem)] max-w-7xl grid-cols-1 items-center gap-10 px-4 pt-6 sm:px-6 lg:grid-cols-2 lg:gap-6 lg:pt-0">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.16em] text-text-muted sm:text-sm">
-            Jassim M. Shamim — Digital Accessibility Engineer @ Cognizant ·
-            Ex-ISRO
+            Jassim M. Shamim - AI Accessibility Engineer
           </p>
 
           {/* Giant brand wordmark — decorative (the name is in the nav + eyebrow) */}

@@ -33,7 +33,7 @@ export default function WorkPage() {
               a real, readable line (not a heading, to keep the h1→project-h2 outline). */}
           <Reveal
             as="p"
-            className="mt-4 max-w-3xl font-display text-h1 font-semibold leading-[1.08] text-text-muted text-balance sm:text-display"
+            className="mt-4 max-w-6xl font-display text-h1 font-semibold leading-[1.08] text-text-muted text-balance sm:text-display"
           >
             <svg
               aria-hidden="true"

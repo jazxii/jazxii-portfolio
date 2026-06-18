@@ -650,10 +650,10 @@ body {
 .work-letter {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
-  font-size: clamp(9rem, 32vw, 34rem);
+  font-size: clamp(9rem, 34vw, 34rem);
   line-height: 0.78;
   letter-spacing: -0.03em;
-  color: var(--peach);
+  color: var(--color-white);
   opacity: 0.16;
   user-select: none;
   white-space: nowrap;
