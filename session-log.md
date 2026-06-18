@@ -141,11 +141,35 @@ Date: 2026-06-14. Stack: Next.js 16.2.9 (App Router, Turbopack) · React 19.2.4 
 
 ---
 
+## Phase 13 — Work page: multi-media gallery, card layout, + global scroll fixes (2026-06-19)
+
+**Trigger:** user asked to (a) support multiple images/videos per Work card, (b) stop the project cards "popping up" when entering `/work` (open on the hero), (c) always open any page at the top, (d) move Role to its own full-width row, and (e) pin the project index to the left with the cards spread wider — then reported scrolling that **gets stuck until reload**.
+
+- **Multiple media per card** — `Project.media` stays the single **cover** (still used by the home teaser); added optional `Project.gallery: MediaItem[]`. New [MediaGallery.tsx](components/ui/MediaGallery.tsx) renders the cover full-width then the rest in a responsive 2-col `<ul role="list">` grid (deliberately **not** a carousel — no hidden slides / focus traps). Extracted a shared `MediaItem` type into [content/projects.ts](content/projects.ts); [MediaFigure.tsx](components/ui/MediaFigure.tsx) imports it; [ProjectSection.tsx](components/work/ProjectSection.tsx) passes `[media, ...gallery]`. (decisions [D22](decisions.md).)
+- **Open at the top + un-stick scrolling** ([SmoothScroll.tsx](components/motion/SmoothScroll.tsx)) — the global Lenis persists across client navs, which caused two bugs: the browser restored the prior scroll (landing in the Work cards), and Lenis kept the *previous* route's scroll **limit** so a taller page clamped ~⅓ down ("stuck until reload"). Now on every `usePathname()` change: `scrollRestoration="manual"`, snap to top (hash deep-links exempt), and after paint (double rAF) `lenis.resize()` + `ScrollTrigger.refresh()`. **Diagnosed empirically** by exposing the Lenis instance: limit was stale `5541` (Home) on a client nav to Work vs. the real `16134`; matches after the fix and reaches the true bottom. (decisions [D21](decisions.md).)
+- **Card layout** ([ProjectSection.tsx](components/work/ProjectSection.tsx)) — **Challenge + Services side-by-side**, **Role on its own full-width row** below a hairline divider (kills the dead space a short Challenge left under it; Role capped `max-w-3xl`).
+- **Left-anchored index + wider cards** ([WorkShowcase.tsx](components/work/WorkShowcase.tsx) + [work/page.tsx](app/work/page.tsx)) — dropped the centered `mx-auto max-w` for a left gutter (`px-6 sm:px-10 xl:px-16`); the sticky `<nav>` index now pins to the left edge with a `gap-x-16` to the cards (`max-w-[72rem]`); hero + intro widened to `max-w-7xl` to share the left edge. Checked at 1920 @ 75% (≈2560 CSS px): index at 64px, 64px gap, cards 1152px, no overflow. (decisions [D23](decisions.md).)
+- ✅ tsc + eslint clean. (Scroll/sticky behaviour verified by element-measurement + screenshots; the headless preview can't drive Lenis scroll reliably.)
+
+## Phase 14 — Playground: video autoplay + slow fade-in reveal (2026-06-19)
+
+**Trigger:** user added an `.mp4` to a Playground card ("not loading"; wants it autoplaying on mute as it loads), then asked for the masonry contents to **fade in slowly on scroll** instead of appearing abruptly.
+
+- **Video cards** ([PlaygroundCard.tsx](components/playground/PlaygroundCard.tsx)) — the card always rendered `<img>`, so `<img src="*.mp4">` silently failed. Now auto-detects video by extension and renders `<video autoPlay muted loop playsInline preload="metadata">` (optional `poster` added to `PlaygroundItem.media`), `<img>` otherwise. Reduced motion pauses it. First tried the work MediaFigure "play in view" IntersectionObserver, but it paused the freshly-mounted video — native **`autoPlay`** is the reliable path. Verified playing/looping/muted. (decisions [D24](decisions.md).)
+- **Fade-in reveal** ([RevealStagger.tsx](components/motion/RevealStagger.tsx)) — added opt-in `fade` + `duration` props; `/playground` uses `fade y={36} duration={0.9}`. **Switched the engine `ScrollTrigger.batch` → `IntersectionObserver`**: the batch never revealed items already in the first viewport on load (transform-only had masked it; with opacity they went blank). IO fires reliably on load + as the masonry settles. (decisions [D25](decisions.md).)
+- **Duplicate-key fix** ([playground/page.tsx](app/playground/page.tsx)) — the user's content has repeated `slug`s; the list now keys on `` `${slug}-${index}` `` (duplicate React keys had corrupted the nodes GSAP animates).
+- **a11y check** — ran the project's own **axe-core** against `/playground` with all cards at `opacity:0` → **0 color-contrast violations**, so the fade keeps the [D17] axe-clean guarantee; reduced motion renders everything static + opaque.
+- **Environment gotcha** — the headless preview is `visibilityState:"hidden"`, which **pauses `requestAnimationFrame` and `IntersectionObserver`**; scroll/visibility reveals don't run there between renders (forced renders via screenshots confirmed the fade works in a real browser). Cost several debugging iterations.
+- ✅ tsc + eslint clean. Verified video playback + the staggered fade via forced-render screenshots.
+
+---
+
 ## Current state
 
 - Routes: `/`, `/work`, `/playground`, `/about` (a11y statement at `#accessibility`), `/accessibility`, `/design-system` — statically rendered, each with GSAP scroll-reveals (text + cards) layered on as client islands.
-- `/work` opens as a **full-screen hero** ("Passionate about the craft and little details" + folder icon, sticky); the project content panel scrolls up and over it, carrying the cards. Sticky left scroll-spy index intact ([WorkShowcase.tsx](components/work/WorkShowcase.tsx)).
-- Motion: one global Lenis ↔ ScrollTrigger (`SmoothScroll` in the layout); reusable `Reveal` / `RevealText` (SplitText) / `RevealStagger` primitives in [components/motion/](components/motion/); plugins registered once in [lib/gsap.ts](lib/gsap.ts). All reduced-motion + keyboard safe.
+- `/work` opens as a **full-screen hero** ("Driven by the craft. Defined by the details." + folder icon, sticky); the project content panel scrolls up and over it. The page is **left-anchored** — the sticky scroll-spy index pins to the left with a gap to a width-capped card column ([WorkShowcase.tsx](components/work/WorkShowcase.tsx)); each card shows Challenge + Services with **Role on a full-width row**, plus a **cover + optional media gallery** ([MediaGallery.tsx](components/ui/MediaGallery.tsx)).
+- `/playground` cards render **image or autoplaying muted/looping video** and **fade + rise in on scroll** (RevealStagger `fade`, IntersectionObserver-driven).
+- Motion: one global Lenis ↔ ScrollTrigger (`SmoothScroll` in the layout) that also **resets scroll to the top + recomputes Lenis/ScrollTrigger on every route change** (opens at top; fixes the cross-nav stuck-scroll); reusable `Reveal` / `RevealText` (SplitText) / `RevealStagger` (IntersectionObserver) primitives in [components/motion/](components/motion/); plugins registered once in [lib/gsap.ts](lib/gsap.ts). All reduced-motion + keyboard safe.
 - Hero: CSS-3D diorama (no WebGL deps). Nav: dynamic island — collapsed shows album art + a **looping EQ**; expands (hover / focus / tap) via a smooth box-morph to **four nav buttons spread edge-to-edge** (player reverted + archived); active pill shares the bar's `--island-radius`. Ambient glow + custom cursor + theme toggle global. Footer links: Design system · About · email.
 - Planning: [ai-sdlc.md](ai-sdlc.md) holds the Kanban template + the 3D/GSAP roadmap.
 - Verification: `npx tsc --noEmit`, `npx eslint`, `npm run build`, `npx playwright test` (server on 3210; restart after rebuild).
@@ -153,6 +177,7 @@ Date: 2026-06-14. Stack: Next.js 16.2.9 (App Router, Turbopack) · React 19.2.4 
 ## Open / next
 
 - Build the planned **3D character / animation** treatment for the island (see [ai-sdlc.md](ai-sdlc.md) roadmap).
-- Replace placeholder project + playground **media** (SVGs) with real screenshots/recordings.
+- Finish the real-**media** swap: real Playground `.mp4`/`.mov`/`.png` + a real WCAG-project cover have landed; remaining SVG placeholders + several **duplicate Playground `slug`/title placeholders and mismatched alt text** still need cleanup, and the new gallery field is wired but unused (add `gallery` arrays when real extra shots exist).
 - Confirm playground links (several point to LinkedIn as stand-ins).
+- Re-run the **full verification loop** (`npm run build` + Playwright/axe) for the Phase 13–14 changes — only tsc + eslint were run this session (preview couldn't exercise scroll/visibility animations, see Phase 14 note).
 - Nothing committed yet — all changes are in the working tree.

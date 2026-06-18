@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ElementType, type ReactNode } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
 type RevealStaggerProps = {
@@ -19,6 +19,16 @@ type RevealStaggerProps = {
   selector?: string;
   /** px the items rise from */
   y?: number;
+  /**
+   * Also fade the items in (opacity 0 → 1), not just rise. OFF by default to
+   * preserve the site-wide transform-only / axe-clean reveal; opt in only for
+   * media-led items whose accessible name is NOT carried by faded body text
+   * (e.g. the Playground artwork cards, where the caption sits on its own
+   * always-opaque scrim). See decisions.md D17.
+   */
+  fade?: boolean;
+  /** seconds the reveal runs (defaults 0.6; a touch slower reads as a soft fade) */
+  duration?: number;
 };
 
 /**
@@ -39,6 +49,8 @@ export function RevealStagger({
   id,
   selector,
   y = 28,
+  fade = false,
+  duration = 0.6,
 }: RevealStaggerProps) {
   const Tag = (as ?? "div") as ElementType;
   const ref = useRef<HTMLElement | null>(null);
@@ -55,19 +67,37 @@ export function RevealStagger({
       const items = gsap.utils.toArray<HTMLElement>(nodes);
       if (!items.length) return;
 
-      gsap.set(items, { y });
-      ScrollTrigger.batch(items, {
-        start: "top 88%",
-        once: true,
-        onEnter: (batch) =>
-          gsap.to(batch, {
+      gsap.set(items, fade ? { y, opacity: 0 } : { y });
+
+      // Drive the reveal from an IntersectionObserver rather than ScrollTrigger.
+      // ScrollTrigger.update here is fed only by Lenis scroll events, so a
+      // trigger created at rest (this masonry on load) never gets its initial
+      // evaluation — with fade the cards would sit invisible until the first
+      // scroll. The observer fires reliably on load for on-screen items AND
+      // re-fires as the masonry settles, independent of Lenis. Items entering
+      // together animate as a soft stagger. See decisions.md D17.
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entering = entries
+            .filter((entry) => entry.isIntersecting)
+            .map((entry) => entry.target as HTMLElement);
+          if (!entering.length) return;
+          gsap.to(entering, {
             y: 0,
-            duration: 0.6,
+            ...(fade ? { opacity: 1 } : {}),
+            duration,
             ease: "power3.out",
             stagger: 0.08,
             overwrite: true,
-          }),
-      });
+          });
+          entering.forEach((el) => observer.unobserve(el));
+        },
+        // reveal when an item reaches ~88% down the viewport (matches the old
+        // ScrollTrigger "top 88%" start) so it eases in just before fully shown
+        { rootMargin: "0px 0px -12% 0px" },
+      );
+      items.forEach((el) => observer.observe(el));
+      return () => observer.disconnect();
     },
     { dependencies: [reducedMotion], scope: ref },
   );

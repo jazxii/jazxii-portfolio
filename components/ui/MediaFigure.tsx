@@ -3,15 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { asset } from "@/lib/asset";
-
-type Media = {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  videoSrc?: string;
-  videoDescription?: string;
-};
+import type { MediaItem as Media } from "@/content/projects";
 
 /**
  * Project/playground media. Images get real alt text; optional video is

@@ -1,7 +1,7 @@
 # Kanban — jazxii-portfolio
 
 Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sprint:
-**Site-wide GSAP scroll-reveals**. WIP limit: **max 2 In Progress**. Flow left → right.
+**Work media/layout + Playground motion polish** (2026-06-19). WIP limit: **max 2 In Progress**. Flow left → right.
 
 > Definition of Done (every card): tsc clean · eslint clean (React-compiler rules, D11) ·
 > `npm run build` green · `npx playwright test` green (**axe 0 violations, 6 routes × 2 themes**) ·
@@ -15,7 +15,7 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 - [ ] CARD-029 · Pinned scrollytelling beat on Home between hero and Work teaser (roadmap **R6**, L/High)
 - [ ] CARD-030 · Diorama → optional light WebGL upgrade, code-split + `pointer:fine` gated (roadmap **R4**, L/Med)
 - [ ] CARD-031 · Cursor-reactive multi-layer parallax depth on character + diorama (roadmap **R7**, M/Low)
-- [ ] CARD-032 · Replace placeholder project + playground media (SVGs) with real screenshots/recordings (chore, M/Med)
+- [ ] CARD-032 · Replace placeholder project + playground media (SVGs) with real screenshots/recordings (chore, M/Med) — *in progress: real Playground `.mp4`/`.mov`/`.png` + WCAG cover landed; clean up duplicate Playground `slug`/title placeholders + mismatched alt text (Phase 14)*
 - [ ] CARD-033 · Confirm playground links (several point to LinkedIn as stand-ins) (chore, S/Low)
 
 ## 🔎 Ready (groomed, acceptance criteria written)
@@ -37,6 +37,13 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 - [x] CARD-035 · Work hero headline "Passionate about the craft and little details" + folder icon (Phase 12)
 - [x] CARD-036 · Revert out-of-session 4-column / LiveCta ProjectSection rewrite to committed 2-column layout (Phase 12)
 - [x] CARD-037 · Work opens as full-screen hero; content panel scrolls up over it (sticky) + scroll-spy `offsetParent` fix (Phase 12, decisions D19)
+- [x] CARD-038 · Work cards: multiple media via `gallery` field + `MediaGallery` (featured cover + grid, no carousel) (Phase 13, decisions D22)
+- [x] CARD-039 · Work layout: Role on full-width row + left-anchored sticky index / wider card column (Phase 13, decisions D23)
+- [x] CARD-040 · Open every route at the top + fix cross-nav stuck-scroll (reset + recompute Lenis/ScrollTrigger on route change) (Phase 13, decisions D21)
+- [x] CARD-041 · Playground card video autoplay (muted/looping, ext-detected; reduced-motion pauses) (Phase 14, decisions D24)
+- [x] CARD-042 · Playground slow fade-in reveal — `RevealStagger` opt-in `fade` + `ScrollTrigger.batch`→`IntersectionObserver`; duplicate-key fix; axe-verified opacity:0 clean (Phase 14, decisions D25)
+
+> ⚠️ **DoD partial for CARD-038–042:** tsc + eslint clean, but `npm run build` + Playwright/axe were **not** re-run this session (the headless preview can't exercise scroll/visibility animations — see session-log Phase 14). Run the full loop before shipping.
 
 ## 🧊 Icebox / Parked (validate value first)
 - [ ] CARD-R8 · Audio re-introduction as explicit opt-in toggle (reuse archived `IslandPlayer.tsx`)
@@ -99,4 +106,4 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 
 ---
 
-_Last updated: 2026-06-18. Source of truth for cards; mirror status to [session-log.md](session-log.md) phases._
+_Last updated: 2026-06-19. Source of truth for cards; mirror status to [session-log.md](session-log.md) phases._

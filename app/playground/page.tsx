@@ -27,10 +27,18 @@ export default function PlaygroundPage() {
       </header>
 
       {/* CSS-columns masonry: zero JS, 3 → 2 → 1 (PRD §5.3).
-          RevealStagger batch-reveals the cards as they scroll in. */}
-      <RevealStagger as="ul" selector=":scope > li" className="masonry list-none p-0">
-        {playgroundItems.map((item) => (
-          <li key={item.slug}>
+          RevealStagger batch-reveals the cards as they scroll in — fade + rise,
+          a touch slower, so the media-led cards ease in instead of snapping. */}
+      <RevealStagger
+        as="ul"
+        selector=":scope > li"
+        className="masonry list-none p-0"
+        fade
+        y={36}
+        duration={0.9}
+      >
+        {playgroundItems.map((item, index) => (
+          <li key={`${item.slug}-${index}`}>
             <PlaygroundCard item={item} />
           </li>
         ))}

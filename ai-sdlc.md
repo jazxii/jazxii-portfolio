@@ -142,7 +142,7 @@ fallback** first, then layers motion behind `prefers-reduced-motion: no-preferen
 | ID | Item | Effort | Impact | Notes |
 |---|---|---|---|---|
 | R4 | **Diorama → light WebGL upgrade (optional)** | L | Med | Re-introduce React Three Fiber *only* for the hero desk, code-split + `pointer:fine` gated, with the current CSS-3D diorama as the no-JS/reduced-motion fallback. Re-evaluate vs. the "no WebGL" decision (PRD §7). |
-| ~~R5~~ | ~~**Scroll-driven section reveals**~~ ✅ Done (Phase 10) | M | Med | Shipped site-wide (not just About + Playground): `Reveal` / `RevealText` (SplitText) / `RevealStagger` (ScrollTrigger.batch) on every route; reduced-motion shows final state instantly. See [decisions.md](decisions.md) D17. |
+| ~~R5~~ | ~~**Scroll-driven section reveals**~~ ✅ Done (Phase 10; refined Phase 14) | M | Med | Shipped site-wide: `Reveal` / `RevealText` (SplitText) / `RevealStagger` on every route; reduced-motion shows final state instantly. `RevealStagger` later moved `ScrollTrigger.batch`→`IntersectionObserver` (reliable on-load reveal) and gained an opt-in `fade` for Playground. See [decisions.md](decisions.md) D17, D25. |
 | R6 | **Pinned scrollytelling beat on Home** | L | High | A pinned, scrubbed "build story" sequence (Juan-Mora-style) between hero and Work teaser; SVG/CSS first, 3D optional. |
 | R7 | **Cursor-reactive 3D parallax depth** | M | Low | Extend the existing page-wide pointer parallax to a subtle multi-layer depth on the 3D character + diorama. |
 
@@ -175,4 +175,4 @@ fallback** first, then layers motion behind `prefers-reduced-motion: no-preferen
 
 ---
 
-_Last updated: 2026-06-17 (Phase 10 — GSAP scroll-reveals shipped site-wide; R2 + R5 done. Live board: [kanban.md](kanban.md). See [session-log.md](session-log.md))._
+_Last updated: 2026-06-19 (Phases 13–14 — Work media gallery + left-anchored layout, open-at-top / stuck-scroll fixes, Playground video autoplay + IntersectionObserver fade-in. R2 + R5 done. Live board: [kanban.md](kanban.md). See [session-log.md](session-log.md), decisions D21–D25)._

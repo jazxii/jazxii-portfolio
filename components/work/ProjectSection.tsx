@@ -1,7 +1,7 @@
 import type { Project } from "@/content/projects";
 import { ButtonLink } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
-import { MediaFigure } from "@/components/ui/MediaFigure";
+import { MediaGallery } from "@/components/ui/MediaGallery";
 import { Reveal } from "@/components/motion/Reveal";
 import { TagChips } from "./TagChips";
 
@@ -53,14 +53,16 @@ export function ProjectSection({ project }: { project: Project }) {
         )}
       </div>
 
-      <Reveal as="div" className="mt-8 grid gap-8 sm:grid-cols-[2fr_1fr]">
-        <div>
-          <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted">
-            Challenge
-          </h3>
-          <p className="mt-2 max-w-prose">{project.challenge}</p>
-        </div>
-        <div className="flex flex-col gap-8">
+      <Reveal as="div" className="mt-8">
+        {/* Challenge + Services share the top row; Role drops to its own
+            full-width row below so a short Challenge doesn't leave dead space. */}
+        <div className="grid gap-8 sm:grid-cols-[2fr_1fr]">
+          <div>
+            <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted">
+              Challenge
+            </h3>
+            <p className="mt-2 max-w-prose">{project.challenge}</p>
+          </div>
           <div>
             <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted">
               Services
@@ -69,17 +71,17 @@ export function ProjectSection({ project }: { project: Project }) {
               <TagChips tags={project.services} />
             </div>
           </div>
-          <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted">
-              Role
-            </h3>
-            <p className="mt-2 text-sm">{project.role}</p>
-          </div>
+        </div>
+        <div className="mt-8 border-t border-border-soft/60 pt-6">
+          <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted">
+            Role
+          </h3>
+          <p className="mt-2 max-w-3xl text-sm">{project.role}</p>
         </div>
       </Reveal>
 
       <Reveal className="mt-10">
-        <MediaFigure media={project.media} />
+        <MediaGallery items={[project.media, ...(project.gallery ?? [])]} />
       </Reveal>
     </section>
   );

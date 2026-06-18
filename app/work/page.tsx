@@ -16,12 +16,12 @@ export default function WorkPage() {
           scrolls up and over it — the project cards rise from below. */}
       <section
         aria-labelledby="work-h1"
-        className="sticky top-0 flex min-h-screen flex-col justify-center px-4 sm:px-6"
+        className="sticky top-0 flex min-h-screen flex-col justify-center px-6 sm:px-10 xl:px-16"
       >
         {/* decorative scroll-progress dots down the left edge (reference style) */}
         <span aria-hidden="true" className="work-scroll-rail hidden md:block" />
 
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="w-full max-w-7xl">
           <h1
             id="work-h1"
             className="font-mono text-xs uppercase tracking-[0.18em] text-text-muted"
@@ -33,7 +33,7 @@ export default function WorkPage() {
               a real, readable line (not a heading, to keep the h1→project-h2 outline). */}
           <Reveal
             as="p"
-            className="mt-4 max-w-6xl font-display text-h1 font-semibold leading-[1.08] text-text-muted text-balance sm:text-display"
+            className="mt-4 max-w-7xl font-display text-h1 font-semibold leading-[1.08] text-text-muted text-balance sm:text-display"
           >
             <svg
               aria-hidden="true"
@@ -67,7 +67,7 @@ export default function WorkPage() {
 
       {/* Content panel — rises over the hero on scroll, carrying the cards. */}
       <div className="work-panel">
-        <div className="mx-auto max-w-6xl px-4 pb-10 pt-16 sm:px-6">
+        <div className="px-6 pb-10 pt-16 sm:px-10 xl:px-16">
           <Reveal as="p" className="max-w-xl text-text-muted">
             Selected projects where craft and accessibility are the same goal.
           </Reveal>

@@ -11,25 +11,41 @@ export type PlaygroundItem = {
   date: string; // ISO yyyy-mm
   href: string;
   media: {
+    /** Image, or a video file (.mp4/.webm/.mov) — the card auto-detects it. */
     src: string;
     alt: string;
     width: number;
     height: number;
+    /** Optional still shown for videos before play / under reduced motion. */
+    poster?: string;
   };
 };
 
 export const playgroundItems: PlaygroundItem[] = [
   {
-    slug: "a11y-agents",
-    title: "AI Agents for A11y Testing",
+    slug: "clawspace-agents",
+    title: "Clawspace Agents",
     medium: "Experiment · Playwright + axe-core + LLM",
     date: "2026-03",
     href: "https://www.linkedin.com/in/jassim-m-shamim/",
     media: {
-      src: "/media/play-a11y-agents.svg",
+      src: "/media/play-clawspace.mp4",
       alt: "Abstract waveform over a blue card, captioned 'Playwright · axe-core · LLM'.",
       width: 1280,
       height: 820,
+    },
+  },
+  {
+    slug: "linkedin-banner",
+    title: "LinkedIn Banner",
+    medium: "Experiment · Neo4j + LLM retrieval",
+    date: "2026-01",
+    href: "https://www.linkedin.com/in/jassim-m-shamim/",
+    media: {
+      src: "/media/play-linkedin-banner.png",
+      alt: "Small node-and-edge knowledge graph on a blue card, captioned 'Neo4j · LLM retrieval'.",
+      width: 1280,
+      height: 900,
     },
   },
   {
@@ -39,20 +55,20 @@ export const playgroundItems: PlaygroundItem[] = [
     date: "2026-01",
     href: "https://www.linkedin.com/in/jassim-m-shamim/",
     media: {
-      src: "/media/play-wcag-graphrag.svg",
+      src: "/media/play-ai-character-sheet.png",
       alt: "Small node-and-edge knowledge graph on a blue card, captioned 'Neo4j · LLM retrieval'.",
       width: 1280,
       height: 900,
     },
   },
   {
-    slug: "house-of-alt",
-    title: "House of Alt Campaign",
+    slug: "logo-design",
+    title: "Logo Design",
     medium: "Social campaign · video + design",
     date: "2024-04",
     href: "https://www.instagram.com/",
     media: {
-      src: "/media/play-house-of-alt.svg",
+      src: "/media/play-logo-design.png",
       alt: "Play button on a blue card, captioned '250 pieces · 2.5k Instagram / 4k YouTube'.",
       width: 1280,
       height: 980,
@@ -65,7 +81,7 @@ export const playgroundItems: PlaygroundItem[] = [
     date: "2021-09",
     href: "https://www.linkedin.com/in/jassim-m-shamim/",
     media: {
-      src: "/media/play-ar-filters.svg",
+      src: "/media/play-self-ai-gen.mp4",
       alt: "Concentric augmented-reality target rings on a blue card, captioned 'Spark AR · creative tech'.",
       width: 1280,
       height: 940,
@@ -78,21 +94,47 @@ export const playgroundItems: PlaygroundItem[] = [
     date: "2022-10",
     href: "https://www.linkedin.com/in/jassim-m-shamim/",
     media: {
-      src: "/media/play-world-space-week.svg",
+      src: "/media/play-equally-design.png",
       alt: "Stylised rocket on a blue card for the VIT × ISRO World Space Week event site.",
       width: 1280,
       height: 760,
     },
   },
   {
-    slug: "thanima-2022",
-    title: "Thanima 2022",
+    slug: "mla-website",
+    title: "First MLA Website",
+    medium: "Front-end · maintenance",
+    date: "2022-02",
+    href: "https://www.linkedin.com/in/jassim-m-shamim/",
+    media: {
+      src: "/media/play-l-and-d.mov",
+      alt: "Stacked code-line bars on a blue card for the first Malayalam Literary Association website.",
+      width: 1280,
+      height: 720,
+    },
+  },
+  {
+    slug: "mla-website",
+    title: "First MLA Website",
+    medium: "Front-end · maintenance",
+    date: "2022-02",
+    href: "https://www.linkedin.com/in/jassim-m-shamim/",
+    media: {
+      src: "/media/play-logo-ai-cinematic.mp4",
+      alt: "Stacked code-line bars on a blue card for the first Malayalam Literary Association website.",
+      width: 1280,
+      height: 720,
+    },
+  },
+  {
+    slug: "dynamic-island-topnav",
+    title: "Dynamic Island Topnav",
     medium: "Event site · front-end",
     date: "2022-09",
     href: "https://www.linkedin.com/in/jassim-m-shamim/",
     media: {
-      src: "/media/play-thanima.svg",
-      alt: "Stacked code-line bars on a blue card for the Thanima 2022 Onam festival website.",
+      src: "/media/play-dynamicisland-topnav.mov",
+      alt: "Stacked code-line bars on a blue card for the Dynamic Island Topnav event site.",
       width: 1280,
       height: 880,
     },
@@ -104,7 +146,7 @@ export const playgroundItems: PlaygroundItem[] = [
     date: "2023-05",
     href: "https://www.linkedin.com/in/jassim-m-shamim/",
     media: {
-      src: "/media/play-relic-edits.svg",
+      src: "/media/play-socialmedia-design.png",
       alt: "Video play button on a blue card, captioned 'freelance video editing'.",
       width: 1280,
       height: 780,
@@ -117,7 +159,19 @@ export const playgroundItems: PlaygroundItem[] = [
     date: "2022-02",
     href: "https://www.linkedin.com/in/jassim-m-shamim/",
     media: {
-      src: "/media/play-mla-site.svg",
+      src: "/media/play-ada-tree.png",
+      alt: "Stacked code-line bars on a blue card for the first Malayalam Literary Association website.",
+      width: 1280,
+      height: 720,
+    },
+  },{
+    slug: "mla-website",
+    title: "First MLA Website",
+    medium: "Front-end · maintenance",
+    date: "2022-02",
+    href: "https://www.linkedin.com/in/jassim-m-shamim/",
+    media: {
+      src: "/media/play-disability-divide.png",
       alt: "Stacked code-line bars on a blue card for the first Malayalam Literary Association website.",
       width: 1280,
       height: 720,

@@ -6,8 +6,8 @@
 |---|---|
 | **Author** | Jassim M. Shamim |
 | **LinkedIn** | https://www.linkedin.com/in/jassim-m-shamim/ |
-| **Status** | Draft v1.3 |
-| **Last updated** | 18 June 2026 |
+| **Status** | Draft v1.4 |
+| **Last updated** | 19 June 2026 |
 | **Inspiration** | williamle.design (spatial 3D entry + Playground), juanmora.co (scroll-driven Work) |
 
 ---
@@ -80,18 +80,18 @@ Juan's "Curious?… Check out my **Work**" beat, rebuilt in CSS (`HomeIntro.tsx`
 - **A11y:** the whole folder/word is decorative (`aria-hidden`); the link carries sr-only text ("work — view all projects") and the section an `aria-label`. The folder's text sits on a gradient, so axe reports it *incomplete*, never a contrast violation.
 
 ### 5.2 — Work Showcase (inspired by Juan Mora)
-**Opens as a full-screen hero** (v1.3): a small `Work` eyebrow `<h1>`, the muted display tagline **"Passionate about the craft and little details"** with a decorative blue **folder + "iii"** icon, and a decorative left scroll-dots rail. The hero is `position: sticky; top: 0; min-height: 100vh`; the project content lives in a `.work-panel` (`position: relative; z-index: 1`, opaque `--bg`, rounded top + soft shadow) that **scrolls up and over** the held hero — the cards rise from below (Juan-Mora overlap, done in pure CSS, no scroll-jacking).
+**Opens as a full-screen hero** (v1.3): a small `Work` eyebrow `<h1>`, the muted display tagline **"Driven by the craft. Defined by the details."** with a decorative blue **folder + "iii"** icon, and a decorative left scroll-dots rail. The hero is `position: sticky; top: 0; min-height: 100vh`; the project content lives in a `.work-panel` (`position: relative; z-index: 1`, opaque `--bg`, rounded top + soft shadow) that **scrolls up and over** the held hero — the cards rise from below (Juan-Mora overlap, done in pure CSS, no scroll-jacking).
 
-Inside the panel: a two-column layout — a sticky left index (`position: sticky; top: 0`) + scrolling content. Each project block: Title, Year pill, "View live / repo" button (or a context badge when there's no public link), then **Challenge / Services (tag chips) / Role**, plus media (looping muted video or images), revealed via the shared transform-only reveal primitives (§5.6).
+Inside the panel (v1.4): a **left-anchored** layout — the page hugs one left edge (`px-6 sm:px-10 xl:px-16`, no centered max-width) so the sticky `<nav>` index **pins to the left** with a 64px gap to a width-capped (`max-w-[72rem]`) card column; the hero + intro share the same left edge. Each project block: Title, Year pill, "View live / repo" button (or a context badge when there's no public link), then **Challenge + Services (tag chips) side-by-side with Role on its own full-width row** below a divider, plus media — a **cover plus an optional gallery** (featured cover full-width, the rest in a responsive grid; images and/or muted looping video), revealed via the shared reveal primitives (§5.6). (See decisions D22, D23.)
 
 - **Behavior:** active project highlights in the index as you scroll (verified pattern on Juan's site).
 - **A11y implementation:** the hero `<h1>` keeps the page identity (the tagline is a decorative `<p>`, folder `aria-hidden`); the sticky overlap works under reduced motion (Lenis off → native scroll). Index is a real `<nav aria-label="Projects">`; active state driven by IntersectionObserver, also sets `aria-current="true"`. Clicking smooth-scrolls (Lenis) and moves focus to the section heading — the scroll target is computed as an **absolute `getBoundingClientRect().top + scrollY − 96` number** passed to `lenis.scrollTo` (not the element), so the positioned `.work-panel` becoming the sections' `offsetParent` can't mis-resolve it (see decisions D19). Each project = `<section aria-labelledby>` with a `tabIndex={-1}` heading. Videos `muted loop playsinline preload="none"` with poster + text alternative; only play in view and when motion allowed.
 
 ### 5.3 — Playground (inspired by William Le)
-3-column masonry (verified: William's is 3 fixed columns ~495px wide) mixing design experiments, Figma concepts, AI-tool demos, and curation. Each card: preview (image/muted video), title, medium/tool, date tag; newest first.
+3-column masonry (verified: William's is 3 fixed columns ~495px wide) mixing design experiments, Figma concepts, AI-tool demos, and curation. Each card: preview (image **or autoplaying muted/looping video**), title, medium/tool, date tag; newest first. Cards **fade + rise in as they scroll into view** (v1.4). (See decisions D24, D25.)
 
-- **Implementation:** CSS `columns: 3; gap` with `break-inside: avoid` (zero-JS, degrades to 2 -> 1 column).
-- **A11y:** semantic list; each card is one focusable link with a clear accessible name; videos lazy-play in view, pause off-view; visible focus rings; keyboard-only operable.
+- **Implementation:** CSS `columns: 3; gap` with `break-inside: avoid` (zero-JS, degrades to 2 -> 1 column). Card media auto-detects video by file extension (`.mp4`/`.webm`/`.mov`) and renders `<video autoplay muted loop playsinline>` (optional poster), else `<img>`.
+- **A11y:** semantic list; each card is one focusable link with a clear accessible name; video is decorative (`aria-hidden` — the link title/medium name the card), muted, and **paused under reduced motion**; visible focus rings; keyboard-only operable. The fade-in reveal is opt-in `fade` on `RevealStagger` (§5.6) and is axe-clean (opacity:0 cards trip **no** color-contrast violations; reduced motion shows everything static + opaque).
 
 ### 5.4 — Bookend Footer
 A single repeated CTA card ("Let's build something inclusive together") + large wordmark/monogram footer on every route (Juan resolves Home and Work to the identical closing moment). The CTA carries `mailto:`, LinkedIn, GitHub; the footer nav links **Design system** · About · email. No downloads or sharing flows.
@@ -107,9 +107,9 @@ Persistent top nav: a left `jazxii.` wordmark (peach dot), a centred **iPhone-st
 Every route layers on the home page's "text loads up / cards appear on scroll" feel via three reusable client primitives in `components/motion/`, built on `@gsap/react`'s `useGSAP` (GSAP is 100% free since v3.13 — SplitText ships in the public package):
 - **`RevealText`** — per-line text reveal via **SplitText** (`aria:"auto"` keeps the full string as the accessible name; `autoSplit` re-splits after the web font swaps). Headings only.
 - **`Reveal`** — a single block rises into place.
-- **`RevealStagger`** — a list/grid reveals in staggered batches via `ScrollTrigger.batch` (cards, chips, swatches, rows).
-- **Smooth scroll:** one global Lenis instance (`components/motion/SmoothScroll.tsx`, mounted in the layout) synced to ScrollTrigger (`lenis.on("scroll", ScrollTrigger.update)` + `gsap.ticker` drives `lenis.raf`).
-- **A11y/perf:** all gate on `useReducedMotion` (reduced motion = final state instantly); reveals are **transform-only (no opacity/visibility)** so content is never hidden from axe, the tab order, or the a11y tree, and never trips color-contrast. Content stays server-rendered (LCP = real text); `gsap`/`ScrollTrigger`/`SplitText` ship in one shared client chunk. (See decisions D17.)
+- **`RevealStagger`** — a list/grid reveals in a staggered batch as items enter, driven by an **`IntersectionObserver`** (reliable on load, unlike `ScrollTrigger.batch`, which never revealed items already in the first viewport — see decisions D25). An opt-in `fade` adds an opacity fade for media-led cards (Playground); default off elsewhere (transform-only).
+- **Smooth scroll:** one global Lenis instance (`components/motion/SmoothScroll.tsx`, mounted in the layout) synced to ScrollTrigger (`lenis.on("scroll", ScrollTrigger.update)` + `gsap.ticker` drives `lenis.raf`). On every route change it resets scroll to the **top** (browser restoration off; hash deep-links exempt) and recomputes Lenis's scroll limit + `ScrollTrigger.refresh()`, so the persisted global Lenis can't strand the visitor mid-page on a taller route (decisions D21).
+- **A11y/perf:** all gate on `useReducedMotion` (reduced motion = final state instantly); reveals are **transform-only (no opacity/visibility) by default**, so content is never hidden from axe, the tab order, or the a11y tree, and never trips color-contrast. The one opt-in exception is `RevealStagger fade` on the media-led Playground cards (opacity 0→1) — verified axe-clean (opacity:0 cards trip no color-contrast violations) and still fully static/opaque under reduced motion. Content stays server-rendered (LCP = real text); `gsap`/`ScrollTrigger`/`SplitText` ship in one shared client chunk. (See decisions D17, D25.)
 
 ### 5.7 — About "The story" (v1.3)
 The `/about` story section conveys the persona — an **AI orchestrator for accessibility bridging ADA across the SDLC (build) and STLC (test) lifecycles**, with a keen eye for design/authenticity/aesthetics, and an active musician — via copy plus two graphics in `components/about/`:

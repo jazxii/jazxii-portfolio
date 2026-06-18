@@ -52,7 +52,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
   return (
     <div
       ref={containerRef}
-      className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[240px_1fr]"
+      className="grid gap-x-16 gap-y-10 px-6 sm:px-10 xl:px-16 lg:grid-cols-[240px_minmax(0,1fr)]"
     >
       <nav
         aria-label="Projects"
@@ -90,7 +90,9 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
         </ul>
       </nav>
 
-      <div>
+      {/* Cap the card column so lines stay readable on ultrawide / zoomed-out
+          viewports; the nav stays anchored left and extra width spills right. */}
+      <div className="w-full max-w-[72rem]">
         {projects.map((project) => (
           <ProjectSection key={project.slug} project={project} />
         ))}
