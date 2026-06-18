@@ -129,9 +129,22 @@ Date: 2026-06-14. Stack: Next.js 16.2.9 (App Router, Turbopack) · React 19.2.4 
 
 ---
 
+## Phase 12 — Work page: hero headline + folder, revert, full-screen hero that scrolls over
+
+**Trigger:** user iterated on `/work` — add a Juan-Mora-style headline + folder, revert an out-of-session header rewrite, then make the page open as a full-screen hero with the cards rising over it on scroll.
+
+- **Headline + folder** ([work/page.tsx](app/work/page.tsx)) — added the muted-gray display tagline "Passionate about the craft and little details" with a decorative blue **folder + slanted "iii"** SVG (inline, `aria-hidden`, `var(--accent)`). Real text (a `<p>` tagline, not a heading) so the `h1`→project-`h2` outline is preserved.
+- **Reverted an out-of-session rewrite** — `ProjectSection.tsx` had been changed at ~01:14 (not by this session) into a 4-column Juan-Mora header using a `LiveCta` component; per user, `git checkout HEAD` restored the committed 2-column layout (ButtonLink + context badge) and re-applied only this session's `Reveal` wrappers. `components/work/LiveCta.tsx` is now orphaned (untracked, unused).
+- **Full-screen hero + slide-over panel** — the hero (eyebrow `h1` "Work" + the tagline + left scroll-dots rail) is `position: sticky; top: 0; min-h-screen`; the projects live in `.work-panel` (`relative`, `z-1`, opaque, rounded top + shadow) that scrolls up over the held hero. Pure CSS (no scroll-jacking; reduced-motion-safe). (decisions [D19](decisions.md).)
+- **Scroll-spy fix** ([lib/scroll.ts](lib/scroll.ts)) — making `.work-panel` positioned turned it into the sections' `offsetParent`, breaking index-link `scrollToAndFocus`. Now computes the absolute target (`getBoundingClientRect().top + scrollY − 96`) and passes a **number** to `lenis.scrollTo`. Verified: click scrolls + focuses + sets `aria-current`.
+- ✅ tsc + eslint clean, build green, **25/25** Playwright (axe 0 violations 6×2 + scroll-spy). Verified hero + panel-rises-over + scroll-spy in preview (dark + light). Note: home light-mode axe is intermittently flaky on the `opacity:0.5` reveal words (passes on re-run; pre-existing).
+
+---
+
 ## Current state
 
 - Routes: `/`, `/work`, `/playground`, `/about` (a11y statement at `#accessibility`), `/accessibility`, `/design-system` — statically rendered, each with GSAP scroll-reveals (text + cards) layered on as client islands.
+- `/work` opens as a **full-screen hero** ("Passionate about the craft and little details" + folder icon, sticky); the project content panel scrolls up and over it, carrying the cards. Sticky left scroll-spy index intact ([WorkShowcase.tsx](components/work/WorkShowcase.tsx)).
 - Motion: one global Lenis ↔ ScrollTrigger (`SmoothScroll` in the layout); reusable `Reveal` / `RevealText` (SplitText) / `RevealStagger` primitives in [components/motion/](components/motion/); plugins registered once in [lib/gsap.ts](lib/gsap.ts). All reduced-motion + keyboard safe.
 - Hero: CSS-3D diorama (no WebGL deps). Nav: dynamic island — collapsed shows album art + a **looping EQ**; expands (hover / focus / tap) via a smooth box-morph to **four nav buttons spread edge-to-edge** (player reverted + archived); active pill shares the bar's `--island-radius`. Ambient glow + custom cursor + theme toggle global. Footer links: Design system · About · email.
 - Planning: [ai-sdlc.md](ai-sdlc.md) holds the Kanban template + the 3D/GSAP roadmap.
