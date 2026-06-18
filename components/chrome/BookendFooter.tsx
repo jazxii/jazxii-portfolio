@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
 import { Wordmark } from "./Wordmark";
+import { asset } from "@/lib/asset";
 
 const EMAIL = "jassimmohammed2910@gmail.com";
 
@@ -17,7 +18,7 @@ export function BookendFooter() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/media/memoji-hearts.png"
+          src={asset("/media/memoji-hearts.png")}
           alt=""
           aria-hidden="true"
           width={128}

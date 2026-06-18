@@ -4,6 +4,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RevealStagger } from "@/components/motion/RevealStagger";
 import { StoryBridge } from "@/components/about/StoryBridge";
 import { OrchestrationGraph } from "@/components/about/OrchestrationGraph";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "About",
@@ -113,7 +114,7 @@ export default function AboutPage() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/media/memoji-portrait.png"
+              src={asset("/media/memoji-portrait.png")}
               alt="Jassim M. Shamim"
               width={256}
               height={256}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import { asset } from "@/lib/asset";
 
 type Media = {
   src: string;
@@ -58,12 +59,12 @@ export function MediaFigure({ media, className = "" }: { media: Media; className
           loop
           playsInline
           preload="none"
-          poster={media.src}
+          poster={asset(media.src)}
           width={media.width}
           height={media.height}
           className="block h-auto w-full"
         >
-          <source src={media.videoSrc} />
+          <source src={asset(media.videoSrc)} />
         </video>
         <p className="sr-only">{media.videoDescription ?? media.alt}</p>
       </figure>
@@ -75,7 +76,7 @@ export function MediaFigure({ media, className = "" }: { media: Media; className
       {/* Placeholder SVGs: plain img keeps them out of the optimizer; swap to next/image with real photos/AVIF. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={media.src}
+        src={asset(media.src)}
         alt={media.alt}
         width={media.width}
         height={media.height}

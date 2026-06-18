@@ -110,10 +110,12 @@ jobs:
           cache: npm
       - name: Setup Pages
         uses: actions/configure-pages@v6
-        with:
-          static_site_generator: next
+        # basePath / static export are self-managed in next.config.ts via
+        # NEXT_PUBLIC_BASE_PATH (set on the build step below).
       - run: npm ci
       - name: Build static export
+        env:
+          NEXT_PUBLIC_BASE_PATH: /jazxii-portfolio
         run: npx next build
       - name: Upload preview build
         uses: actions/upload-artifact@v7

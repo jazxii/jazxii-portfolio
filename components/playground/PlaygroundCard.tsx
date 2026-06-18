@@ -1,4 +1,5 @@
 import type { PlaygroundItem } from "@/content/playground";
+import { asset } from "@/lib/asset";
 
 // "JUN 25’" — William Le-style date tag
 const formatDate = (iso: string) => {
@@ -26,7 +27,7 @@ export function PlaygroundCard({ item }: { item: PlaygroundItem }) {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={item.media.src}
+        src={asset(item.media.src)}
         alt={item.media.alt}
         width={item.media.width}
         height={item.media.height}

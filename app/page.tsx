@@ -3,6 +3,7 @@ import { Diorama } from "@/components/hero/Diorama";
 import { HomeIntro } from "@/components/hero/HomeIntro";
 import { WorkTeaser } from "@/components/hero/WorkTeaser";
 import { StoryLine } from "@/components/hero/StoryLine";
+import { asset } from "@/lib/asset";
 
 export default function HomePage() {
   return (
@@ -27,7 +28,7 @@ export default function HomePage() {
             </p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/media/memoji-wave.png"
+              src={asset("/media/memoji-wave.png")}
               alt=""
               aria-hidden="true"
               width={256}
