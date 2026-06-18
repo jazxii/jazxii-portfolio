@@ -18,12 +18,25 @@ export default function HomePage() {
           </p>
 
           {/* Giant brand wordmark — decorative (the name is in the nav + eyebrow) */}
-          <p
-            aria-hidden="true"
-            className="mt-7 font-display text-[clamp(4rem,11vw,9rem)] font-semibold leading-[0.85] tracking-tight text-peach"
-          >
-            jazxii
-          </p>
+          <div className="mt-7 flex items-center gap-3 sm:gap-5">
+            <p
+              aria-hidden="true"
+              className="font-display text-[clamp(4rem,11vw,9rem)] font-semibold leading-[0.85] tracking-tight text-peach"
+            >
+              jazxii
+            </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/media/memoji-wave.png"
+              alt=""
+              aria-hidden="true"
+              width={256}
+              height={256}
+              decoding="async"
+              loading="lazy"
+              className="size-20 shrink-0 object-contain sm:size-28 lg:size-32"
+            />
+          </div>
 
           <div className="mt-7 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-border-soft pt-4">
             <span className="font-semibold">Agentic AI × Inclusive Design</span>

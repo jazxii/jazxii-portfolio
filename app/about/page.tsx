@@ -102,19 +102,26 @@ export default function AboutPage() {
           </Reveal>
         </div>
 
-        {/* Decorative portrait placeholder (swap for a real photo + alt text) */}
-        <div
-          aria-hidden="true"
-          className="relative mx-auto grid size-56 place-items-center rounded-full border border-border-soft bg-surface sm:size-64"
-          style={{
-            backgroundImage:
-              "radial-gradient(120% 120% at 30% 20%, color-mix(in oklab, var(--peach) 38%, transparent), transparent 60%), radial-gradient(120% 120% at 80% 90%, color-mix(in oklab, var(--accent) 32%, transparent), transparent 60%)",
-          }}
-        >
-          <span className="font-display text-6xl font-semibold text-text/70">
-            JS
-          </span>
-        </div>
+        {/* Portrait — Memoji on the decorative gradient circle */}
+        <Reveal>
+          <div
+            className="relative mx-auto grid size-64 place-items-center overflow-hidden rounded-full border border-border-soft bg-surface sm:size-80"
+            style={{
+              backgroundImage:
+                "radial-gradient(120% 120% at 30% 20%, color-mix(in oklab, var(--peach) 38%, transparent), transparent 60%), radial-gradient(120% 120% at 80% 90%, color-mix(in oklab, var(--accent) 32%, transparent), transparent 60%)",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/media/memoji-portrait.png"
+              alt="Jassim M. Shamim"
+              width={256}
+              height={256}
+              decoding="async"
+              className="size-[88%] object-contain"
+            />
+          </div>
+        </Reveal>
       </section>
 
       {/* ---- The story (bespoke: persona narrative + SDLC⇄STLC bridge + orchestration motif) ---- */}

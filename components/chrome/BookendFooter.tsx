@@ -15,6 +15,17 @@ export function BookendFooter() {
         aria-labelledby="cta-heading"
         className="mx-auto max-w-5xl rounded-card border border-border-soft bg-surface p-8 text-center shadow-glow sm:p-16"
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/media/memoji-hearts.png"
+          alt=""
+          aria-hidden="true"
+          width={128}
+          height={128}
+          decoding="async"
+          loading="lazy"
+          className="mx-auto mb-5 size-24 object-contain sm:size-28"
+        />
         <h2 id="cta-heading" className="font-display text-h2 font-semibold">
           Let’s build something inclusive together
         </h2>
