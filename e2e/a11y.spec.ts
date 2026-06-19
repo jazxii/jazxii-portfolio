@@ -73,8 +73,12 @@ test.describe("scroll reveals", () => {
     page,
   }) => {
     await page.goto("/playground");
-    await page.waitForLoadState("networkidle");
+    // NOTE: don't waitForLoadState("networkidle") here — the cards include
+    // autoplay-looping videos that keep the network busy indefinitely, so it
+    // never settles under motion. Waiting for the first card is enough; the
+    // polls below already tolerate the reveal animation finishing.
     const first = page.locator(".masonry > li").first();
+    await first.waitFor({ state: "visible" });
     await expect
       .poll(() => first.evaluate((el) => getComputedStyle(el).opacity), {
         timeout: 4000,
@@ -137,8 +141,11 @@ test("work index sets aria-current and moves focus on activation", async ({
   // not what this test asserts)
   await page.waitForLoadState("networkidle");
   const secondLink = page.getByRole("navigation", { name: "Projects" }).getByRole("link").nth(1);
+  // derive the heading id from the link's own href so this stays correct as the
+  // project list is reordered/renamed (href is "#<slug>", heading is "project-<slug>")
+  const slug = (await secondLink.getAttribute("href"))!.replace(/^#/, "");
   await secondLink.click();
-  const heading = page.locator("#project-albertsons-wcag-program");
+  const heading = page.locator(`#project-${slug}`);
   await expect(heading).toBeFocused();
   await expect(secondLink).toHaveAttribute("aria-current", "true");
 });
