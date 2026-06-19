@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="t1 d1">
+  <title id="t1">WCAG 2.2 AA conformance badge</title>
+  <desc id="d1">A double accessibility focus ring encircling an "AA" badge, with passing colour-contrast swatches, for the Digital Accessibility Engineer role at Albertsons.</desc>
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="36%" r="75%">
+      <stop offset="0%" stop-color="#16223D"/>
+      <stop offset="100%" stop-color="#0B1220"/>
+    </radialGradient>
+    <linearGradient id="badge1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1B2A49"/>
+      <stop offset="100%" stop-color="#121C32"/>
+    </linearGradient>
+    <pattern id="grid1" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#22304F" stroke-width="1" opacity="0.35"/>
+    </pattern>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#7E92B6}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#5B9DFF}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#EAF1FF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#9FB1D1}
+      .mono{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;fill:#9FB1D1}
+    </style>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg1)"/>
+  <rect width="1280" height="800" fill="url(#grid1)"/>
+
+  <!-- eyebrow + handle -->
+  <text x="80" y="92" class="eye">01 · CONFORMANCE</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- signature: double focus ring (CSS outline + outline-offset) -->
+  <rect x="476" y="196" width="328" height="328" rx="40" fill="none" stroke="#5B9DFF" stroke-width="2.5" opacity="0.4"/>
+  <rect x="500" y="220" width="280" height="280" rx="32" fill="url(#badge1)" stroke="#34456B" stroke-width="1.5"/>
+  <rect x="500" y="220" width="280" height="280" rx="32" fill="none" stroke="#5B9DFF" stroke-width="4"/>
+
+  <!-- badge contents -->
+  <text x="640" y="300" class="mono" font-size="20" letter-spacing="4" text-anchor="middle" fill="#7E92B6">WCAG 2.2</text>
+  <text x="640" y="430" class="h" font-size="156" text-anchor="middle">AA</text>
+
+  <!-- pass check disc -->
+  <circle cx="780" cy="220" r="34" fill="#3DD68C"/>
+  <path d="M765 220l11 11 20-22" fill="none" stroke="#0B1220" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- contrast swatch row -->
+  <g transform="translate(0,594)">
+    <g transform="translate(404,0)">
+      <rect width="150" height="64" rx="12" fill="#0B1220" stroke="#34456B"/>
+      <text x="20" y="40" class="h" font-size="26" fill="#EAF1FF">Aa</text>
+      <text x="92" y="32" class="mono" font-size="13" fill="#7E92B6">ratio</text>
+      <text x="92" y="50" class="mono" font-size="16" fill="#3DD68C">7.1:1</text>
+    </g>
+    <g transform="translate(566,0)">
+      <rect width="150" height="64" rx="12" fill="#5B9DFF"/>
+      <text x="20" y="40" class="h" font-size="26" fill="#0B1220">Aa</text>
+      <text x="92" y="32" class="mono" font-size="13" fill="#16223D">ratio</text>
+      <text x="92" y="50" class="mono" font-size="16" fill="#0B1220" font-weight="700">4.7:1</text>
+    </g>
+    <g transform="translate(728,0)">
+      <rect width="150" height="64" rx="12" fill="#16223D" stroke="#34456B"/>
+      <text x="20" y="40" class="h" font-size="26" fill="#9FB1D1">Aa</text>
+      <text x="92" y="32" class="mono" font-size="13" fill="#7E92B6">ratio</text>
+      <text x="92" y="50" class="mono" font-size="16" fill="#3DD68C">12:1</text>
+    </g>
+  </g>
+
+  <!-- footer label -->
+  <text x="640" y="712" class="h" font-size="34" text-anchor="middle">Digital Accessibility Engineer</text>
+  <text x="640" y="746" class="sub" text-anchor="middle">Albertsons · Web + Unified Mobile App</text>
+</svg>

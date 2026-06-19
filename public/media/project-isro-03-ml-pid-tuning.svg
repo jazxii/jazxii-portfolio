@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="it3 id3">
+  <title id="it3">ML-assisted PID tuning for pulse stability</title>
+  <desc id="id3">A control loop converges from oscillation to a stable target under machine-learning-assisted PID tuning, improving radar performance.</desc>
+  <defs>
+    <radialGradient id="ibg3" cx="40%" cy="30%" r="95%"><stop offset="0%" stop-color="#1A0F33"/><stop offset="100%" stop-color="#0A0614"/></radialGradient>
+    <pattern id="ig3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#241647" stroke-width="1" opacity="0.55"/></pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#A855F7" stop-opacity="0"/><stop offset="100%" stop-color="#A855F7" stop-opacity="0.5"/></linearGradient>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#8E78BE}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#C084FC}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#F3ECFF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#B9A9E0}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:15px;letter-spacing:2px;fill:#8E78BE}
+      .big{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;fill:#C084FC}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#ibg3)"/><rect width="1280" height="800" fill="url(#ig3)"/>
+  <text x="80" y="92" class="eye">03 · ML-TUNED PID</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- convergence chart -->
+  <rect x="140" y="210" width="600" height="300" rx="18" fill="#120A26" stroke="#34245C" stroke-width="1.5"/>
+  <text x="164" y="244" class="lab">PULSE STABILITY · setpoint tracking</text>
+  <line x1="170" y1="336" x2="710" y2="336" stroke="#22D3EE" stroke-width="1.6" stroke-dasharray="3 7"/>
+  <text x="710" y="326" class="lab" fill="#22D3EE" text-anchor="end">target</text>
+  <path d="M170.0,450.0 L173.0,450.0 L176.0,450.0 L179.0,450.0 L182.0,450.0 L185.0,450.0 L188.0,450.0 L191.0,450.0 L194.0,450.0 L197.0,450.0 L200.0,450.0 L203.0,450.0 L206.0,450.0 L209.0,450.0 L212.0,450.0 L215.0,450.0 L218.0,450.0 L221.0,450.0 L224.0,450.0 L227.0,435.6 L230.0,422.1 L233.0,409.5 L236.0,398.1 L239.0,387.8 L242.0,378.8 L245.0,371.2 L248.0,364.9 L251.0,359.9 L254.0,356.3 L257.0,353.9 L260.0,352.8 L263.0,352.9 L266.0,354.0 L269.0,356.1 L272.0,359.1 L275.0,362.9 L278.0,367.3 L281.0,372.2 L284.0,377.5 L287.0,383.1 L290.0,388.8 L293.0,394.6 L296.0,400.2 L299.0,405.7 L302.0,410.9 L305.0,415.7 L308.0,420.0 L311.0,423.9 L314.0,427.2 L317.0,429.8 L320.0,431.9 L323.0,433.2 L326.0,434.0 L329.0,434.0 L332.0,433.4 L335.0,432.3 L338.0,430.5 L341.0,428.2 L344.0,425.4 L347.0,422.1 L350.0,418.5 L353.0,414.6 L356.0,410.4 L359.0,406.0 L362.0,401.4 L365.0,396.9 L368.0,392.3 L371.0,387.7 L374.0,383.3 L377.0,379.1 L380.0,375.0 L383.0,371.2 L386.0,367.7 L389.0,364.5 L392.0,361.6 L395.0,359.1 L398.0,357.0 L401.0,355.2 L404.0,353.8 L407.0,352.7 L410.0,352.0 L413.0,351.6 L416.0,351.5 L419.0,351.7 L422.0,352.2 L425.0,352.9 L428.0,353.8 L431.0,354.8 L434.0,356.0 L437.0,357.3 L440.0,358.6 L443.0,360.0 L446.0,361.4 L449.0,362.7 L452.0,364.0 L455.0,365.2 L458.0,366.3 L461.0,367.3 L464.0,368.1 L467.0,368.8 L470.0,369.3 L473.0,369.6 L476.0,369.8 L479.0,369.8 L482.0,369.6 L485.0,369.2 L488.0,368.7 L491.0,368.1 L494.0,367.3 L497.0,366.3 L500.0,365.3 L503.0,364.2 L506.0,363.0 L509.0,361.7 L512.0,360.4 L515.0,359.1 L518.0,357.7 L521.0,356.4 L524.0,355.1 L527.0,353.8 L530.0,352.6 L533.0,351.4 L536.0,350.3 L539.0,349.3 L542.0,348.4 L545.0,347.5 L548.0,346.8 L551.0,346.2 L554.0,345.7 L557.0,345.2 L560.0,344.9 L563.0,344.6 L566.0,344.5 L569.0,344.4 L572.0,344.4 L575.0,344.5 L578.0,344.6 L581.0,344.8 L584.0,345.0 L587.0,345.3 L590.0,345.6 L593.0,345.9 L596.0,346.2 L599.0,346.5 L602.0,346.8 L605.0,347.1 L608.0,347.3 L611.0,347.5 L614.0,347.7 L617.0,347.9 L620.0,348.0 L623.0,348.0 L626.0,348.1 L629.0,348.0 L632.0,348.0 L635.0,347.8 L638.0,347.7 L641.0,347.5 L644.0,347.2 L647.0,346.9 L650.0,346.6 L653.0,346.3 L656.0,345.9 L659.0,345.6 L662.0,345.2 L665.0,344.8 L668.0,344.4 L671.0,344.0 L674.0,343.6 L677.0,343.2 L680.0,342.8 L683.0,342.4 L686.0,342.1 L689.0,341.8 L692.0,341.5 L695.0,341.2 L698.0,340.9 L701.0,340.7 L704.0,340.5 L707.0,340.4 L710.0,340.2" fill="none" stroke="#C084FC" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- radar dial -->
+  <circle cx="960" cy="372" r="176" fill="none" stroke="#34245C" stroke-width="1.4"/><circle cx="960" cy="372" r="126.72" fill="none" stroke="#34245C" stroke-width="1.4"/><circle cx="960" cy="372" r="80.96000000000001" fill="none" stroke="#34245C" stroke-width="1.4"/><circle cx="960" cy="372" r="38.72" fill="none" stroke="#34245C" stroke-width="1.4"/><line x1="784" y1="372" x2="1136" y2="372" stroke="#241647"/><line x1="960" y1="196" x2="960" y2="548" stroke="#241647"/><path d="M960,372 L899.8,206.6 A176,176 0 0 1 1048.0,219.6 Z" fill="url(#sweep)"/><circle cx="968" cy="276" r="6" fill="#C084FC" filter="url(#glow)"/><circle cx="1007" cy="243" r="5" fill="#22D3EE"/><circle cx="930" cy="320" r="4" fill="#FDB022"/>
+  <circle cx="960" cy="372" r="6" fill="#C084FC"/>
+
+  <!-- stats -->
+  <g transform="translate(140,540)">
+    <rect width="200" height="50" rx="25" fill="#1C1238" stroke="#A855F7"/><text x="100" y="32" class="big" font-size="22" text-anchor="middle">+15% efficacy</text>
+    <rect x="220" width="180" height="50" rx="25" fill="#1C1238" stroke="#22D3EE"/><text x="310" y="32" font-size="20" fill="#22D3EE" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700">−20% test</text>
+  </g>
+
+  <text x="140" y="700" class="h" font-size="34">70KV SiC IGBT Switch Matrix</text>
+  <text x="140" y="734" class="sub">ISRO / ISTRAC · ML-assisted PID tuning for pulse stability</text>
+</svg>

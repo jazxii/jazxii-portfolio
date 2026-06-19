@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="it1 id1">
+  <title id="it1">Marx modulator producing a stable 70KV pulse</title>
+  <desc id="id1">A Marx-generator capacitor stack discharges through spark gaps to produce a clean 70 kilovolt square pulse shown on an oscilloscope, increasing radar efficacy.</desc>
+  <defs>
+    <radialGradient id="ibg1" cx="44%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#1A0F33"/><stop offset="100%" stop-color="#0A0614"/>
+    </radialGradient>
+    <pattern id="ig1" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#241647" stroke-width="1" opacity="0.55"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#8E78BE}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#C084FC}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#F3ECFF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#B9A9E0}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:15px;letter-spacing:2px;fill:#8E78BE}
+      .big{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;fill:#C084FC}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#ibg1)"/><rect width="1280" height="800" fill="url(#ig1)"/>
+  <text x="80" y="92" class="eye">01 · 70KV PULSE</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- Marx capacitor stack -->
+  <text x="200" y="170" class="lab">MARX STACK</text>
+  <g stroke="#A855F7" stroke-width="2.5" fill="none">
+    <g transform="translate(160,190)">
+      <rect width="160" height="62" rx="10" fill="#1C1238"/><line x1="44" y1="20" x2="44" y2="42" stroke="#C084FC"/><line x1="60" y1="14" x2="60" y2="48" stroke="#C084FC"/><text x="92" y="38" class="lab" stroke="none" fill="#B9A9E0">stage 1</text>
+    </g>
+    <g transform="translate(160,272)">
+      <rect width="160" height="62" rx="10" fill="#1C1238"/><line x1="44" y1="20" x2="44" y2="42" stroke="#C084FC"/><line x1="60" y1="14" x2="60" y2="48" stroke="#C084FC"/><text x="92" y="38" class="lab" stroke="none" fill="#B9A9E0">stage 2</text>
+    </g>
+    <g transform="translate(160,354)">
+      <rect width="160" height="62" rx="10" fill="#1C1238"/><line x1="44" y1="20" x2="44" y2="42" stroke="#C084FC"/><line x1="60" y1="14" x2="60" y2="48" stroke="#C084FC"/><text x="92" y="38" class="lab" stroke="none" fill="#B9A9E0">stage 3</text>
+    </g>
+    <g transform="translate(160,436)">
+      <rect width="160" height="62" rx="10" fill="#1C1238"/><line x1="44" y1="20" x2="44" y2="42" stroke="#C084FC"/><line x1="60" y1="14" x2="60" y2="48" stroke="#C084FC"/><text x="92" y="38" class="lab" stroke="none" fill="#B9A9E0">stage 4</text>
+    </g>
+  </g>
+  <!-- spark-gap arcs between stages -->
+  <g stroke="#FDB022" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow)">
+    <path d="M240 252 l-8 10 12 6 -8 10 8 6"/>
+    <path d="M240 334 l-8 10 12 6 -8 10 8 6"/>
+    <path d="M240 416 l-8 10 12 6 -8 10 8 6"/>
+  </g>
+
+  <!-- HV arc out to scope -->
+  <path d="M320 220 l40 -6 -16 24 46 -8 -20 26 60 -6" fill="none" stroke="#FDB022" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- oscilloscope -->
+  <rect x="560" y="180" width="560" height="320" rx="20" fill="#120A26" stroke="#34245C" stroke-width="1.5"/>
+  <g stroke="#241647" stroke-width="1">
+    <line x1="560" y1="260" x2="1120" y2="260"/><line x1="560" y1="340" x2="1120" y2="340"/><line x1="560" y1="420" x2="1120" y2="420"/>
+    <line x1="680" y1="180" x2="680" y2="500"/><line x1="820" y1="180" x2="820" y2="500"/><line x1="960" y1="180" x2="960" y2="500"/>
+  </g>
+  <!-- 70KV square pulse -->
+  <path d="M580 450 L700 450 L702 230 L980 230 L982 450 L1100 450" fill="none" stroke="#C084FC" stroke-width="4" stroke-linejoin="round" filter="url(#glow)"/>
+  <text x="708" y="216" class="lab" fill="#C084FC">70 KV · stable</text>
+
+  <!-- stat chips -->
+  <g transform="translate(560,536)">
+    <rect width="190" height="50" rx="25" fill="#1C1238" stroke="#A855F7"/><text x="95" y="32" class="big" font-size="22" text-anchor="middle">+15%</text>
+    <text x="200" y="32" class="sub" font-size="18">radar efficacy</text>
+    <rect x="360" width="170" height="50" rx="25" fill="#1C1238" stroke="#22D3EE"/><text x="445" y="32" font-size="20" fill="#22D3EE" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700">−20%</text>
+    <text x="548" y="32" class="sub" font-size="18">test time</text>
+  </g>
+
+  <text x="160" y="700" class="h" font-size="34">70KV SiC IGBT Switch Matrix</text>
+  <text x="160" y="734" class="sub">ISRO / ISTRAC · project lead · Marx-modulator pulse source</text>
+</svg>

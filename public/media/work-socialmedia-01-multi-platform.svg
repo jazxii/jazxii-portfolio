@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="ht1 hd1">
+  <title id="ht1">Multi-platform social campaign reach</title>
+  <desc id="hd1">Content distributed across Instagram, YouTube, Facebook and X, reaching 2,500 Instagram followers and 4,000 YouTube subscribers.</desc>
+  <defs>
+    <radialGradient id="hbg1" cx="50%" cy="22%" r="95%"><stop offset="0%" stop-color="#2A0E28"/><stop offset="100%" stop-color="#120713"/></radialGradient>
+    <pattern id="hg1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#33152F" stroke-width="1" opacity="0.55"/></pattern>
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF4D6D"/><stop offset="50%" stop-color="#FB5607"/><stop offset="100%" stop-color="#FFB703"/></linearGradient>
+    <linearGradient id="t-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF4D6D"/><stop offset="100%" stop-color="#C9184A"/></linearGradient>
+    <linearGradient id="t-orange" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FB5607"/><stop offset="100%" stop-color="#E63946"/></linearGradient>
+    <linearGradient id="t-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFB703" stop-opacity=".9"/><stop offset="100%" stop-color="#FB8500"/></linearGradient>
+    <linearGradient id="t-purple" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9D4EDD"/><stop offset="100%" stop-color="#7B2FF7"/></linearGradient>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#C77FA8}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#FF4D6D}
+      .pf{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:22px;fill:#FFF1F4}
+      .num{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;font-size:46px;fill:#FFF1F4}
+      .small{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:16px;fill:#E0A9C0}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;fill:#FFF1F4}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#E0A9C0}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#hbg1)"/><rect width="1280" height="800" fill="url(#hg1)"/>
+  <text x="80" y="92" class="eye">01 · MULTI-PLATFORM</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- Instagram tile -->
+  <g transform="translate(90,176)">
+    <rect width="250" height="300" rx="22" fill="#26122A" stroke="#46213F"/>
+    <rect width="250" height="8" rx="4" fill="url(#t-coral)"/>
+    <rect x="26" y="34" width="60" height="60" rx="16" fill="none" stroke="url(#t-coral)" stroke-width="3"/><circle cx="56" cy="64" r="16" fill="none" stroke="url(#t-coral)" stroke-width="3"/><circle cx="76" cy="46" r="4" fill="#FF4D6D"/>
+    <text x="26" y="140" class="pf">Instagram</text>
+    <text x="26" y="200" class="num">2.5k</text>
+    <text x="26" y="232" class="small">followers</text>
+  </g>
+  <!-- YouTube tile -->
+  <g transform="translate(370,176)">
+    <rect width="250" height="300" rx="22" fill="#26122A" stroke="#46213F"/>
+    <rect width="250" height="8" rx="4" fill="url(#t-orange)"/>
+    <rect x="26" y="40" width="74" height="52" rx="12" fill="none" stroke="url(#t-orange)" stroke-width="3"/><path d="M52 54v24l20 -12z" fill="#FB5607"/>
+    <text x="26" y="140" class="pf">YouTube</text>
+    <text x="26" y="200" class="num">4k</text>
+    <text x="26" y="232" class="small">subscribers</text>
+  </g>
+  <!-- Facebook tile -->
+  <g transform="translate(650,176)">
+    <rect width="250" height="300" rx="22" fill="#26122A" stroke="#46213F"/>
+    <rect width="250" height="8" rx="4" fill="url(#t-gold)"/>
+    <path d="M26 40h62a10 10 0 0 1 10 10v40a10 10 0 0 1 -10 10h-40l-22 18v-78z" fill="none" stroke="url(#t-gold)" stroke-width="3" stroke-linejoin="round"/>
+    <text x="26" y="148" class="pf">Facebook</text>
+    <text x="26" y="200" class="small" font-size="18" fill="#FFB703">static + reels</text>
+    <text x="26" y="232" class="small">cross-posted</text>
+  </g>
+  <!-- X tile -->
+  <g transform="translate(930,176)">
+    <rect width="250" height="300" rx="22" fill="#26122A" stroke="#46213F"/>
+    <rect width="250" height="8" rx="4" fill="url(#t-purple)"/>
+    <path d="M30 92 L96 40 M52 40l44 52" stroke="url(#t-purple)" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <text x="26" y="148" class="pf">X</text>
+    <text x="26" y="200" class="small" font-size="18" fill="#9D4EDD">reach + engagement</text>
+    <text x="26" y="232" class="small">cross-posted</text>
+  </g>
+
+  <!-- summary strip -->
+  <rect x="90" y="512" width="1090" height="64" rx="32" fill="#1E0C20" stroke="#46213F"/>
+  <circle cx="130" cy="544" r="16" fill="url(#warm)"/>
+  <text x="166" y="551" class="pf" font-size="20" font-weight="700">250 platform-ready pieces · static + one-minute reels</text>
+
+  <text x="90" y="700" class="h" font-size="34" fill="url(#warm)">House of Alt — Social Media Campaign</text>
+  <text x="90" y="734" class="sub">Media team · awareness campaign on a tight timeline</text>
+</svg>

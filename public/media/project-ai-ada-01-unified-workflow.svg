@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="at1 ad1">
+  <title id="at1">Unified end-to-end ADA workflow platform</title>
+  <desc id="ad1">A single platform surface unifying design review, development, ADA engineering and lead oversight, replacing scattered accessibility tools.</desc>
+  <defs>
+    <radialGradient id="abg1" cx="46%" cy="30%" r="90%"><stop offset="0%" stop-color="#161A3E"/><stop offset="100%" stop-color="#0A0C20"/></radialGradient>
+    <pattern id="ag1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#23285A" stroke-width="1" opacity="0.5"/></pattern>
+    <linearGradient id="if" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#818CF8"/><stop offset="100%" stop-color="#E879F9"/></linearGradient>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#8F95C8}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#E879F9}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#ECEEFF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#A6ABDB}
+      .stg{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:20px;fill:#ECEEFF}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:14px;letter-spacing:1px;fill:#8F95C8}
+      .cap{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:15px;fill:#C9B6F0}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#abg1)"/><rect width="1280" height="800" fill="url(#ag1)"/>
+  <text x="80" y="92" class="eye">01 · UNIFIED ADA WORKFLOW</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- platform surface -->
+  <rect x="120" y="150" width="1040" height="372" rx="22" fill="#12152F" stroke="#2E3470" stroke-width="1.5"/>
+  <rect x="120" y="150" width="1040" height="56" rx="22" fill="#191E48"/><rect x="120" y="190" width="1040" height="16" fill="#191E48"/>
+  <circle cx="152" cy="178" r="6" fill="#818CF8"/><circle cx="174" cy="178" r="6" fill="#E879F9"/><circle cx="196" cy="178" r="6" fill="#2DD4BF"/>
+  <text x="228" y="184" class="lab" fill="#A6ABDB" font-size="15">Accessibility AI Platform — one surface, end to end</text>
+
+  <!-- 4 unified stages -->
+  <g>
+    <line x1="320" y1="300" x2="370" y2="300" stroke="url(#if)" stroke-width="3"/>
+    <line x1="570" y1="300" x2="620" y2="300" stroke="url(#if)" stroke-width="3"/>
+    <line x1="820" y1="300" x2="870" y2="300" stroke="url(#if)" stroke-width="3"/>
+    <g><rect x="160" y="252" width="160" height="96" rx="16" fill="#1A1E44" stroke="#6366F1" stroke-width="1.5"/><text x="240" y="292" class="stg" text-anchor="middle">Design</text><text x="240" y="318" class="lab" text-anchor="middle">UX / UI review</text></g>
+    <g><rect x="370" y="252" width="200" height="96" rx="16" fill="#1A1E44" stroke="#2E3470"/><text x="470" y="292" class="stg" text-anchor="middle">Development</text><text x="470" y="318" class="lab" text-anchor="middle">in-context fixes</text></g>
+    <g><rect x="620" y="252" width="200" height="96" rx="16" fill="#1A1E44" stroke="#2E3470"/><text x="720" y="292" class="stg" text-anchor="middle">ADA engineering</text><text x="720" y="318" class="lab" text-anchor="middle">audit + verify</text></g>
+    <g><rect x="870" y="252" width="220" height="96" rx="16" fill="#1A1E44" stroke="#E879F9" stroke-width="1.5"/><text x="980" y="292" class="stg" text-anchor="middle">Lead oversight</text><text x="980" y="318" class="lab" text-anchor="middle">go / no-go</text></g>
+  </g>
+
+  <!-- capability strip -->
+  <g transform="translate(160,390)">
+    <rect width="930" height="100" rx="16" fill="#0E1230" stroke="#2E3470"/>
+    <text x="24" y="40" class="lab" fill="#8F95C8">POWERED BY</text>
+    <text x="24" y="74" class="cap">Intelligent Auditor V2  ·  Graph RAG synthesis  ·  custom rule engine  ·  trend dashboards  ·  retraining console</text>
+  </g>
+
+  <text x="120" y="700" class="h" font-size="34">Accessibility AI Platform</text>
+  <text x="120" y="734" class="sub">Cognizant · internal platform · designed &amp; built</text>
+</svg>

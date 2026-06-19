@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="pt2 pd2">
+  <title id="pt2">Shifting accessibility left in the delivery pipeline</title>
+  <desc id="pd2">A delivery pipeline of design, build, test and release with an arrow moving accessibility checks earlier, plus an AI-assisted coverage node extending beyond off-the-shelf tooling.</desc>
+  <defs>
+    <radialGradient id="pbg2" cx="40%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#0C2129"/><stop offset="100%" stop-color="#06100F"/>
+    </radialGradient>
+    <pattern id="pg2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#143036" stroke-width="1" opacity="0.5"/>
+    </pattern>
+    <marker id="arrL" markerWidth="14" markerHeight="14" refX="7" refY="7" orient="auto">
+      <path d="M11 2L4 7l7 5" fill="none" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#5E9389}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#34D399}
+      .stg{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:24px;fill:#C7EFE5}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#22D3EE}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#E6FBF4}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#8FBDB4}
+      .ai{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:17px;fill:#9DEFE0}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#pbg2)"/><rect width="1280" height="800" fill="url(#pg2)"/>
+  <text x="80" y="92" class="eye">02 · SHIFT LEFT</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- left-moving arrow (the move) -->
+  <path d="M1010 232 C 700 150 470 150 200 232" fill="none" stroke="#22D3EE" stroke-width="3" marker-end="url(#arrL)"/>
+  <text x="600" y="178" class="lab" text-anchor="middle">accessibility, moved earlier</text>
+
+  <!-- pipeline connectors -->
+  <line x1="380" y1="360" x2="430" y2="360" stroke="#1C3A40" stroke-width="3"/>
+  <line x1="630" y1="360" x2="680" y2="360" stroke="#1C3A40" stroke-width="3"/>
+  <line x1="880" y1="360" x2="930" y2="360" stroke="#1C3A40" stroke-width="3"/>
+
+  <!-- stages -->
+  <g>
+    <rect x="180" y="315" width="200" height="90" rx="16" fill="#0E2329" stroke="#34D399" stroke-width="2"/><text x="280" y="368" class="stg" text-anchor="middle" fill="#34D399">Design</text>
+    <rect x="430" y="315" width="200" height="90" rx="16" fill="#0E2329" stroke="#1C3A40" stroke-width="1.5"/><text x="530" y="368" class="stg" text-anchor="middle">Build</text>
+    <rect x="680" y="315" width="200" height="90" rx="16" fill="#0E2329" stroke="#1C3A40" stroke-width="1.5"/><text x="780" y="368" class="stg" text-anchor="middle">Test</text>
+    <rect x="930" y="315" width="200" height="90" rx="16" fill="#0E2329" stroke="#1C3A40" stroke-width="1.5"/><text x="1030" y="368" class="stg" text-anchor="middle">Release</text>
+  </g>
+
+  <!-- a11y check chips landing on Design -->
+  <g>
+    <rect x="180" y="430" width="200" height="50" rx="25" fill="#10331F" stroke="#34D399"/><text x="280" y="461" class="lab" fill="#34D399" text-anchor="middle">WCAG checks ✓</text>
+  </g>
+
+  <!-- AI-assisted coverage node -->
+  <rect x="430" y="430" width="700" height="92" rx="18" fill="#0B2026" stroke="#22D3EE" stroke-width="1.5"/>
+  <circle cx="478" cy="476" r="20" fill="#22D3EE"/><path d="M470 476h16M478 468v16" stroke="#06100F" stroke-width="3" stroke-linecap="round"/>
+  <text x="514" y="468" class="ai">AI-assisted WCAG coverage</text>
+  <text x="514" y="494" class="ai" fill="#5E9389" font-size="15">extends automation beyond off-the-shelf tooling</text>
+
+  <text x="180" y="700" class="h" font-size="34">Program Analyst Trainee</text>
+  <text x="180" y="734" class="sub">Cognizant · pushing accessibility left across 5+ accounts</text>
+</svg>

@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="it2 id2">
+  <title id="it2">SiC IGBT switch matrix</title>
+  <desc id="id2">A matrix of silicon-carbide IGBT switch cells with several cells actively gating, representing the high-voltage switch matrix.</desc>
+  <defs>
+    <radialGradient id="ibg2" cx="50%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#1A0F33"/><stop offset="100%" stop-color="#0A0614"/>
+    </radialGradient>
+    <pattern id="ig2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#241647" stroke-width="1" opacity="0.55"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#8E78BE}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#C084FC}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#F3ECFF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#B9A9E0}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:15px;letter-spacing:2px;fill:#8E78BE}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#ibg2)"/><rect width="1280" height="800" fill="url(#ig2)"/>
+  <text x="80" y="92" class="eye">02 · SWITCH MATRIX</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+  <text x="305" y="176" class="lab">SiC IGBT · GATED ARRAY</text>
+  <g transform="translate(305,196)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <g transform="translate(443,196)">
+    <rect width="118" height="118" rx="16" fill="#2A1A4D" stroke="#C084FC" stroke-width="2.2"/>
+    <g stroke="#C084FC" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#C084FC" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(581,196)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <g transform="translate(719,196)">
+    <rect width="118" height="118" rx="16" fill="#2A1A4D" stroke="#C084FC" stroke-width="2.2"/>
+    <g stroke="#C084FC" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#C084FC" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(857,196)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <g transform="translate(305,334)">
+    <rect width="118" height="118" rx="16" fill="#2A1A4D" stroke="#C084FC" stroke-width="2.2"/>
+    <g stroke="#C084FC" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#C084FC" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(443,334)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <g transform="translate(581,334)">
+    <rect width="118" height="118" rx="16" fill="#2A1A4D" stroke="#C084FC" stroke-width="2.2"/>
+    <g stroke="#C084FC" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#C084FC" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(719,334)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <g transform="translate(857,334)">
+    <rect width="118" height="118" rx="16" fill="#2A1A4D" stroke="#C084FC" stroke-width="2.2"/>
+    <g stroke="#C084FC" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#C084FC" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(305,472)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <g transform="translate(443,472)">
+    <rect width="118" height="118" rx="16" fill="#2A1A4D" stroke="#C084FC" stroke-width="2.2"/>
+    <g stroke="#C084FC" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#C084FC" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(581,472)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <g transform="translate(719,472)">
+    <rect width="118" height="118" rx="16" fill="#2A1A4D" stroke="#C084FC" stroke-width="2.2"/>
+    <g stroke="#C084FC" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#C084FC" filter="url(#glow)"/>
+  </g>
+  <g transform="translate(857,472)">
+    <rect width="118" height="118" rx="16" fill="#160E2C" stroke="#34245C" stroke-width="1.2"/>
+    <g stroke="#5A4A86" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <line x1="52" y1="34" x2="52" y2="84"/>
+      <line x1="34" y1="59" x2="52" y2="59"/>
+      <line x1="52" y1="44" x2="78" y2="32"/>
+      <line x1="52" y1="74" x2="78" y2="86"/>
+      <path d="M70 80l8 6 -2 -9"/>
+    </g>
+    <circle cx="98" cy="20" r="6" fill="#34245C"/>
+  </g>
+  <!-- legend -->
+  <g transform="translate(305,594)">
+    <circle cx="8" cy="0" r="6" fill="#C084FC"/><text x="24" y="5" class="lab" fill="#B9A9E0">gating</text>
+    <circle cx="118" cy="0" r="6" fill="#34245C"/><text x="134" y="5" class="lab">idle</text>
+  </g>
+  <text x="305" y="700" class="h" font-size="34">70KV SiC IGBT Switch Matrix</text>
+  <text x="305" y="734" class="sub">ISRO / ISTRAC · component design &amp; implementation</text>
+</svg>

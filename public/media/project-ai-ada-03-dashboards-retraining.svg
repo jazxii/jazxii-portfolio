@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="at3 ad3">
+  <title id="at3">Regression dashboards and feedback-driven retraining</title>
+  <desc id="ad3">A trend dashboard shows accessibility defects declining across sprints, with a feedback loop that retrains the auditor model.</desc>
+  <defs>
+    <radialGradient id="abg3" cx="42%" cy="30%" r="92%"><stop offset="0%" stop-color="#161A3E"/><stop offset="100%" stop-color="#0A0C20"/></radialGradient>
+    <pattern id="ag3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#23285A" stroke-width="1" opacity="0.5"/></pattern>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E879F9" stop-opacity="0.35"/><stop offset="100%" stop-color="#E879F9" stop-opacity="0"/></linearGradient>
+    <linearGradient id="if3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#818CF8"/><stop offset="100%" stop-color="#E879F9"/></linearGradient>
+    <marker id="lr" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto"><path d="M2 2l6 4 -6 4" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#8F95C8}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#E879F9}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#ECEEFF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#A6ABDB}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:14px;letter-spacing:1px;fill:#8F95C8}
+      .loop{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:17px;fill:#ECEEFF}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#abg3)"/><rect width="1280" height="800" fill="url(#ag3)"/>
+  <text x="80" y="92" class="eye">03 · TRENDS + RETRAINING</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <rect x="120" y="200" width="640" height="300" rx="18" fill="#12152F" stroke="#2E3470" stroke-width="1.5"/>
+  <text x="144" y="234" class="lab">OPEN DEFECTS · per sprint ↓</text>
+  <line x1="160" y1="250" x2="730" y2="250" stroke="#23285A"/>
+  <line x1="160" y1="355" x2="730" y2="355" stroke="#23285A"/>
+  <line x1="160" y1="460" x2="730" y2="460" stroke="#23285A"/>
+  <path d="M160.0,460 L160.0,266.8 L211.8,292.0 L263.6,283.6 L315.5,321.4 L367.3,338.2 L419.1,329.8 L470.9,363.4 L522.7,380.2 L574.5,388.6 L626.4,397.0 L678.2,413.8 L730.0,422.2 L730.0,460 Z" fill="url(#area)"/>
+  <path d="M160.0,266.8 L211.8,292.0 L263.6,283.6 L315.5,321.4 L367.3,338.2 L419.1,329.8 L470.9,363.4 L522.7,380.2 L574.5,388.6 L626.4,397.0 L678.2,413.8 L730.0,422.2" fill="none" stroke="url(#if3)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="160.0" cy="266.8" r="4" fill="#E879F9"/><circle cx="211.8" cy="292.0" r="4" fill="#E879F9"/><circle cx="263.6" cy="283.6" r="4" fill="#E879F9"/><circle cx="315.5" cy="321.4" r="4" fill="#E879F9"/><circle cx="367.3" cy="338.2" r="4" fill="#E879F9"/><circle cx="419.1" cy="329.8" r="4" fill="#E879F9"/><circle cx="470.9" cy="363.4" r="4" fill="#E879F9"/><circle cx="522.7" cy="380.2" r="4" fill="#E879F9"/><circle cx="574.5" cy="388.6" r="4" fill="#E879F9"/><circle cx="626.4" cy="397.0" r="4" fill="#E879F9"/><circle cx="678.2" cy="413.8" r="4" fill="#E879F9"/><circle cx="730.0" cy="422.2" r="4" fill="#E879F9"/>
+
+  <!-- retraining loop -->
+  <text x="820" y="226" class="lab">FEEDBACK-DRIVEN RETRAINING</text>
+  <g>
+    <rect x="820" y="250" width="150" height="64" rx="14" fill="#1A1E44" stroke="#818CF8"/><text x="895" y="289" class="loop" text-anchor="middle">Feedback</text>
+    <rect x="1010" y="250" width="150" height="64" rx="14" fill="#1A1E44" stroke="#E879F9"/><text x="1085" y="289" class="loop" text-anchor="middle">Retrain</text>
+    <rect x="915" y="372" width="150" height="64" rx="14" fill="#1A1E44" stroke="#2DD4BF"/><text x="990" y="411" class="loop" text-anchor="middle">Auditor v2.x</text>
+  </g>
+  <path d="M970 282 L1010 282" fill="none" stroke="#2DD4BF" stroke-width="2.5" marker-end="url(#lr)"/>
+  <path d="M1085 314 C 1085 350 1020 350 1000 372" fill="none" stroke="#2DD4BF" stroke-width="2.5" marker-end="url(#lr)"/>
+  <path d="M915 404 C 850 404 850 314 895 314" fill="none" stroke="#2DD4BF" stroke-width="2.5" marker-end="url(#lr)"/>
+
+  <!-- admin console chip -->
+  <rect x="820" y="470" width="340" height="56" rx="28" fill="#0E1230" stroke="#2E3470"/>
+  <circle cx="852" cy="498" r="14" fill="#818CF8"/><path d="M846 498h12M852 492v12" stroke="#0A0C20" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="878" y="504" class="lab" font-size="16" fill="#C9B6F0">admin console · regression + trend tracking</text>
+
+  <text x="120" y="700" class="h" font-size="34">Accessibility AI Platform</text>
+  <text x="120" y="734" class="sub">Cognizant · dashboards + feedback-driven model retraining</text>
+</svg>

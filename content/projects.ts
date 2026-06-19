@@ -59,13 +59,28 @@ export const projects: Project[] = [
       "ETL",
     ],
     role: "Designer & builder — 5-phase ETL into a 2,400+ node WCAG graph (13 entity types) and a ReAct agent with 9 tools, with rule-based routing for CI and LLM routing for natural-language queries.",
+    repoUrl: "https://github.com/jazxii/Neo4J-GraphRAG-ETL-pipeline",
     context: "Independent project",
     media: {
-      src: "/media/project-wcag-etl-pipeline.png",
+      src: "/media/project-agentic-grag-01-knowledge-graph.svg",
       alt: "Knowledge-graph diagram of WCAG principles, guidelines, and criteria nodes linked by labelled edges, with an agent node querying across them.",
       width: 1280,
       height: 800,
     },
+    gallery: [
+      {
+        src: "/media/project-agentic-grag-02-react-agent.svg",
+        alt: "ReAct agent diagram showing the agent node with tools and reasoning steps, querying the WCAG knowledge graph.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/project-agentic-grag-03-etl-routing.svg",
+        alt: "ETL routing diagram showing the flow of data from WCAG sources into the knowledge graph.",
+        width: 1280,
+        height: 800,
+      },
+    ],
   },
   {
     slug: "accessibility-ai-platform",
@@ -86,11 +101,25 @@ export const projects: Project[] = [
     role: "Designer & builder — Intelligent Auditor V2 (LLM over DOM + screenshots), Graph RAG synthesis, a custom rule engine, regression/trend dashboards, and an admin console for feedback-driven retraining.",
     context: "Internal platform",
     media: {
-      src: "/media/project-accessibility-ai.svg",
-      alt: "Knowledge-graph diagram of linked WCAG criteria nodes labelled 'WCAG knowledge graph · Graph RAG', representing the Accessibility AI Platform.",
+      src: "/media/project-ai-ada-01-unified-workflow.svg",
+      alt: "Diagram showing the unified accessibility workflow from design review to development and lead oversight, captioned 'Accessibility AI Platform'.",
       width: 1280,
       height: 800,
     },
+    gallery: [
+      {
+        src: "/media/project-ai-ada-02-intelligent-auditor.svg",
+        alt: "Diagram of the Intelligent Auditor V2 showing LLM reasoning over DOM and screenshots, captioned 'Intelligent Auditor V2'.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/project-ai-ada-03-dashboards-retraining.svg",
+        alt: "Diagram showing dashboards and retraining processes for the Accessibility AI Platform, captioned 'Dashboards & Retraining'.",
+        width: 1280,
+        height: 800,
+      },
+    ],
   },
   {
     slug: "albertsons-accessibility-engineer",
@@ -110,11 +139,25 @@ export const projects: Project[] = [
     role: "Accessibility engineer — audited web + mobile across 5 pods, ran P1/P2/P3 triage into go/no-go reviews, reviewed Figma specs, and remediated in JS/React alongside developers.",
     context: "Client engagement",
     media: {
-      src: "/media/project-albertsons.svg",
+      src: "/media/project-alb-01-conformance.svg",
       alt: "Accessibility audit checklist of the four WCAG principles, each row ticked and tagged with a P1–P3 priority.",
       width: 1280,
       height: 800,
     },
+    gallery: [
+      {
+        src: "/media/project-alb-02-web-mobile.svg",
+        alt: "Web and mobile accessibility audit results for Albertsons, showing linked WCAG criteria nodes labelled 'WCAG knowledge graph · Graph RAG'.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/project-alb-03-triage-gate.svg",
+        alt: "Triage gate diagram for Albertsons accessibility audit, showing linked WCAG criteria nodes labelled 'WCAG knowledge graph · Graph RAG'.",
+        width: 1280,
+        height: 800,
+      },
+    ],
   },
   {
     slug: "program-analyst-trainee",
@@ -134,11 +177,25 @@ export const projects: Project[] = [
     role: "QA & accessibility tester — built Selenium + TestNG + Maven suites, audited web/mobile to A/AA, shipped the GAAD 'Vision Hunt' kiosk, and piloted an AI defect-management tool.",
     context: "Client engagement",
     media: {
-      src: "/media/project-program-analyst.svg",
+      src: "/media/work-pat-01-test-automation.svg",
       alt: "Test-automation pipeline diagram showing Selenium, TestNG, and Maven feeding a results dashboard with passing and failing cases.",
       width: 1280,
       height: 800,
     },
+    gallery: [
+      {
+        src: "/media/work-pat-02-shift-left.svg",
+        alt: "Shift-left approach diagram for accessibility testing, showing early integration of accessibility checks in the development process.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/work-pat-03-gaad-vision-hunt.svg",
+        alt: "GAAD 'Vision Hunt' kiosk diagram, representing the Accessibility AI Platform.",
+        width: 1280,
+        height: 800,
+      },
+    ],
   },
   {
     slug: "isro-igbt-switch-matrix",
@@ -157,12 +214,27 @@ export const projects: Project[] = [
     role: "Project lead — component design and implementation, plus ML-assisted PID tuning for pulse stability; cut testing duration ~20% and delivered outcomes to senior management.",
     context: "Research project",
     media: {
-      src: "/media/project-isro.svg",
+      src: "/media/project-isro-01-marx-pulse.svg",
       alt: "Oscilloscope-style square-wave pulse train on a grid, captioned 'Stable 70KV pulse · +15% radar efficacy'.",
       width: 1280,
       height: 800,
     },
+    gallery: [
+      {
+        src: "/media/project-isro-02-switch-matrix.svg",
+        alt: "Switch matrix diagram showing the configuration of SiC IGBTs and Marx modulators for high-voltage pulse generation.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/project-isro-03-ml-pid-tuning.svg",
+        alt: "ML-assisted PID tuning diagram for pulse stability, showing the integration of machine learning algorithms with the switch matrix control system.",
+        width: 1280,
+        height: 800,
+      },
+    ],
   },
+  
   {
     slug: "house-of-alt-campaign",
     title: "House of Alt — Social Media Campaign",
@@ -174,11 +246,25 @@ export const projects: Project[] = [
     role: "Media team — produced 250 content pieces (static + one-minute reels), reaching 2.5k Instagram followers and 4k YouTube subscribers.",
     context: "Campaign work",
     media: {
-      src: "/media/project-house-of-alt.svg",
+      src: "/media/work-socialmedia-01-multi-platform.svg",
       alt: "Grid of social-media post thumbnails across Instagram, YouTube, Facebook, and X, captioned '250 pieces of content'.",
       width: 1280,
       height: 800,
     },
+    gallery: [
+      {
+        src: "/media/work-socialmedia-02-short-form-reels.svg",
+        alt: "Grid of short-form video reels across Instagram, YouTube, Facebook, and X, captioned '250 pieces of content'.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/work-socialmedia-03-content-volume.svg",
+        alt: "Diagram showing the volume of content produced for the campaign, captioned '250 pieces of content'.",
+        width: 1280,
+        height: 800,
+      },
+    ],
   },
   {
     slug: "renewable-grid-integration",
@@ -191,32 +277,46 @@ export const projects: Project[] = [
     role: "Intern — modelled 1000 MW solar into the Kerala grid with PSSE + pyPSSE, achieving a 25–30% reduction in power imports while improving stability.",
     context: "Internship project",
     media: {
-      src: "/media/project-grid-integration.svg",
-      alt: "Single-line power-grid schematic with a solar farm feeding into substations, annotated '1000 MW solar · 25–30% fewer imports'.",
+      src: "/media/project-renewable-energy-01-solar-to-grid.svg",
+      alt: "Diagram showing the integration of 1000 MW solar power into the Kerala state grid, captioned '25–30% reduction in power imports'.",
       width: 1280,
       height: 800,
     },
+    gallery: [
+      {
+        src: "/media/project-renewable-energy-02-load-flow.svg",
+        alt: "Load flow diagram showing the integration of 1000 MW solar power into the Kerala state grid.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/project-renewable-energy-03-import-reduction.svg",
+        alt: "Diagram showing the reduction in power imports after integrating 1000 MW solar power into the Kerala state grid, captioned '25–30% reduction in power imports'.",
+        width: 1280,
+        height: 800,
+      },
+    ],
   },
-  {
-    slug: "relic-labs-video-editing",
-    title: "Freelance Video Editor · RELIC Labs",
-    year: 2023,
-    period: "Oct 2022 — May 2023",
-    challenge:
-      "RELIC Labs needed polished, on-brand video output on a freelance basis. I handled editing end-to-end, turning raw footage into finished pieces ready to publish.",
-    services: ["Video editing", "Post-production", "Motion"],
-    role: "Freelance editor — edited and delivered finished video content for the studio.",
-    context: "Freelance",
-    media: {
-      src: "/media/project-relic-labs.svg",
-      alt: "Video-editing timeline interface with stacked clip and audio tracks and a preview frame.",
-      width: 1280,
-      height: 800,
-    },
-  },
+  // {
+  //   slug: "relic-labs-video-editing",
+  //   title: "Freelance Video Editor · RELIC Labs",
+  //   year: 2023,
+  //   period: "Oct 2022 — May 2023",
+  //   challenge:
+  //     "RELIC Labs needed polished, on-brand video output on a freelance basis. I handled editing end-to-end, turning raw footage into finished pieces ready to publish.",
+  //   services: ["Video editing", "Post-production", "Motion"],
+  //   role: "Freelance editor — edited and delivered finished video content for the studio.",
+  //   context: "Freelance",
+  //   media: {
+  //     src: "/media/project-relic-labs.svg",
+  //     alt: "Video-editing timeline interface with stacked clip and audio tracks and a preview frame.",
+  //     width: 1280,
+  //     height: 800,
+  //   },
+  // },
   {
     slug: "enigma-8",
-    title: "ENIGMA 8.0",
+    title: "ENIGMA 8.0 · IEEE-VIT Vellore",
     year: 2022,
     period: "2021 — 2022 · IEEE-VIT",
     challenge:
@@ -232,23 +332,23 @@ export const projects: Project[] = [
       height: 800,
     },
   },
-  {
-    slug: "ieee-vit-chapter",
-    title: "IEEE-VIT Vellore",
-    year: 2023,
-    period: "Nov 2020 — Sep 2023",
-    challenge:
-      "Beyond the ENIGMA build, I contributed across the IEEE-VIT chapter's tech, operations, and outreach over nearly three years — building training apps, running event operations, and driving registrations for flagship events.",
-    services: ["Android", "MVVM", "AR filters", "Event ops"],
-    role: "Tech / operations / outreach — built a training app on UI + MVVM, created AR filters for Palette'21, and handled event ops and outreach across multiple events.",
-    context: "Student chapter",
-    media: {
-      src: "/media/project-ieee-vit.svg",
-      alt: "IEEE-VIT event collage showing an app screen, an AR camera filter, and a registrations counter.",
-      width: 1280,
-      height: 800,
-    },
-  },
+  // {
+  //   slug: "ieee-vit-chapter",
+  //   title: "IEEE-VIT Vellore",
+  //   year: 2023,
+  //   period: "Nov 2020 — Sep 2023",
+  //   challenge:
+  //     "Beyond the ENIGMA build, I contributed across the IEEE-VIT chapter's tech, operations, and outreach over nearly three years — building training apps, running event operations, and driving registrations for flagship events.",
+  //   services: ["Android", "MVVM", "AR filters", "Event ops"],
+  //   role: "Tech / operations / outreach — built a training app on UI + MVVM, created AR filters for Palette'21, and handled event ops and outreach across multiple events.",
+  //   context: "Student chapter",
+  //   media: {
+  //     src: "/media/project-ieee-vit.svg",
+  //     alt: "IEEE-VIT event collage showing an app screen, an AR camera filter, and a registrations counter.",
+  //     width: 1280,
+  //     height: 800,
+  //   },
+  // },
   {
     slug: "malayalam-literary-association",
     title: "Malayalam Literary Association",
@@ -260,7 +360,7 @@ export const projects: Project[] = [
     role: "Technical team & mentor — front-end developer on the first MLA website, responsible for new content and upkeep.",
     context: "Student association",
     media: {
-      src: "/media/project-mla.svg",
+      src: "/media/project-mla.png",
       alt: "Browser window mockup of the Malayalam Literary Association website homepage with navigation and an events section.",
       width: 1280,
       height: 800,
@@ -283,38 +383,38 @@ export const projects: Project[] = [
       height: 800,
     },
   },
-  {
-    slug: "photography-club-vit",
-    title: "The Photography Club · VIT",
-    year: 2022,
-    period: "Mar — Dec 2022",
-    challenge:
-      "The club's video team covered campus events live. I was part of the crew that shot and captured a range of campus events, sharpening my photography and videography along the way.",
-    services: ["Videography", "Photography", "Event coverage"],
-    role: "Core committee, video team — shot and covered campus events.",
-    context: "Student club",
-    media: {
-      src: "/media/project-photography-club.svg",
-      alt: "Camera viewfinder framing a campus event, with focus brackets and exposure readouts overlaid.",
-      width: 1280,
-      height: 800,
-    },
-  },
-  {
-    slug: "kseb-substation-internships",
-    title: "KSEB Substation Internships",
-    year: 2022,
-    period: "May — Jul 2022 · KSEB",
-    challenge:
-      "Across three Kerala State Electricity Board substations I learned high-voltage substation operations hands-on — from a 400KV station to a 220KV station and a 66→220KV conversion site — covering single-line diagrams, transformer maintenance, and on-site duties.",
-    services: ["Substation operations", "Transformer maintenance", "Single-line diagrams"],
-    role: "Intern — on-site duties across the Madakkathara 400KV, Kalamassery 220KV, and Ettumanoor 66→220KV substations.",
-    context: "Internship",
-    media: {
-      src: "/media/project-kseb.svg",
-      alt: "High-voltage substation single-line diagram showing transformers and 400KV / 220KV / 66KV feeders.",
-      width: 1280,
-      height: 800,
-    },
-  },
+  // {
+  //   slug: "photography-club-vit",
+  //   title: "The Photography Club · VIT",
+  //   year: 2022,
+  //   period: "Mar — Dec 2022",
+  //   challenge:
+  //     "The club's video team covered campus events live. I was part of the crew that shot and captured a range of campus events, sharpening my photography and videography along the way.",
+  //   services: ["Videography", "Photography", "Event coverage"],
+  //   role: "Core committee, video team — shot and covered campus events.",
+  //   context: "Student club",
+  //   media: {
+  //     src: "/media/project-photography-club.svg",
+  //     alt: "Camera viewfinder framing a campus event, with focus brackets and exposure readouts overlaid.",
+  //     width: 1280,
+  //     height: 800,
+  //   },
+  // },
+  // {
+  //   slug: "kseb-substation-internships",
+  //   title: "KSEB Substation Internships",
+  //   year: 2022,
+  //   period: "May — Jul 2022 · KSEB",
+  //   challenge:
+  //     "Across three Kerala State Electricity Board substations I learned high-voltage substation operations hands-on — from a 400KV station to a 220KV station and a 66→220KV conversion site — covering single-line diagrams, transformer maintenance, and on-site duties.",
+  //   services: ["Substation operations", "Transformer maintenance", "Single-line diagrams"],
+  //   role: "Intern — on-site duties across the Madakkathara 400KV, Kalamassery 220KV, and Ettumanoor 66→220KV substations.",
+  //   context: "Internship",
+  //   media: {
+  //     src: "/media/project-kseb.svg",
+  //     alt: "High-voltage substation single-line diagram showing transformers and 400KV / 220KV / 66KV feeders.",
+  //     width: 1280,
+  //     height: 800,
+  //   },
+  // },
 ];

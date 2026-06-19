@@ -63,8 +63,8 @@ export function WaveAvatar({ className = "" }: { className?: string }) {
     >
       {/* Soft peach bloom behind the disc — large blur, low opacity (not neon). */}
       <span
-        className="pointer-events-none absolute -inset-3 rounded-full blur-2xl"
-        style={{ background: "var(--color-peach-raw)", opacity: 0.28 }}
+        className="pointer-events-none absolute -inset-3 rounded-full blur-xl"
+        style={{ background: "var(--color-peach-raw)", opacity: 0.09 }}
       />
       {/* The disc: a faint highlight ring + a peach-tinted soft shadow. */}
       <span className="relative size-full overflow-hidden rounded-full bg-surface-2 ring-1 ring-white/15 shadow-[0_10px_30px_-8px_rgba(245,169,126,0.55)]">

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="t3 d3">
+  <title id="t3">Severity triage into a go/no-go release gate</title>
+  <desc id="d3">P1, P2 and P3 findings flow through five product pods into a go/no-go release decision, representing release-stage accessibility triage.</desc>
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="30%" r="85%">
+      <stop offset="0%" stop-color="#16223D"/>
+      <stop offset="100%" stop-color="#0B1220"/>
+    </radialGradient>
+    <pattern id="grid3" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#22304F" stroke-width="1" opacity="0.35"/>
+    </pattern>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#7E92B6}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#5B9DFF}
+      .col{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:15px;letter-spacing:3px;fill:#7E92B6}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#EAF1FF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#9FB1D1}
+      .chip{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px}
+      .pod{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:19px;fill:#C7D4EC}
+      .mono{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;fill:#9FB1D1}
+    </style>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg3)"/>
+  <rect width="1280" height="800" fill="url(#grid3)"/>
+
+  <text x="80" y="92" class="eye">03 · TRIAGE → GO/NO-GO</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- flow connectors (focus-blue) -->
+  <path d="M300 360 C 380 360 380 410 470 410" fill="none" stroke="#5B9DFF" stroke-width="2.5" opacity="0.55"/>
+  <path d="M300 440 C 380 440 380 410 470 410" fill="none" stroke="#5B9DFF" stroke-width="2.5" opacity="0.55"/>
+  <path d="M300 520 C 380 520 380 410 470 410" fill="none" stroke="#5B9DFF" stroke-width="2.5" opacity="0.55"/>
+  <path d="M790 410 C 880 410 880 410 960 410" fill="none" stroke="#5B9DFF" stroke-width="2.5" stroke-dasharray="2 8" stroke-linecap="round"/>
+
+  <!-- STAGE 1 — findings -->
+  <text x="140" y="300" class="col">FINDINGS</text>
+  <g class="chip">
+    <rect x="140" y="330" width="160" height="60" rx="14" fill="#2A1722" stroke="#FF6B6B" stroke-width="1.5"/>
+    <circle cx="172" cy="360" r="9" fill="#FF6B6B"/>
+    <text x="196" y="368" fill="#FF6B6B">P1 · Blocker</text>
+  </g>
+  <g class="chip">
+    <rect x="140" y="410" width="160" height="60" rx="14" fill="#2A2316" stroke="#F6A623" stroke-width="1.5"/>
+    <circle cx="172" cy="440" r="9" fill="#F6A623"/>
+    <text x="196" y="448" fill="#F6A623">P2 · Major</text>
+  </g>
+  <g class="chip">
+    <rect x="140" y="490" width="160" height="60" rx="14" fill="#16223D" stroke="#5B9DFF" stroke-width="1.5"/>
+    <circle cx="172" cy="520" r="9" fill="#5B9DFF"/>
+    <text x="196" y="528" fill="#9FB1D1">P3 · Minor</text>
+  </g>
+
+  <!-- STAGE 2 — 5 pods -->
+  <rect x="470" y="250" width="320" height="320" rx="24" fill="#101A30" stroke="#2A3A5C" stroke-width="1.5"/>
+  <text x="498" y="294" class="col">5 PODS</text>
+  <g>
+    <circle cx="516" cy="334" r="7" fill="#3DD68C"/><text x="540" y="341" class="pod">Pantry PDS</text>
+    <circle cx="516" cy="380" r="7" fill="#3DD68C"/><text x="540" y="387" class="pod">Product Description Page</text>
+    <circle cx="516" cy="426" r="7" fill="#5B9DFF"/><text x="540" y="433" class="pod">Pod 03</text>
+    <circle cx="516" cy="472" r="7" fill="#5B9DFF"/><text x="540" y="479" class="pod">Pod 04</text>
+    <circle cx="516" cy="518" r="7" fill="#F6A623"/><text x="540" y="525" class="pod">Pod 05</text>
+  </g>
+
+  <!-- STAGE 3 — gate -->
+  <text x="960" y="300" class="col">RELEASE GATE</text>
+  <g>
+    <rect x="960" y="330" width="200" height="72" rx="16" fill="#13301F" stroke="#3DD68C" stroke-width="2"/>
+    <circle cx="998" cy="366" r="18" fill="#3DD68C"/>
+    <path d="M990 366l6 6 11 -12" fill="none" stroke="#0B1220" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1028" y="374" class="h" font-size="26" fill="#3DD68C">GO</text>
+  </g>
+  <g>
+    <rect x="960" y="416" width="200" height="72" rx="16" fill="#16223D" stroke="#34456B" stroke-width="1.5"/>
+    <circle cx="998" cy="452" r="18" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+    <path d="M991 445l14 14M1005 445l-14 14" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+    <text x="1028" y="460" class="h" font-size="26" fill="#8195B6">NO-GO</text>
+  </g>
+
+  <!-- footer -->
+  <text x="140" y="700" class="h" font-size="34">Digital Accessibility Engineer</text>
+  <text x="140" y="734" class="sub">Albertsons · P1 / P2 / P3 triage feeding go/no-go reviews</text>
+</svg>

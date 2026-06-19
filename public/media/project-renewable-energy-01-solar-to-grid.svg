@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="gt1 gd1">
+  <title id="gt1">1000 MW solar integrated into the Kerala grid</title>
+  <desc id="gd1">A 1000 megawatt solar source feeds through transmission into the Kerala state grid, reducing power imports by 25 to 30 percent.</desc>
+  <defs>
+    <radialGradient id="gbg1" cx="70%" cy="18%" r="100%"><stop offset="0%" stop-color="#243A5E"/><stop offset="100%" stop-color="#070C1A"/></radialGradient>
+    <pattern id="gg1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#152743" stroke-width="1" opacity="0.6"/></pattern>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FDE047"/><stop offset="70%" stop-color="#FACC15"/><stop offset="100%" stop-color="#FB923C"/></radialGradient>
+    <filter id="gglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#7E93B6}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#FACC15}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#EAF2FF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#9FB3D6}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:15px;letter-spacing:1px;fill:#7E93B6}
+      .big{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;fill:#FACC15}
+      .node{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:16px;fill:#EAF2FF}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#gbg1)"/><rect width="1280" height="800" fill="url(#gg1)"/>
+  <text x="80" y="92" class="eye">01 · SOLAR → GRID</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- sun -->
+  <g filter="url(#gglow)"><circle cx="220" cy="240" r="52" fill="url(#sun)"/></g>
+  <g stroke="#FACC15" stroke-width="3" stroke-linecap="round">
+    <line x1="220" y1="160" x2="220" y2="178"/><line x1="220" y1="302" x2="220" y2="320"/>
+    <line x1="140" y1="240" x2="158" y2="240"/><line x1="282" y1="240" x2="300" y2="240"/>
+    <line x1="166" y1="186" x2="178" y2="198"/><line x1="262" y1="282" x2="274" y2="294"/>
+    <line x1="274" y1="186" x2="262" y2="198"/><line x1="178" y1="282" x2="166" y2="294"/>
+  </g>
+
+  <!-- PV array -->
+  <g transform="translate(120,360)">
+    <g stroke="#FACC15" stroke-width="1.5" fill="#13294A">
+      <rect x="0" y="0" width="90" height="56" rx="4"/><rect x="100" y="0" width="90" height="56" rx="4"/>
+      <rect x="0" y="66" width="90" height="56" rx="4"/><rect x="100" y="66" width="90" height="56" rx="4"/>
+    </g>
+    <g stroke="#FACC15" stroke-width="1" opacity="0.55"><line x1="30" y1="0" x2="30" y2="122"/><line x1="60" y1="0" x2="60" y2="122"/><line x1="130" y1="0" x2="130" y2="122"/><line x1="160" y1="0" x2="160" y2="122"/><line x1="0" y1="28" x2="190" y2="28"/><line x1="0" y1="94" x2="190" y2="94"/></g>
+    <text x="0" y="150" class="lab" fill="#FACC15">PV array</text>
+  </g>
+
+  <!-- 1000 MW marker -->
+  <rect x="120" y="540" width="240" height="56" rx="28" fill="#0E1A33" stroke="#FACC15"/>
+  <text x="142" y="577" class="big" font-size="26">1000 MW</text><text x="296" y="577" class="lab" fill="#9FB3D6">solar</text>
+
+  <!-- transmission line + pylons -->
+  <g stroke="#38BDF8" stroke-width="2.5" fill="none">
+    <path d="M340 420 L560 420" stroke-dasharray="1 10" stroke-linecap="round"/>
+    <path d="M620 420 L840 420" stroke-dasharray="1 10" stroke-linecap="round"/>
+  </g>
+  <!-- pylon -->
+  <g stroke="#5E7CA8" stroke-width="2.5" fill="none">
+    <path d="M590 460 L578 390 L602 390 Z"/><line x1="560" y1="404" x2="620" y2="404"/><line x1="566" y1="420" x2="614" y2="420"/>
+  </g>
+  <!-- power flow pulses -->
+  <circle cx="450" cy="420" r="5" fill="#FDE047" filter="url(#gglow)"/>
+  <circle cx="730" cy="420" r="5" fill="#FDE047" filter="url(#gglow)"/>
+
+  <!-- Kerala grid cluster -->
+  <text x="900" y="316" class="lab" fill="#38BDF8">KERALA STATE GRID</text>
+  <g>
+    <circle cx="940" cy="380" r="14" fill="#38BDF8"/><circle cx="1060" cy="360" r="14" fill="#38BDF8"/><circle cx="1010" cy="450" r="14" fill="#22D3EE"/><circle cx="1110" cy="440" r="12" fill="#38BDF8"/><circle cx="940" cy="480" r="12" fill="#22D3EE"/>
+    <g stroke="#2B5180" stroke-width="2"><line x1="940" y1="380" x2="1060" y2="360"/><line x1="940" y1="380" x2="1010" y2="450"/><line x1="1060" y1="360" x2="1010" y2="450"/><line x1="1060" y1="360" x2="1110" y2="440"/><line x1="1010" y1="450" x2="1110" y2="440"/><line x1="940" y1="480" x2="1010" y2="450"/></g>
+    <line x1="840" y1="420" x2="940" y2="380" stroke="#38BDF8" stroke-width="2.5"/>
+  </g>
+
+  <text x="120" y="700" class="h" font-size="34">Renewable Energy Grid Integration</text>
+  <text x="120" y="734" class="sub">Grid Controller of India · 25–30% lower imports, improved stability</text>
+</svg>

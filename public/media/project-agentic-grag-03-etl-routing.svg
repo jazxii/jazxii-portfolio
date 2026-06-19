@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="nt3 nd3">
+  <title id="nt3">Five-phase ETL pipeline with dual routing</title>
+  <desc id="nd3">A five-phase ETL pipeline turns the W3C WCAG specification into a knowledge graph, with rule-based routing for CI and language-model routing for natural-language queries.</desc>
+  <defs>
+    <radialGradient id="nbg3" cx="50%" cy="28%" r="92%"><stop offset="0%" stop-color="#15191E"/><stop offset="100%" stop-color="#0A0C0E"/></radialGradient>
+    <pattern id="ng3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1E242B" stroke-width="1" opacity="0.6"/></pattern>
+    <marker id="nar3" markerWidth="12" markerHeight="12" refX="7" refY="6" orient="auto"><path d="M2 2l6 4 -6 4" fill="none" stroke="#8B8470" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#8B8470}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#F5A524}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#F5EFE2}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#B7AE98}
+      .ph{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:18px;fill:#F5EFE2}
+      .num{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:14px;font-weight:700;fill:#0A0C0E}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:14px;letter-spacing:1px;fill:#8B8470}
+      .route{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:17px;fill:#F5EFE2}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#nbg3)"/><rect width="1280" height="800" fill="url(#ng3)"/>
+  <text x="80" y="92" class="eye">03 · 5-PHASE ETL</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <!-- source doc -->
+  <g>
+    <rect x="120" y="220" width="120" height="150" rx="10" fill="#191D22" stroke="#2C333B"/>
+    <rect x="138" y="244" width="80" height="8" rx="4" fill="#3A4048"/><rect x="138" y="264" width="84" height="6" rx="3" fill="#2C333B"/><rect x="138" y="280" width="70" height="6" rx="3" fill="#2C333B"/><rect x="138" y="296" width="84" height="6" rx="3" fill="#2C333B"/><rect x="138" y="312" width="60" height="6" rx="3" fill="#2C333B"/>
+    <text x="180" y="392" class="lab" text-anchor="middle">W3C WCAG 2.2</text>
+  </g>
+  <path d="M244 295 L300 295" fill="none" stroke="#8B8470" stroke-width="2" marker-end="url(#nar3)"/>
+
+  <!-- 5 ETL phases -->
+  <g>
+    <g transform="translate(300,250)"><rect width="130" height="90" rx="14" fill="#191D22" stroke="#F5A524"/><circle cx="22" cy="22" r="12" fill="#F5A524"/><text x="22" y="27" class="num" text-anchor="middle">1</text><text x="65" y="62" class="ph" text-anchor="middle">Extract</text></g>
+    <g transform="translate(450,250)"><rect width="130" height="90" rx="14" fill="#191D22" stroke="#FBBF24"/><circle cx="22" cy="22" r="12" fill="#FBBF24"/><text x="22" y="27" class="num" text-anchor="middle">2</text><text x="65" y="62" class="ph" text-anchor="middle">Parse</text></g>
+    <g transform="translate(600,250)"><rect width="130" height="90" rx="14" fill="#191D22" stroke="#38BDF8"/><circle cx="22" cy="22" r="12" fill="#38BDF8"/><text x="22" y="27" class="num" text-anchor="middle">3</text><text x="65" y="62" class="ph" text-anchor="middle">Model</text></g>
+    <g transform="translate(750,250)"><rect width="130" height="90" rx="14" fill="#191D22" stroke="#A78BFA"/><circle cx="22" cy="22" r="12" fill="#A78BFA"/><text x="22" y="27" class="num" text-anchor="middle">4</text><text x="65" y="62" class="ph" text-anchor="middle">Embed</text></g>
+    <g transform="translate(900,250)"><rect width="130" height="90" rx="14" fill="#191D22" stroke="#34D399"/><circle cx="22" cy="22" r="12" fill="#34D399"/><text x="22" y="27" class="num" text-anchor="middle">5</text><text x="65" y="62" class="ph" text-anchor="middle">Load</text></g>
+  </g>
+  <g stroke="#8B8470" stroke-width="2" fill="none">
+    <path d="M430 295 L450 295" marker-end="url(#nar3)"/><path d="M580 295 L600 295" marker-end="url(#nar3)"/><path d="M730 295 L750 295" marker-end="url(#nar3)"/><path d="M880 295 L900 295" marker-end="url(#nar3)"/>
+  </g>
+  <path d="M1030 295 L1090 295" fill="none" stroke="#34D399" stroke-width="2" marker-end="url(#nar3)"/>
+  <!-- graph target -->
+  <g transform="translate(1110,260)"><circle cx="20" cy="35" r="11" fill="#F5A524"/><circle cx="50" cy="15" r="9" fill="#38BDF8"/><circle cx="56" cy="55" r="9" fill="#A78BFA"/><line x1="20" y1="35" x2="50" y2="15" stroke="#2C333B"/><line x1="20" y1="35" x2="56" y2="55" stroke="#2C333B"/><line x1="50" y1="15" x2="56" y2="55" stroke="#2C333B"/></g>
+
+  <!-- dual routing -->
+  <text x="120" y="448" class="lab">DUAL ROUTING</text>
+  <g>
+    <rect x="120" y="466" width="500" height="86" rx="16" fill="#191D22" stroke="#F5A524" stroke-width="1.5"/>
+    <text x="144" y="500" class="route" fill="#F5A524">Rule-based routing</text>
+    <text x="144" y="528" class="lab" fill="#B7AE98">deterministic checks for CI / pipelines</text>
+    <rect x="640" y="466" width="500" height="86" rx="16" fill="#191D22" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="664" y="500" class="route" fill="#38BDF8">LLM routing</text>
+    <text x="664" y="528" class="lab" fill="#B7AE98">natural-language, citation-backed queries</text>
+  </g>
+
+  <text x="120" y="700" class="h" font-size="34">Neo4j Agentic Graph RAG for WCAG 2.2</text>
+  <text x="120" y="734" class="sub">Independent · 5-phase ETL · 13 entity types · grounded answers</text>
+</svg>

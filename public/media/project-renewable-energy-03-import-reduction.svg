@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-labelledby="gt3 gd3">
+  <title id="gt3">Reduced power imports with maintained stability</title>
+  <desc id="gd3">A before-and-after comparison shows power imports falling by 25 to 30 percent after solar integration, while voltage stability is maintained.</desc>
+  <defs>
+    <radialGradient id="gbg3" cx="40%" cy="28%" r="95%"><stop offset="0%" stop-color="#1B2A4A"/><stop offset="100%" stop-color="#070C1A"/></radialGradient>
+    <pattern id="gg3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#152743" stroke-width="1" opacity="0.6"/></pattern>
+    <linearGradient id="barb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#2563AC"/></linearGradient>
+    <linearGradient id="bara" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#1E7E96"/></linearGradient>
+    <style>
+      .eye{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:18px;letter-spacing:3px;fill:#7E93B6}
+      .tag{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:16px;letter-spacing:2px;fill:#FACC15}
+      .h{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;fill:#EAF2FF}
+      .sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:22px;fill:#9FB3D6}
+      .lab{font-family:'JetBrains Mono','SF Mono',ui-monospace,monospace;font-size:15px;fill:#7E93B6}
+      .barlab{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:18px;fill:#EAF2FF}
+      .big{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;fill:#FACC15}
+    </style>
+  </defs>
+  <rect width="1280" height="800" fill="url(#gbg3)"/><rect width="1280" height="800" fill="url(#gg3)"/>
+  <text x="80" y="92" class="eye">03 · IMPORT REDUCTION</text>
+  <text x="1200" y="92" class="tag" text-anchor="end">jazxii</text>
+
+  <text x="160" y="186" class="lab">GRID POWER IMPORTS</text>
+  <!-- axis -->
+  <line x1="200" y1="540" x2="640" y2="540" stroke="#22365C" stroke-width="2"/>
+
+  <!-- before bar -->
+  <rect x="250" y="240" width="120" height="300" rx="8" fill="url(#barb)"/>
+  <text x="310" y="220" class="barlab" text-anchor="middle">Before</text>
+  <text x="310" y="575" class="lab" text-anchor="middle">baseline</text>
+
+  <!-- after bar -->
+  <rect x="450" y="326" width="120" height="214" rx="8" fill="url(#bara)"/>
+  <text x="510" y="306" class="barlab" text-anchor="middle">After</text>
+  <text x="510" y="575" class="lab" text-anchor="middle">+ 1000 MW solar</text>
+
+  <!-- reduction bracket -->
+  <path d="M598 240 L618 240 L618 326 L598 326" fill="none" stroke="#FACC15" stroke-width="2.5"/>
+  <rect x="628" y="262" width="150" height="44" rx="22" fill="#0E1A33" stroke="#FACC15"/>
+  <text x="703" y="291" class="big" font-size="22" text-anchor="middle">−25–30%</text>
+
+  <!-- stability panel -->
+  <rect x="820" y="220" width="340" height="220" rx="18" fill="#0E1A33" stroke="#22365C"/>
+  <text x="844" y="256" class="lab" fill="#38BDF8">VOLTAGE STABILITY · p.u.</text>
+  <line x1="844" y1="340" x2="1136" y2="340" stroke="#152743" stroke-dasharray="3 7"/>
+  <path d="M844 360 C 900 300 940 380 990 348 C 1040 322 1090 350 1136 344" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+  <g transform="translate(844,400)"><circle cx="12" cy="0" r="13" fill="#34D399"/><path d="M6 0l4 4 8 -9" fill="none" stroke="#0E1A33" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="36" y="6" class="barlab" fill="#9FB3D6">within limits — stable</text></g>
+
+  <!-- tool chip -->
+  <rect x="820" y="476" width="340" height="50" rx="25" fill="#0E1A33" stroke="#22365C"/>
+  <text x="844" y="507" class="lab" fill="#9FB3D6" font-size="16">modelled with PSS®E + Python (pyPSSE)</text>
+
+  <text x="160" y="700" class="h" font-size="34">Renewable Energy Grid Integration</text>
+  <text x="160" y="734" class="sub">Grid Controller of India · 1000 MW solar into the Kerala grid</text>
+</svg>
