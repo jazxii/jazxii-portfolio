@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import type { PlaygroundItem } from "@/content/playground";
 import { asset } from "@/lib/asset";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import { useInViewAutoplay } from "@/lib/useInViewAutoplay";
 
 // Treat these media extensions as video; everything else renders as an image.
 const VIDEO_RE = /\.(mp4|webm|mov)(\?.*)?$/i;
@@ -34,18 +35,10 @@ export function PlaygroundCard({ item }: { item: PlaygroundItem }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reducedMotion = useReducedMotion();
 
-  // The video carries `autoPlay muted` so it starts on its own as the card
-  // loads. This effect only enforces the accessibility policy: under
-  // prefers-reduced-motion we hold it on its first frame instead of playing.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (reducedMotion) {
-      video.pause();
-    } else {
-      video.play().catch(() => {});
-    }
-  }, [reducedMotion]);
+  // Play only while the card is near the viewport (and motion is allowed); the
+  // masonry stacks many clips, so decoding them all at once would stutter the
+  // scroll. Under prefers-reduced-motion it holds the poster frame instead.
+  useInViewAutoplay(videoRef, !reducedMotion);
 
   const mediaClass =
     "block h-auto w-full transition-transform duration-500 ease-out-expo motion-safe:group-hover:scale-[1.03]";
@@ -62,7 +55,6 @@ export function PlaygroundCard({ item }: { item: PlaygroundItem }) {
         <video
           ref={videoRef}
           aria-hidden="true"
-          autoPlay
           muted
           loop
           playsInline

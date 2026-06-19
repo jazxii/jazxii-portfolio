@@ -384,6 +384,45 @@ body {
   pointer-events: none;
 }
 
+/* Below lg the expanded island spans nearly the full width, so it would sit
+   under the wordmark + theme toggle (which render above it). Fade those corner
+   items out of the way exactly while the island is expanded — they restore when
+   it collapses (outside-tap / Esc / link select). Desktop has room: untouched.
+   Layer order (z): header sticky bar 50 > nav corners 10 > island-wrap 5. */
+.nav-corner {
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    visibility var(--dur-fast) var(--ease-out);
+}
+@media (max-width: 1023px) {
+  header:has(.island:hover) .nav-corner,
+  header:has(.island:focus-within) .nav-corner,
+  header:has(.island[data-open="true"]) .nav-corner {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* On a phone the four links are tight in the expanded island ("About" clipped).
+   The corners are hidden here, so let the island use a touch more width and trim
+   the link padding/size so all four spread cleanly without clipping. */
+@media (max-width: 480px) {
+  .island:hover,
+  .island:focus-within,
+  .island[data-open="true"] {
+    width: calc(100vw - 1.25rem);
+  }
+  .island-nav ul {
+    padding: 8px 8px;
+    gap: 2px;
+  }
+  .island-link {
+    padding: 9px 12px;
+    font-size: 0.875rem;
+  }
+}
+
 /* ============================================================
    Reduced motion — global gate. Anything animated must also be
    gated in JS via useReducedMotion; this is the CSS backstop.
@@ -946,7 +985,9 @@ body {
   width: 34px;
   height: 34px;
   margin: -17px 0 0 -17px;
-  border: 1.5px solid var(--accent);
+  /* Softened to a subtle halo (the precise dot stays full-accent) so the
+     custom cursor reads as refined rather than a heavy outlined ring. */
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
   display: grid;
   place-items: center;
   transition:

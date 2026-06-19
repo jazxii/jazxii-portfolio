@@ -3,7 +3,7 @@ import { Diorama } from "@/components/hero/Diorama";
 import { HomeIntro } from "@/components/hero/HomeIntro";
 import { WorkTeaser } from "@/components/hero/WorkTeaser";
 import { StoryLine } from "@/components/hero/StoryLine";
-import { asset } from "@/lib/asset";
+import { WaveAvatar } from "@/components/hero/WaveAvatar";
 
 export default function HomePage() {
   return (
@@ -19,38 +19,28 @@ export default function HomePage() {
           </p>
 
           {/* Giant brand wordmark — decorative (the name is in the nav + eyebrow) */}
-          <div className="mt-7 flex items-center gap-3 sm:gap-5">
+          <div className="mt-6 flex items-center gap-3 sm:mt-7 sm:gap-5">
             <p
               aria-hidden="true"
               className="font-display text-[clamp(4rem,11vw,9rem)] font-semibold leading-[0.85] tracking-tight text-peach"
             >
               jazxii
             </p>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={asset("/media/memoji-wave.png")}
-              alt=""
-              aria-hidden="true"
-              width={256}
-              height={256}
-              decoding="async"
-              loading="lazy"
-              className="size-20 shrink-0 object-contain sm:size-28 lg:size-32"
-            />
+            <WaveAvatar className="size-20 sm:size-28 lg:size-32" />
           </div>
 
-          <div className="mt-7 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-border-soft pt-4">
+          <div className="mt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-border-soft pt-4 sm:mt-7">
             <span className="font-semibold">Agentic AI × Inclusive Design</span>
             <span className="text-text">
               Chennai, India <span className="text-text-muted">2026</span>
             </span>
           </div>
 
-          <h1 className="mt-9 max-w-xl font-display text-[clamp(2rem,2.8vw,3.4rem)] font-semibold leading-[1.07]">
+          <h1 className="mt-7 max-w-xl font-display text-[clamp(2rem,2.8vw,3.4rem)] font-semibold leading-[1.07] sm:mt-9">
             Building a digital world that’s beautiful — <br></br> and built for everyone.
           </h1>
 
-          <p className="mt-7 font-mono text-xs text-text-muted">
+          <p className="mt-6 font-mono text-xs text-text-muted sm:mt-7">
             WCAG 2.2 AA · keyboard-first · reduced-motion safe —{" "}
             <Link
               href="/accessibility"

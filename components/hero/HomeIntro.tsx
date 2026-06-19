@@ -190,7 +190,7 @@ export function HomeIntro() {
       {/* ---- Big scroll-reveal statement (Juan's "16 years…" beat) ---- */}
       <section
         aria-label="Introduction"
-        className="intro-statement mx-auto flex min-h-[70vh] max-w-5xl items-center px-4 py-24 sm:px-6"
+        className="intro-statement mx-auto flex min-h-[46svh] max-w-5xl items-center px-4 py-14 sm:min-h-[70vh] sm:px-6 sm:py-24"
       >
         <h2 className="font-display text-h1 font-semibold leading-tight">
           <span className="sr-only">{STATEMENT}</span>
@@ -210,7 +210,7 @@ export function HomeIntro() {
       {/* ---- Services (Juan's "I help companies to succeed…") ---- */}
       <section
         aria-labelledby="intro-services-heading"
-        className="mx-auto max-w-5xl px-4 py-16 sm:px-6"
+        className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16"
       >
         <h2
           id="intro-services-heading"
@@ -235,12 +235,13 @@ export function HomeIntro() {
       {/* ---- Folder CTA (Juan's "Work" word with the folder between letters) ---- */}
       <section
         aria-label="See my work"
-        className="intro-folder-cta relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-24"
+        className="intro-folder-cta relative flex min-h-[60svh] items-center justify-center overflow-hidden px-4 py-16 sm:min-h-screen sm:py-24"
       >
-        {/* Giant faded "W … ork" spanning the full width, folder in the gap */}
+        {/* Giant faded "W … ork" spanning the full width, folder in the gap.
+            Hidden below sm: on a phone the letters collide with the folder. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 flex items-center justify-between px-[1vw]"
+          className="pointer-events-none absolute inset-0 hidden items-center justify-between px-[1vw] sm:flex"
         >
           <span className="work-letter">W</span>
           <span className="work-letter">rk</span>
@@ -280,7 +281,7 @@ export function HomeIntro() {
       {/* ---- Pinned stepped headline (Juan's "Good design takes time…") ---- */}
       <section
         aria-labelledby="intro-steps-heading"
-        className="intro-steps flex min-h-screen items-center"
+        className="intro-steps flex min-h-[70svh] items-center sm:min-h-screen"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <h2 id="intro-steps-heading" className="font-display text-display font-semibold leading-tight">
@@ -296,7 +297,7 @@ export function HomeIntro() {
       {/* ---- Benefits checklist ---- */}
       <section
         aria-labelledby="intro-benefits-heading"
-        className="intro-benefits mx-auto max-w-5xl px-4 py-24 sm:px-6"
+        className="intro-benefits mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24"
       >
         <h2 id="intro-benefits-heading" className="font-display text-h2 font-semibold">
           <span className="line-mask">

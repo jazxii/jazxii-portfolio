@@ -60,11 +60,14 @@ export function Nav() {
   }, [open]);
 
   return (
+    // The `.nav-corner` items (wordmark, utilities) fade out via CSS while the
+    // island is expanded on small screens, so the wide island never collides
+    // with them — driven by the island's own expand state (see globals.css).
     <header className="sticky top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
       {/* Wordmark */}
       <Link
         href="/"
-        className="relative z-10 font-display text-lg font-semibold lowercase tracking-tight text-text no-underline"
+        className="nav-corner relative z-10 font-display text-lg font-semibold lowercase tracking-tight text-text no-underline"
       >
         jazxii
         <span aria-hidden="true" className="text-peach">
@@ -122,7 +125,7 @@ export function Nav() {
       </div>
 
       {/* Right utilities — toggle always shown; links/clock on large screens */}
-      <div className="relative z-10 flex items-center gap-5">
+      <div className="nav-corner relative z-10 flex items-center gap-5">
         <a
           href={`mailto:${EMAIL}`}
           data-cursor="email"

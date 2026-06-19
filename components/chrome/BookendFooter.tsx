@@ -1,21 +1,23 @@
-import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
-import { Wordmark } from "./Wordmark";
+import { FooterBanner } from "./FooterBanner";
 import { asset } from "@/lib/asset";
 
 const EMAIL = "jassimmohammed2910@gmail.com";
 
 /**
  * Shared bookend: identical closing moment on every route (PRD §5.4) —
- * one CTA card + large wordmark footer.
+ * one CTA card + a full-bleed cinematic sign-off banner. The footer itself
+ * carries no horizontal padding so the banner can bleed edge-to-edge; the
+ * CTA card supplies its own gutter.
  */
 export function BookendFooter() {
   return (
-    <footer className="mt-24 px-4 pb-10 sm:px-6">
-      <section
-        aria-labelledby="cta-heading"
-        className="mx-auto max-w-5xl rounded-card border border-border-soft bg-surface p-8 text-center shadow-glow sm:p-16"
-      >
+    <footer className="mt-24">
+      <div className="px-4 sm:px-6">
+        <section
+          aria-labelledby="cta-heading"
+          className="mx-auto max-w-5xl rounded-card border border-border-soft bg-surface p-8 text-center shadow-glow sm:p-16"
+        >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={asset("/media/memoji-hearts.png")}
@@ -49,38 +51,10 @@ export function BookendFooter() {
             GitHub
           </ButtonLink>
         </div>
-      </section>
-
-      <div className="mx-auto mt-16 flex max-w-5xl flex-col items-center gap-6">
-        <p aria-hidden="true" className="font-display text-display font-semibold leading-none">
-          <Wordmark />
-        </p>
-        <nav aria-label="Footer">
-          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
-            <li>
-              <Link href="/design-system" className="text-link underline underline-offset-4">
-                Design system
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="text-link underline underline-offset-4">
-                About
-              </Link>
-            </li>
-            <li>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="text-link underline underline-offset-4"
-              >
-                {EMAIL}
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <p className="text-sm text-text-muted">
-          © {new Date().getFullYear()} Jassim M. Shamim · Built to WCAG 2.2 AA
-        </p>
+        </section>
       </div>
+
+      <FooterBanner />
     </footer>
   );
 }
