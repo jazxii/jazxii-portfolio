@@ -1,7 +1,7 @@
 # Kanban — jazxii-portfolio
 
 Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sprint:
-**Work media/layout + Playground motion polish** (2026-06-19). WIP limit: **max 2 In Progress**. Flow left → right.
+**Header polish — adaptive glass pills + scroll/contrast fixes** (2026-06-20); previous: Work media/layout + Playground motion polish (2026-06-19). WIP limit: **max 2 In Progress**. Flow left → right.
 
 > Definition of Done (every card): tsc clean · eslint clean (React-compiler rules, D11) ·
 > `npm run build` green · `npx playwright test` green (**axe 0 violations, 6 routes × 2 themes**) ·
@@ -42,8 +42,12 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 - [x] CARD-040 · Open every route at the top + fix cross-nav stuck-scroll (reset + recompute Lenis/ScrollTrigger on route change) (Phase 13, decisions D21)
 - [x] CARD-041 · Playground card video autoplay (muted/looping, ext-detected; reduced-motion pauses) (Phase 14, decisions D24)
 - [x] CARD-042 · Playground slow fade-in reveal — `RevealStagger` opt-in `fade` + `ScrollTrigger.batch`→`IntersectionObserver`; duplicate-key fix; axe-verified opacity:0 clean (Phase 14, decisions D25)
+- [x] CARD-043 · In-page stuck-scroll fix — `body` ResizeObserver recomputes the Lenis limit on content growth (`<html height:100%>` defeats Lenis autoResize) (Phase 15, decisions D26)
+- [x] CARD-044 · Progressive blur band under the sticky nav (3 stacked `backdrop-filter` layers, masked, theme-tinted scrim) (Phase 15, decisions D27)
+- [x] CARD-045 · "Work" watermark theme-aware colour (`var(--color-white)`→`var(--text)`) — light-mode visibility (Phase 15, decisions D3c)
+- [x] CARD-046 · Adaptive glass-pill header + per-section tone flip (Juan Mora-style; `useNavTone` IntersectionObserver; footer flips header to light contents in light mode) (Phase 15, decisions D28)
 
-> ⚠️ **DoD partial for CARD-038–042:** tsc + eslint clean, but `npm run build` + Playwright/axe were **not** re-run this session (the headless preview can't exercise scroll/visibility animations — see session-log Phase 14). Run the full loop before shipping.
+> ⚠️ **DoD partial for CARD-038–046:** tsc + eslint clean (CARD-043–046 also: no console errors, preview-verified in light + dark), but `npm run build` + Playwright/axe were **not** re-run these sessions (the headless preview can't exercise scroll/visibility animations — see session-log Phase 14). Run the full loop before shipping; for CARD-046 add an e2e assertion for `header[data-tone="dark"]` over the footer and re-check the axe matrix with the new pill colours.
 
 ## 🧊 Icebox / Parked (validate value first)
 - [ ] CARD-R8 · Audio re-introduction as explicit opt-in toggle (reuse archived `IslandPlayer.tsx`)
@@ -106,4 +110,4 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 
 ---
 
-_Last updated: 2026-06-19. Source of truth for cards; mirror status to [session-log.md](session-log.md) phases._
+_Last updated: 2026-06-20. Source of truth for cards; mirror status to [session-log.md](session-log.md) phases._

@@ -25,7 +25,7 @@ export function ThemeToggle() {
       onClick={() => setTheme(target)}
       aria-label={label}
       title={label}
-      className="flex items-center justify-center whitespace-nowrap rounded-pill border border-border-soft bg-surface/80 px-2.5 py-1.5 text-sm text-text no-underline shadow-card backdrop-blur-md transition-colors hover:bg-surface-2 lg:px-4"
+      className="nav-toggle"
     >
       {/* compact icon on small screens, label on large */}
       <span aria-hidden="true" className="lg:hidden">

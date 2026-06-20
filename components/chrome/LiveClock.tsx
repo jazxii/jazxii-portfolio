@@ -27,7 +27,7 @@ export function LiveClock() {
   if (!time) return null;
 
   return (
-    <span aria-hidden="true" className="font-mono text-sm text-text-muted tabular-nums">
+    <span aria-hidden="true" className="nav-clock font-mono text-sm tabular-nums">
       {time}
     </span>
   );

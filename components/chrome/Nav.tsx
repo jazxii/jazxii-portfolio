@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { subscribeNavTone, type NavTone } from "@/lib/navTone";
 import { LiveClock } from "./LiveClock";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -35,7 +36,12 @@ const EMAIL = "jassimmohammed2910@gmail.com";
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  // Override tone of the section currently under the header (null = theme
+  // default). Drives the glass pills + scrim via header[data-tone] in CSS.
+  const [tone, setTone] = useState<NavTone | null>(null);
   const islandRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => subscribeNavTone(setTone), []);
 
   // Touch/tap-open path: dismiss on Escape or outside tap.
   useEffect(() => {
@@ -63,11 +69,24 @@ export function Nav() {
     // The `.nav-corner` items (wordmark, utilities) fade out via CSS while the
     // island is expanded on small screens, so the wide island never collides
     // with them — driven by the island's own expand state (see globals.css).
-    <header className="sticky top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
+    <header
+      data-tone={tone ?? undefined}
+      className="sticky top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6"
+    >
+      {/* Progressive blur + soft scrim pinned to the top edge: scrolling content
+          is gently frosted (heaviest at the very top, fading to sharp below) so
+          it never collides with the nav. Decorative, click-through, sits behind
+          the nav items (z-10) but above the page. */}
+      <div aria-hidden="true" className="nav-blur">
+        <span />
+        <span />
+        <span />
+      </div>
+
       {/* Wordmark */}
       <Link
         href="/"
-        className="nav-corner relative z-10 font-display text-lg font-semibold lowercase tracking-tight text-text no-underline"
+        className="nav-word nav-corner relative z-10 font-display text-lg font-semibold lowercase tracking-tight no-underline"
       >
         jazxii
         <span aria-hidden="true" className="text-peach">
@@ -124,12 +143,13 @@ export function Nav() {
         </div>
       </div>
 
-      {/* Right utilities — toggle always shown; links/clock on large screens */}
-      <div className="nav-corner relative z-10 flex items-center gap-5">
+      {/* Right utilities — each its own frosted glass pill (Juan Mora-style);
+          toggle always shown, links + clock on large screens. */}
+      <div className="nav-corner relative z-10 flex items-center gap-2">
         <a
           href={`mailto:${EMAIL}`}
           data-cursor="email"
-          className="hidden text-sm text-text-muted no-underline transition-colors hover:text-text lg:inline"
+          className="nav-pill hidden lg:inline-flex"
         >
           Email
         </a>
@@ -137,7 +157,7 @@ export function Nav() {
           href="https://www.linkedin.com/in/jassim-m-shamim/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden text-sm text-text-muted no-underline transition-colors hover:text-text lg:inline"
+          className="nav-pill hidden lg:inline-flex"
         >
           in
           <span className="sr-only"> — LinkedIn (opens in new tab)</span>
@@ -146,12 +166,12 @@ export function Nav() {
           href="https://github.com/jazxii"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden text-sm text-text-muted no-underline transition-colors hover:text-text lg:inline"
+          className="nav-pill hidden lg:inline-flex"
         >
           gh
           <span className="sr-only"> — GitHub (opens in new tab)</span>
         </a>
-        <span className="hidden lg:inline">
+        <span className="hidden lg:inline-flex">
           <LiveClock />
         </span>
         <ThemeToggle />

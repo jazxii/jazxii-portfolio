@@ -5,6 +5,7 @@ import Link from "next/link";
 import { asset } from "@/lib/asset";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { useInViewAutoplay } from "@/lib/useInViewAutoplay";
+import { useNavTone } from "@/lib/navTone";
 
 const EMAIL = "jassimmohammed2910@gmail.com";
 const BUILT_WITH = ["Next.js", "GSAP", "Lenis", "Tailwind", "axe-core"];
@@ -57,6 +58,10 @@ function FooterLink({
 export function FooterBanner() {
   const reducedMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Always near-black, even in light mode — tell the nav to flip to light
+  // contents while this banner is under the header (else dark-on-dark vanishes).
+  const sectionRef = useRef<HTMLElement>(null);
+  useNavTone(sectionRef, "dark");
 
   // Only decode the scene while the footer is near the viewport — it sits at the
   // very bottom of every page, so for most of a scroll it stays paused and off
@@ -75,6 +80,7 @@ export function FooterBanner() {
 
   return (
     <section
+      ref={sectionRef}
       aria-label="Studio sign-off"
       className="relative isolate mt-16 flex min-h-svh w-full flex-col overflow-hidden px-6 py-9 text-white sm:px-10 sm:py-20"
       style={{ backgroundColor: "#0a0b0d" }}

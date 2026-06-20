@@ -366,23 +366,23 @@ export const projects: Project[] = [
       height: 800,
     },
   },
-  {
-    slug: "vit-event-websites",
-    title: "VIT Event Websites",
-    year: 2022,
-    period: "Aug — Nov 2022 · VIT Vellore",
-    challenge:
-      "Two VIT events needed dedicated web presences. I built the World Space Week site — run in partnership with ISRO — and the official site for Thanima 2022, VIT's Onam celebration hosted by the Office of Students' Welfare.",
-    services: ["Frontend development", "HTML / CSS", "JavaScript", "Responsive design"],
-    role: "Frontend developer — built and shipped the World Space Week and Thanima 2022 event sites.",
-    context: "University project",
-    media: {
-      src: "/media/project-vit-events.svg",
-      alt: "Two event website mockups side by side — a space-themed World Space Week page and a festive Thanima 2022 page.",
-      width: 1280,
-      height: 800,
-    },
-  },
+  // {
+  //   slug: "vit-event-websites",
+  //   title: "VIT Event Websites",
+  //   year: 2022,
+  //   period: "Aug — Nov 2022 · VIT Vellore",
+  //   challenge:
+  //     "Two VIT events needed dedicated web presences. I built the World Space Week site — run in partnership with ISRO — and the official site for Thanima 2022, VIT's Onam celebration hosted by the Office of Students' Welfare.",
+  //   services: ["Frontend development", "HTML / CSS", "JavaScript", "Responsive design"],
+  //   role: "Frontend developer — built and shipped the World Space Week and Thanima 2022 event sites.",
+  //   context: "University project",
+  //   media: {
+  //     src: "/media/project-vit-events.svg",
+  //     alt: "Two event website mockups side by side — a space-themed World Space Week page and a festive Thanima 2022 page.",
+  //     width: 1280,
+  //     height: 800,
+  //   },
+  // },
   // {
   //   slug: "photography-club-vit",
   //   title: "The Photography Club · VIT",

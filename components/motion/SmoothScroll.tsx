@@ -64,9 +64,30 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
     let cancelled = false;
     let lenis: Lenis | null = null;
+    let resizeObserver: ResizeObserver | null = null;
+    let rafId = 0;
     const tick = (time: number) => {
       // gsap.ticker time is in seconds; Lenis expects milliseconds
       lenis?.raf(time * 1000);
+    };
+
+    // Lenis reads its scroll limit from document.documentElement.scrollHeight,
+    // but only RE-reads it when its own ResizeObserver (which watches
+    // documentElement) fires. Our <html> is height:100% (the sticky-footer
+    // pattern), so its box is pinned to the viewport and never resizes when the
+    // content BELOW it grows — late-loading memoji videos/images, the web-font
+    // swap reflowing headings, etc. The real page gets taller while Lenis keeps
+    // clamping the wheel to the stale, shorter limit, so scrolling "sticks"
+    // partway down until a full reload. Watch <body> instead (min-height:100%,
+    // so it DOES grow with content) and recompute the limit when it changes.
+    // Coalesce bursts of mutations into one resize on the next frame.
+    const recompute = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        lenis?.resize();
+        ScrollTrigger.refresh();
+      });
     };
 
     import("lenis").then(({ default: LenisCtor }) => {
@@ -76,10 +97,21 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
+
+      resizeObserver = new ResizeObserver(recompute);
+      resizeObserver.observe(document.body);
+      // Backstops for assets that settle after the observer is attached.
+      window.addEventListener("load", recompute);
+      document.fonts?.ready.then(() => {
+        if (!cancelled) recompute();
+      });
     });
 
     return () => {
       cancelled = true;
+      if (rafId) cancelAnimationFrame(rafId);
+      resizeObserver?.disconnect();
+      window.removeEventListener("load", recompute);
       gsap.ticker.remove(tick);
       lenis?.destroy();
       lenisRef.current = null;
