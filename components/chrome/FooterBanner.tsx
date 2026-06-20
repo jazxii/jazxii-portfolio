@@ -165,7 +165,7 @@ export function FooterBanner() {
 
       {/* ---------- Desktop (lg+): top links + giant split name ---------- */}
       <div className="hidden flex-1 flex-col lg:flex">
-        <div className="flex items-start justify-between gap-6">
+        <div className="flex items-start justify-between gap-6 pt-12">
           <nav aria-label="Footer">
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
               {LINKS.map((l) => (
