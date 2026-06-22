@@ -183,6 +183,8 @@ Date: 2026-06-14. Stack: Next.js 16.2.9 (App Router, Turbopack) · React 19.2.4 
 - **Footer links vertical (desktop)** — the `lg+` footer nav is now a vertical `space-y-1` list under an "Explore" kicker, uniform with the right-hand "Built with" column.
 - ✅ tsc + eslint clean; no console errors. Mobile verified by screenshot (pills gone, memoji art, sharp footer name, full-height); desktop vertical links confirmed via DOM (preview caps at ~727px, below `lg`).
 
+**CI axe fix (decisions [D3c](decisions.md)):** CI flagged `color-contrast` on the decorative `.work-letter` watermark in **light** mode (the faint `var(--text)` at 0.14 on cream ≈ 1.2:1; dark mode ≈ 3.3:1 passes). It's pure decoration (WCAG 1.4.3 exempt; the CTA name + sr-only text + folder carry the meaning) and meeting 3:1 needs ~0.5 opacity (a prominent word), so the axe scan now **excludes `.work-letter`** in [e2e/a11y.spec.ts](e2e/a11y.spec.ts) (route loop + explicit-light test). **Ran the full loop the CI way: `npm run build` green + `npx playwright test` 25/25** (axe 0 violations, 6 routes × 2 themes) — resolves the Phase 13–15 "build + Playwright not re-run" caveat.
+
 ---
 
 ## Current state
@@ -200,5 +202,5 @@ Date: 2026-06-14. Stack: Next.js 16.2.9 (App Router, Turbopack) · React 19.2.4 
 - Build the planned **3D character / animation** treatment for the island (see [ai-sdlc.md](ai-sdlc.md) roadmap).
 - Finish the real-**media** swap: real Playground `.mp4`/`.mov`/`.png` + a real WCAG-project cover have landed; remaining SVG placeholders + several **duplicate Playground `slug`/title placeholders and mismatched alt text** still need cleanup, and the new gallery field is wired but unused (add `gallery` arrays when real extra shots exist).
 - Confirm playground links (several point to LinkedIn as stand-ins).
-- Re-run the **full verification loop** (`npm run build` + Playwright/axe) for the Phase 13–15 changes — only tsc + eslint were run these sessions (preview couldn't exercise scroll/visibility animations, see Phase 14 note). For Phase 15, add e2e coverage for the header tone-flip (assert `header[data-tone="dark"]` over the footer) and re-check the axe matrix with the new glass-pill colours.
+- **Full verification loop is green as of 2026-06-20** (`npm run build` + `npx playwright test` 25/25, axe 0 violations 6×2) — Phase 13–15 are now build- and axe-verified, not just tsc+eslint. Still worth adding: **e2e coverage for the header tone-flip** (assert `header[data-tone="dark"]` over the footer) — the new glass-pill colours already pass the axe matrix.
 - Nothing committed yet — all changes are in the working tree.

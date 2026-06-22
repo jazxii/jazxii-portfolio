@@ -37,6 +37,7 @@ Key technical/design decisions and their rationale. Each entry: what was decided
 - **Decision:** `.work-letter` (the giant faded "W…rk" behind the folder CTA, [HomeIntro.tsx](components/hero/HomeIntro.tsx)) now uses `color: var(--text)` at `opacity: 0.14`, replacing the raw `var(--color-white)`.
 - **Why:** raw primitives don't theme-swap — white at 0.14 over the light-mode cream background was effectively **invisible** (user-reported). `var(--text)` is light on dark / dark on light, so the watermark stays faintly visible in both themes. Same trap as [D7]/[D16] (a raw colour used on the wrong theme).
 - **A11y:** decorative only (`aria-hidden`); the section's real name is the `aria-label="See my work"` + sr-only link text, so this is a purely visual fix (no contrast requirement).
+- **axe / CI fix (2026-06-20):** the faint watermark is genuinely low-contrast (dark `var(--text)` at 0.14 on cream ≈ 1.2:1), so CI's axe flagged `color-contrast` on `.work-letter` in **light** mode (it passes in dark mode ≈ 3.3:1, the large-text 3:1 bar). Because it's **pure decoration** — WCAG 1.4.3 exempts decorative text, and meeting 3:1 needs ~0.5 opacity which turns the ghost word into a prominent one — the axe scan **excludes `.work-letter`** in [e2e/a11y.spec.ts](e2e/a11y.spec.ts) (both the route loop and the explicit-light-theme test), the same spirit as the gradient folder-mark "incomplete" ([D3b]) and skipped `opacity:0` reveals ([D25]). Verified the CI way: fresh `npm run build` + full Playwright/axe suite **25/25 green**, both themes.
 
 ## Navigation
 

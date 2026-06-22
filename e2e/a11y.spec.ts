@@ -13,6 +13,13 @@ for (const colorScheme of ["dark", "light"] as const) {
         await page.goto(route);
         const results = await new AxeBuilder({ page })
           .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"])
+          // The giant "W…rk" watermark behind the home folder CTA is pure
+          // decoration (aria-hidden; the CTA's accessible name + sr-only text +
+          // the visible folder carry the meaning). Its intentionally-faint
+          // colour is exempt from contrast under WCAG 1.4.3 — meeting 3:1 would
+          // make it a prominent word and kill the effect. axe can't infer
+          // "decorative", so exclude just this element. (decisions D3c)
+          .exclude(".work-letter")
           .analyze();
         expect(
           results.violations.map((v) => ({
@@ -179,6 +186,8 @@ test.describe("theme toggle", () => {
     });
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"])
+      // decorative watermark — exempt under WCAG 1.4.3 (see the main loop above)
+      .exclude(".work-letter")
       .analyze();
     expect(results.violations.map((v) => v.id)).toEqual([]);
   });
