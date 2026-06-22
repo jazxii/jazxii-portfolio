@@ -46,8 +46,9 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 - [x] CARD-044 · Progressive blur band under the sticky nav (3 stacked `backdrop-filter` layers, masked, theme-tinted scrim) (Phase 15, decisions D27)
 - [x] CARD-045 · "Work" watermark theme-aware colour (`var(--color-white)`→`var(--text)`) — light-mode visibility (Phase 15, decisions D3c)
 - [x] CARD-046 · Adaptive glass-pill header + per-section tone flip (Juan Mora-style; `useNavTone` IntersectionObserver; footer flips header to light contents in light mode) (Phase 15, decisions D28)
+- [x] CARD-047 · Header + closing-banner responsive polish — fix mobile pill leak (unlayered `display` beat `.hidden`), memoji album art in the island, lighter mobile `.nav-blur` (footer name crisp), footer `min-h-svh`→`min-h-dvh` (iPhone full-bleed), desktop footer links stacked vertically (Phase 15 follow-up, decisions D29)
 
-> ⚠️ **DoD partial for CARD-038–046:** tsc + eslint clean (CARD-043–046 also: no console errors, preview-verified in light + dark), but `npm run build` + Playwright/axe were **not** re-run these sessions (the headless preview can't exercise scroll/visibility animations — see session-log Phase 14). Run the full loop before shipping; for CARD-046 add an e2e assertion for `header[data-tone="dark"]` over the footer and re-check the axe matrix with the new pill colours.
+> ⚠️ **DoD partial for CARD-038–047:** tsc + eslint clean (CARD-043–046 also: no console errors, preview-verified in light + dark), but `npm run build` + Playwright/axe were **not** re-run these sessions (the headless preview can't exercise scroll/visibility animations — see session-log Phase 14). Run the full loop before shipping; for CARD-046 add an e2e assertion for `header[data-tone="dark"]` over the footer and re-check the axe matrix with the new pill colours.
 
 ## 🧊 Icebox / Parked (validate value first)
 - [ ] CARD-R8 · Audio re-introduction as explicit opt-in toggle (reuse archived `IslandPlayer.tsx`)

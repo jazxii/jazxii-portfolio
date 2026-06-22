@@ -449,6 +449,30 @@ body {
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 12%, transparent 38%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 12%, transparent 38%);
 }
+/* Mobile: the header is just the island + toggle + wordmark at the very top, so
+   the band is shorter and the blur much lighter — a heavy 12px frost otherwise
+   smears content sitting high on small screens (e.g. the footer banner's centred
+   name). Over the always-dark footer it shrinks further so the name stays crisp. */
+@media (max-width: 1023px) {
+  .nav-blur {
+    height: 88px;
+  }
+  .nav-blur > span:nth-child(1) {
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+  }
+  .nav-blur > span:nth-child(2) {
+    -webkit-backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2.5px);
+  }
+  .nav-blur > span:nth-child(3) {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+  header[data-tone="dark"] .nav-blur {
+    height: 60px;
+  }
+}
 
 /* ---- Adaptive glass header (Juan Mora-style frosted pills) ------------------
    The wordmark + utilities sit over content of varying tone as the page scrolls
@@ -490,11 +514,12 @@ header[data-tone="light"] {
   transition: color 0.3s var(--ease-out);
 }
 
+/* NB: display/alignment are set with Tailwind utilities on each element
+   (`hidden lg:inline-flex items-center justify-center`), NOT here — an
+   unlayered `display` would beat Tailwind's `.hidden` and leak the pills onto
+   the mobile header. This rule only carries the glass look. */
 .nav-pill,
 .nav-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   color: var(--nav-fg);
   background-color: var(--nav-glass);
   border: 1px solid var(--nav-border);

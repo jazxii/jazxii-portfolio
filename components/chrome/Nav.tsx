@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 import { subscribeNavTone, type NavTone } from "@/lib/navTone";
 import { LiveClock } from "./LiveClock";
 import { ThemeToggle } from "./ThemeToggle";
@@ -110,7 +111,15 @@ export function Nav() {
             aria-label="Open navigation"
             onClick={() => setOpen((value) => !value)}
           >
-            <span className="album-art" aria-hidden="true" />
+            <span
+              className="album-art"
+              aria-hidden="true"
+              style={{
+                backgroundImage: `url(${asset("/media/memoji-lap.png")})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
             <span className="eq" aria-hidden="true">
               <i />
               <i />
@@ -149,7 +158,7 @@ export function Nav() {
         <a
           href={`mailto:${EMAIL}`}
           data-cursor="email"
-          className="nav-pill hidden lg:inline-flex"
+          className="nav-pill hidden items-center justify-center lg:inline-flex"
         >
           Email
         </a>
@@ -157,7 +166,7 @@ export function Nav() {
           href="https://www.linkedin.com/in/jassim-m-shamim/"
           target="_blank"
           rel="noopener noreferrer"
-          className="nav-pill hidden lg:inline-flex"
+          className="nav-pill hidden items-center justify-center lg:inline-flex"
         >
           in
           <span className="sr-only"> — LinkedIn (opens in new tab)</span>
@@ -166,7 +175,7 @@ export function Nav() {
           href="https://github.com/jazxii"
           target="_blank"
           rel="noopener noreferrer"
-          className="nav-pill hidden lg:inline-flex"
+          className="nav-pill hidden items-center justify-center lg:inline-flex"
         >
           gh
           <span className="sr-only"> — GitHub (opens in new tab)</span>

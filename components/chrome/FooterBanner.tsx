@@ -82,7 +82,7 @@ export function FooterBanner() {
     <section
       ref={sectionRef}
       aria-label="Studio sign-off"
-      className="relative isolate mt-16 flex min-h-svh w-full flex-col overflow-hidden px-6 py-9 text-white sm:px-10 sm:py-20"
+      className="relative isolate mt-16 flex min-h-dvh w-full flex-col overflow-hidden px-6 py-9 text-white sm:px-10 sm:py-20"
       style={{ backgroundColor: "#0a0b0d" }}
     >
       {/* Decorative scene — fills the banner behind everything. */}
@@ -167,7 +167,8 @@ export function FooterBanner() {
       <div className="hidden flex-1 flex-col lg:flex">
         <div className="flex items-start justify-between gap-6 pt-12">
           <nav aria-label="Footer">
-            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+            <p className={colLabel}>Explore</p>
+            <ul className="mt-2 space-y-1 text-sm">
               {LINKS.map((l) => (
                 <li key={l.label}>
                   <FooterLink {...l} />

@@ -175,6 +175,14 @@ Date: 2026-06-14. Stack: Next.js 16.2.9 (App Router, Turbopack) · React 19.2.4 
 - **Build gotcha** — newly-added `globals.css` rules silently didn't compile under Turbopack `next dev` (valid CSS, no error, absent from `document.styleSheets`); a server stop/start didn't fix it — **`rm -rf .next` did**. Saved to Claude memory (env notes).
 - ✅ tsc + eslint clean; no console errors. Verified in preview (light + dark): pills render with blur/fill/hairline, footer tone-flip works (`data-tone="dark"` → light contents over the dark footer in light mode), watermark visible. (Full `npm run build` + Playwright/axe not re-run — the preview can't exercise scroll/visibility reliably; see Phase 13–14 notes.)
 
+**Follow-up tweaks (same day, decisions [D29](decisions.md)):**
+- **Mobile pill leak fixed** — the glass pills' `display:inline-flex` lived in unlayered CSS and beat Tailwind's `.hidden`, so Email/in/gh overlapped the mobile header; display/alignment moved onto the elements as Tailwind utilities, leaving only the glass look in CSS.
+- **Island album art** — collapsed island chip now shows `public/media/memoji-lap.png` (inline `backgroundImage` via `asset()`).
+- **Mobile footer blur** — `.nav-blur` shortened + much lighter on `≤1023px` (and 60px over the dark footer) so the footer banner's centred name is no longer smeared on small screens.
+- **Footer full-bleed** — `FooterBanner` `min-h-svh` → `min-h-dvh` (iPhone 16 left a gap once the toolbar collapsed); verified footer height == viewport at 375×812.
+- **Footer links vertical (desktop)** — the `lg+` footer nav is now a vertical `space-y-1` list under an "Explore" kicker, uniform with the right-hand "Built with" column.
+- ✅ tsc + eslint clean; no console errors. Mobile verified by screenshot (pills gone, memoji art, sharp footer name, full-height); desktop vertical links confirmed via DOM (preview caps at ~727px, below `lg`).
+
 ---
 
 ## Current state

@@ -25,7 +25,7 @@ export function ThemeToggle() {
       onClick={() => setTheme(target)}
       aria-label={label}
       title={label}
-      className="nav-toggle"
+      className="nav-toggle inline-flex items-center justify-center"
     >
       {/* compact icon on small screens, label on large */}
       <span aria-hidden="true" className="lg:hidden">
