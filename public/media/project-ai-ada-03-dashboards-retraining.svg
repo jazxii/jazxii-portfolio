@@ -41,9 +41,14 @@
   <path d="M915 404 C 850 404 850 314 895 314" fill="none" stroke="#2DD4BF" stroke-width="2.5" marker-end="url(#lr)"/>
 
   <!-- admin console chip -->
-  <rect x="820" y="470" width="340" height="56" rx="28" fill="#0E1230" stroke="#2E3470"/>
-  <circle cx="852" cy="498" r="14" fill="#818CF8"/><path d="M846 498h12M852 492v12" stroke="#0A0C20" stroke-width="2.5" stroke-linecap="round"/>
-  <text x="878" y="504" class="lab" font-size="16" fill="#C9B6F0">admin console · regression + trend tracking</text>
+  <rect x="820" y="470" width="340" height="80" rx="28" fill="#0E1230" stroke="#2E3470"/>
+  <g transform="translate(0, 10)">
+    <circle cx="852" cy="498" r="14" fill="#818CF8"/><path d="M846 498h12M852 492v12" stroke="#0A0C20" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="878" y="504" class="lab" font-size="16" fill="#C9B6F0">
+  <tspan x="878" y="504">admin console · regression </tspan>
+  <tspan x="918" y="524">+ trend tracking</tspan>
+  </text>
 
   <text x="120" y="700" class="h" font-size="34">Accessibility AI Platform</text>
   <text x="120" y="734" class="sub">Cognizant · dashboards + feedback-driven model retraining</text>

@@ -27,7 +27,7 @@
 
   <!-- left-moving arrow (the move) -->
   <path d="M1010 232 C 700 150 470 150 200 232" fill="none" stroke="#22D3EE" stroke-width="3" marker-end="url(#arrL)"/>
-  <text x="600" y="178" class="lab" text-anchor="middle">accessibility, moved earlier</text>
+  <text x="600" y="148" class="lab" text-anchor="middle">accessibility, moved earlier</text>
 
   <!-- pipeline connectors -->
   <line x1="380" y1="360" x2="430" y2="360" stroke="#1C3A40" stroke-width="3"/>

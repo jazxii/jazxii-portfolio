@@ -187,7 +187,7 @@
     <circle cx="98" cy="20" r="6" fill="#34245C"/>
   </g>
   <!-- legend -->
-  <g transform="translate(305,594)">
+  <g transform="translate(305,624)">
     <circle cx="8" cy="0" r="6" fill="#C084FC"/><text x="24" y="5" class="lab" fill="#B9A9E0">gating</text>
     <circle cx="118" cy="0" r="6" fill="#34245C"/><text x="134" y="5" class="lab">idle</text>
   </g>

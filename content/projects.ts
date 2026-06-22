@@ -5,14 +5,18 @@
  * Every image needs real alt text describing what the visual shows.
  */
 
-/** A single image — or an optional muted/looping video with the image as its poster. */
+/** A single image — or a muted/looping video, detected when `src` ends in
+ *  .mp4/.webm/.mov (same convention as the Playground cards). */
 export type MediaItem = {
+  /** Image path, OR a video path (`.mp4`/`.webm`/`.mov`) for a muted looping clip. */
   src: string;
   alt: string;
   width: number;
   height: number;
-  /** Optional muted looping video; the image becomes its poster. */
-  videoSrc?: string;
+  /** Optional poster image shown before/while a video `src` loads (and under
+   *  reduced motion). If omitted, the video's first frame is used. */
+  poster?: string;
+  /** Richer screen-reader description for a video `src` (falls back to `alt`). */
   videoDescription?: string;
 };
 
@@ -43,6 +47,69 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "gaad-2026-booth",
+    title: "GAAD 2026 Booth Experience",
+    year: 2026,
+    period: "2026 · Cognizant",
+    challenge:
+      "For Cognizant's Global Accessibility Awareness Day 2026 event, I designed and built an interactive kiosk that lets visitors *feel* accessibility barriers rather than just hear about them. Six mini-games, organised under a 'Design, Develop, Deliver' framework, each put the visitor through a broken, inaccessible flow first — then replay the same task done right, with the real-world stat and WCAG criteria behind it.",
+    services: [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "React Router",
+      "WCAG 2.2",
+      "Interaction design",
+    ],
+    role: "Designer & builder — solo-built the booth: a 7-phase game engine, six branded mini-games (CVD, captchas, keyboard traps, ASR captions, dark patterns), kiosk idle-reset, and a focus-trapping comparison layer.",
+    context: "Internal event platform",
+    media: {
+      src: "/media/project-gaad26.png",
+      alt: "Kiosk screen showing the 'Design, Develop, Deliver' stage selector with six accessibility mini-game cards on a deep-navy background.",
+      width: 1280,
+      height: 800,
+    },
+    gallery: [
+      {
+        src: "/media/project-gaad26-02.jpeg",
+        alt: "The GAAD 2026 booth in action: an open laptop running the kiosk's blue 'Design. Develop. Deliver.' start screen, surrounded by a wall of handwritten yellow feedback sticky notes left by visitors.",
+        width: 1280,
+        height: 800,
+      },
+      {
+        src: "/media/project-gaad26-03.jpeg",
+        alt: "A whiteboard headed 'Share Your Thoughts' (with a smiley in the O) at the GAAD 2026 booth, covered with dozens of handwritten yellow sticky notes of visitor feedback in the event hall.",
+        width: 1280,
+        height: 800,
+      },
+    ],
+  },
+  {
+    slug: "clawspace-agents",
+    title: "Clawspace — Personal AI Workforce",
+    year: 2026,
+    period: "2026 · Independent",
+    challenge:
+      "I wanted a single system to run my personal brand, dev projects, and research without anything auto-posting or leaving my machine. Clawspace is a local-first, hierarchical multi-agent system: 33 specialised Claude agents across four tiers coordinate through an append-only message bus, with Markdown as the source of truth and a real-time dashboard on top.",
+    services: [
+      "Claude Code",
+      "Multi-agent systems",
+      "MCP servers",
+      "Next.js 15",
+      "TypeScript",
+      "Knowledge graphs",
+    ],
+    role: "Designer & builder — 33-agent hierarchy, an append-only JSONL bus with custom MCP servers, a research-to-content pipeline, weekly self-evolution with audit/rollback, and a Next.js dashboard (WCAG 2.2 AA floor, Playwright + axe-core).",
+    context: "Independent project",
+    media: {
+      src: "/media/play-clawspace.mp4",
+      alt: "Four-tier agent hierarchy diagram — overseer at top branching to content, projects, and research domains — with an append-only message bus connecting them.",
+      width: 1280,
+      height: 800,
+      poster: "/media/project-clawspace-img.png",
+    },
+  },
   {
     slug: "neo4j-agentic-graph-rag",
     title: "Neo4j Agentic Graph RAG for WCAG 2.2",

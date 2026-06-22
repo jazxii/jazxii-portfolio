@@ -187,10 +187,21 @@ Date: 2026-06-14. Stack: Next.js 16.2.9 (App Router, Turbopack) · React 19.2.4 
 
 ---
 
+## Phase 16 — Work + teaser videos (auto-detect by extension) (2026-06-20)
+
+**Trigger:** user added a project (Clawspace) whose cover is an `.mp4` in `media.src` and asked to make "videos work in the WORK screen as well" (they already work in Playground).
+
+- **MediaFigure video support** ([MediaFigure.tsx](components/ui/MediaFigure.tsx)) — it only rendered video via a separate (unused) `videoSrc` field, so an `.mp4` in `media.src` fell through to a broken `<img src="*.mp4">`. Now it detects video by extension (`.mp4`/`.webm`/`.mov`) in `src` and renders a muted/looping `aria-hidden` `<video>` + sr-only description, gated by the shared `useInViewAutoplay` hook — the same convention as Playground. One fix covers Work `ProjectSection`, the `MediaGallery`, and the home `WorkTeaser`. (decisions [D30](decisions.md).)
+- **MediaItem type** ([content/projects.ts](content/projects.ts)) — dropped the unused `videoSrc`; added optional `poster?` (used before/while a video loads + under reduced motion; first frame otherwise).
+- ✅ tsc + eslint clean; **full loop re-run: `npm run build` + Playwright/axe 25/25 green** (both themes). Verified in preview: `/work` renders the Clawspace clip as a real `<video>` (readyState 4, zero broken mp4-`<img>`), showing the dashboard frame; autoplay-in-view works in a real browser (the headless preview pauses IO, same caveat as Playground).
+- Note: the Clawspace entry has no `poster`, so the first frame is the still (fine). Add a `poster` if a specific still is wanted under reduced motion / before load.
+
+---
+
 ## Current state
 
 - Routes: `/`, `/work`, `/playground`, `/about` (a11y statement at `#accessibility`), `/accessibility`, `/design-system` — statically rendered, each with GSAP scroll-reveals (text + cards) layered on as client islands.
-- `/work` opens as a **full-screen hero** ("Driven by the craft. Defined by the details." + folder icon, sticky); the project content panel scrolls up and over it. The page is **left-anchored** — the sticky scroll-spy index pins to the left with a gap to a width-capped card column ([WorkShowcase.tsx](components/work/WorkShowcase.tsx)); each card shows Challenge + Services with **Role on a full-width row**, plus a **cover + optional media gallery** ([MediaGallery.tsx](components/ui/MediaGallery.tsx)).
+- `/work` opens as a **full-screen hero** ("Driven by the craft. Defined by the details." + folder icon, sticky); the project content panel scrolls up and over it. The page is **left-anchored** — the sticky scroll-spy index pins to the left with a gap to a width-capped card column ([WorkShowcase.tsx](components/work/WorkShowcase.tsx)); each card shows Challenge + Services with **Role on a full-width row**, plus a **cover + optional media gallery** ([MediaGallery.tsx](components/ui/MediaGallery.tsx)) — each item an image **or an autoplaying muted/looping video** (detected by extension in `MediaFigure`, like Playground; decisions D30).
 - `/playground` cards render **image or autoplaying muted/looping video** and **fade + rise in on scroll** (RevealStagger `fade`, IntersectionObserver-driven).
 - Motion: one global Lenis ↔ ScrollTrigger (`SmoothScroll` in the layout) that also **resets scroll to the top + recomputes Lenis/ScrollTrigger on every route change** (opens at top; fixes the cross-nav stuck-scroll) **and recomputes the Lenis limit on in-page content growth via a `body` ResizeObserver** (fixes the within-page stuck-scroll, D26); reusable `Reveal` / `RevealText` (SplitText) / `RevealStagger` (IntersectionObserver) primitives in [components/motion/](components/motion/); plugins registered once in [lib/gsap.ts](lib/gsap.ts). All reduced-motion + keyboard safe.
 - Hero: CSS-3D diorama (no WebGL deps). Nav: dynamic island — collapsed shows album art + a **looping EQ**; expands (hover / focus / tap) via a smooth box-morph to **four nav buttons spread edge-to-edge** (player reverted + archived); active pill shares the bar's `--island-radius`. The header corners are **adaptive frosted glass pills** (Email/in/gh + a round theme-toggle) that flip light/dark contents per the section under them (`header[data-tone]` via `useNavTone`, [lib/navTone.ts](lib/navTone.ts)), sitting behind a progressive `.nav-blur` band; the wordmark + clock are unpilled but tone-adaptive. Ambient glow + custom cursor + theme toggle global. Footer links: Design system · About · email.

@@ -162,6 +162,12 @@ Key technical/design decisions and their rationale. Each entry: what was decided
 - **Why / what didn't work:** the card always rendered `<img>`, so an `<img src="*.mp4">` silently failed to load. The user wanted the clip playing on mute as the card loads. First attempt reused the work MediaFigure "play in view" IntersectionObserver pattern, but the observer paused the freshly-mounted video before it could start — the native **`autoPlay`** attribute is the reliable way to autoplay muted video and doesn't depend on effect/observer timing.
 - **A11y:** the video is `aria-hidden` (the link's title + medium already name the card); muted + reduced-motion-paused keeps it honest (no sound, no forced motion).
 
+### D30. Work + teaser media auto-detect video by extension (unify with Playground) (2026-06-20)
+- **Decision:** [MediaFigure.tsx](components/ui/MediaFigure.tsx) (used by the Work `ProjectSection`, the `MediaGallery`, and the home `WorkTeaser`) now treats a `media.src` ending in `.mp4`/`.webm`/`.mov` as a **video** — rendering a muted/looping, `aria-hidden` `<video>` with an adjacent sr-only description — exactly like [PlaygroundCard] ([D24]). Playback is gated to viewport + motion-allowed via the shared `useInViewAutoplay` hook; reduced motion holds the poster / first frame.
+- **Why:** authors put the clip straight in `media.src` (e.g. the Clawspace project's `play-clawspace.mp4`), the same shape Playground uses — but MediaFigure only handled video through a separate `videoSrc` field (with `src` as the poster), so an `.mp4` in `src` rendered as a broken `<img src="*.mp4">` (nothing played). Detecting by extension gives one consistent convention across Work + Playground.
+- **Type change:** `MediaItem` dropped the **unused** `videoSrc` (no project ever set it) and gained an optional `poster?` (shown before/while a video `src` loads and under reduced motion; the first frame is used if omitted). `videoDescription?` stays for richer SR text.
+- **A11y / perf:** the video is `aria-hidden` (the card's heading/link already names it) with the description in an sr-only `<p>`; `preload="metadata"` keeps it off the critical path; `useInViewAutoplay` avoids decoding off-screen clips during scroll (replacing MediaFigure's old bespoke IntersectionObserver). Verified `npm run build` + Playwright/axe **25/25 green** — the new clips on `/work` and the home teaser don't regress contrast (a video isn't text).
+
 ## Motion — scroll reveals
 
 ### D17. Site-wide GSAP scroll-reveal system (2026-06-17)

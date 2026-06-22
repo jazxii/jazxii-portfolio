@@ -48,6 +48,7 @@ Generated from [ai-sdlc.md](ai-sdlc.md) (§4 templates + §5 roadmap). Newest sp
 - [x] CARD-046 · Adaptive glass-pill header + per-section tone flip (Juan Mora-style; `useNavTone` IntersectionObserver; footer flips header to light contents in light mode) (Phase 15, decisions D28)
 - [x] CARD-047 · Header + closing-banner responsive polish — fix mobile pill leak (unlayered `display` beat `.hidden`), memoji album art in the island, lighter mobile `.nav-blur` (footer name crisp), footer `min-h-svh`→`min-h-dvh` (iPhone full-bleed), desktop footer links stacked vertically (Phase 15 follow-up, decisions D29)
 - [x] CARD-048 · Fix CI axe `color-contrast` on the decorative "W…rk" watermark (light mode) — exclude `.work-letter` from the axe scan per WCAG 1.4.3 (pure decoration); full suite re-run **25/25 green** both themes (Phase 15 follow-up, decisions D3c)
+- [x] CARD-049 · Videos on the Work screen — `MediaFigure` auto-detects video by extension in `media.src` (`.mp4`/`.webm`/`.mov`) like Playground; `MediaItem` drops unused `videoSrc`, adds `poster?`; fixes Work + gallery + home teaser; build + axe **25/25 green** (Phase 16, decisions D30)
 
 > ✅ **Full loop re-run (2026-06-20, after CARD-048):** `npm run build` green + `npx playwright test` **25/25** (axe 0 violations, 6 routes × 2 themes). Earlier CARD-038–046 had only had tsc+eslint; the build + axe suite now pass. **Still open:** add an e2e assertion for the header tone-flip (`header[data-tone="dark"]` over the footer, CARD-046) — the new glass-pill colours already pass the axe matrix.
 
