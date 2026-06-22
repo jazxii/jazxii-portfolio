@@ -101,6 +101,7 @@ export const projects: Project[] = [
       "Knowledge graphs",
     ],
     role: "Designer & builder — 33-agent hierarchy, an append-only JSONL bus with custom MCP servers, a research-to-content pipeline, weekly self-evolution with audit/rollback, and a Next.js dashboard (WCAG 2.2 AA floor, Playwright + axe-core).",
+    repoUrl: "https://github.com/jazxii/clawspace-agents",
     context: "Independent project",
     media: {
       src: "/media/play-clawspace.mp4",

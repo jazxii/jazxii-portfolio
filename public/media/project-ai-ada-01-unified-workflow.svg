@@ -40,7 +40,7 @@
   <g transform="translate(160,390)">
     <rect width="930" height="100" rx="16" fill="#0E1230" stroke="#2E3470"/>
     <text x="24" y="40" class="lab" fill="#8F95C8">POWERED BY</text>
-    <text x="24" y="74" class="cap">Intelligent Auditor V2  ·  Graph RAG synthesis  ·  custom rule engine  ·  trend dashboards </text>
+    <text x="24" y="74" class="cap">Intelligent Auditor V2  ·  Graph RAG synthesis  ·  custom rule engine  ·  trend dashboards</text>
   </g>
 
   <text x="120" y="700" class="h" font-size="34">Accessibility AI Platform</text>
