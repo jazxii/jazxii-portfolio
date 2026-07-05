@@ -76,10 +76,10 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
-        # Repo is served at https://jazxii.github.io/jazxii-portfolio/ — this drives
-        # both next.config.ts (output: export + basePath) and the asset() helper.
+        # Served at the custom domain https://jazxii.com/ (root), so no basePath.
+        # STATIC_EXPORT drives output:"export" in next.config.ts.
         env:
-          NEXT_PUBLIC_BASE_PATH: /jazxii-portfolio
+          STATIC_EXPORT: "1"
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
