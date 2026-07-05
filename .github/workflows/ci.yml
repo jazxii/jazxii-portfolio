@@ -110,12 +110,12 @@ jobs:
           cache: npm
       - name: Setup Pages
         uses: actions/configure-pages@v6
-        # basePath / static export are self-managed in next.config.ts via
-        # NEXT_PUBLIC_BASE_PATH (set on the build step below).
+        # Static export is self-managed in next.config.ts via STATIC_EXPORT
+        # (set on the build step below). No basePath — prod serves at jazxii.com.
       - run: npm ci
       - name: Build static export
         env:
-          NEXT_PUBLIC_BASE_PATH: /jazxii-portfolio
+          STATIC_EXPORT: "1"
         run: npx next build
       - name: Upload preview build
         uses: actions/upload-artifact@v7
