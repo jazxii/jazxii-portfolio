@@ -14,9 +14,8 @@ export const metadata: Metadata = {
     "A live weekly AI program for experienced professionals, built on your own workflows instead of generic course content. Cohort 01 kicks off July 11, 2026.",
 };
 
-// TODO: swap for the MS Forms registration link once the form is live.
-const FORM_URL =
-  "mailto:jassimmohammed2910@gmail.com?subject=Field-Ready%20AI%20%E2%80%94%20Reserve%20my%20seat";
+// Cohort 01 registration — MS Form (closes July 9 EOD per the program plan).
+const FORM_URL = "https://forms.cloud.microsoft/r/JhnEFygTxL";
 
 /* ------------------------------------------------------------------ */
 /* Data                                                               */
@@ -192,7 +191,7 @@ export default function FieldReadyAiPage() {
           workflows
         </Reveal>
         <Reveal className="mt-8 flex flex-wrap items-center gap-3">
-          <ButtonLink href={FORM_URL} cursor="email">
+          <ButtonLink href={FORM_URL} external>
             Reserve your seat
           </ButtonLink>
           <ButtonLink href="#how-it-works" variant="ghost">
@@ -411,14 +410,14 @@ export default function FieldReadyAiPage() {
             become the course material.
           </Reveal>
           <Reveal className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <ButtonLink href={FORM_URL} cursor="email">
+            <ButtonLink href={FORM_URL} external>
               Reserve your seat
             </ButtonLink>
             <a
-              href="mailto:jassimmohammed2910@gmail.com"
+              href="mailto:jassim@jazxii.com"
               className="text-sm text-link underline underline-offset-4"
             >
-              jassimmohammed2910@gmail.com
+              jassim@jazxii.com
             </a>
           </Reveal>
         </div>
