@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tokenizer — live BPE</title>
+<style>
+  :root{
+    --ink:#101418; --panel:#181E24; --line:#2A323B;
+    --text:#F2EFE9; --dim:#8B959E; --faint:#4A545E;
+    --amber:#E8A13D;
+    --c0:#B8C4F2; --c1:#9AD9C0; --c2:#F2B8A0; --c3:#F0AFC7; --c4:#A9CDEF; --c5:#D8CFA8;
+    --k0:#1B2447; --k1:#0B3328; --k2:#47200F; --k3:#471428; --k4:#0E2C4A; --k5:#3A331A;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{background:var(--ink);}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    color:var(--text); background:var(--ink);
+    min-height:100vh; padding:40px 24px 64px;
+  }
+  .wrap{max-width:960px; margin:0 auto;}
+  .eyebrow{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--amber);
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:clamp(22px,3.4vw,34px); font-weight:600; letter-spacing:-0.01em;
+    margin-bottom:6px;
+  }
+  .sub{color:var(--dim); font-size:15px; margin-bottom:28px; max-width:640px; line-height:1.5;}
+
+  .presets{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .presets button{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:13px;
+    background:var(--panel); color:var(--text); border:1px solid var(--line);
+    padding:8px 14px; border-radius:6px; cursor:pointer;
+  }
+  .presets button:hover{border-color:var(--amber); color:var(--amber);}
+  .presets button:focus-visible, textarea:focus-visible, input:focus-visible{
+    outline:2px solid var(--amber); outline-offset:2px;
+  }
+
+  textarea{
+    width:100%; background:var(--panel); color:var(--text);
+    border:1px solid var(--line); border-radius:8px;
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:16px;
+    padding:14px 16px; line-height:1.6; resize:vertical; min-height:84px;
+  }
+
+  .dial{display:flex; align-items:center; gap:16px; margin:22px 0 26px;}
+  .dial label{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim);
+    white-space:nowrap;
+  }
+  .dial input[type=range]{flex:1; accent-color:var(--amber); height:28px;}
+  .dial .val{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:20px; font-weight:600; color:var(--amber); min-width:44px; text-align:right;
+  }
+
+  .stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; margin-bottom:30px;
+  }
+  .stat{background:var(--panel); padding:16px 20px;}
+  .stat .k{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:6px;}
+  .stat .v{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:32px; font-weight:600; line-height:1;
+  }
+  .stat .v.amber{color:var(--amber);}
+
+  .rowlabel{
+    display:flex; align-items:baseline; gap:12px; margin-bottom:10px;
+  }
+  .rowlabel .name{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim);
+  }
+  .rowlabel .note{font-size:13px; color:var(--faint);}
+  .strip{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:16px; margin-bottom:26px; line-height:2.5; word-break:break-all;
+    min-height:58px;
+  }
+  .byte{
+    display:inline-block; font-family:ui-monospace,Menlo,Consolas,monospace;
+    font-size:10px; color:var(--faint); background:var(--ink);
+    border:1px solid var(--line); border-radius:3px;
+    padding:1px 4px; margin:1px;
+  }
+  .tok{
+    display:inline-block; font-family:ui-monospace,Menlo,Consolas,monospace;
+    font-size:15px; padding:4px 7px; border-radius:5px; margin:2px 3px; white-space:pre;
+  }
+  .more{font-size:12px; color:var(--faint); font-style:italic;}
+
+  .log{
+    background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--amber);
+    border-radius:10px; padding:16px 20px;
+    font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px;
+    color:var(--dim); line-height:2;
+  }
+  .log .new{color:var(--amber);}
+  .foot{margin-top:26px; font-size:13px; color:var(--faint); line-height:1.6; max-width:640px;}
+
+  @media (max-width:620px){
+    .stats{grid-template-columns:1fr;}
+    body{padding:24px 14px 48px;}
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .tok{transition:background .2s ease;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Field-Ready AI · Session 2</p>
+  <h1>The Tokenizer</h1>
+  <p class="sub">The model never sees text — it sees numbers. Type anything, then turn the merge dial and watch Byte Pair Encoding compress raw bytes into tokens, most-frequent pair first. New token IDs start at 256.</p>
+
+  <div class="presets">
+    <button id="ex1">English</button>
+    <button id="ex2">Jargon</button>
+    <button id="ex3">Malayalam</button>
+    <button id="ex4">JSON</button>
+  </div>
+
+  <textarea id="inp" rows="3" spellcheck="false">the performance test ran and the performance report showed the performance drop</textarea>
+
+  <div class="dial">
+    <label for="mrg">Merges</label>
+    <input type="range" id="mrg" min="0" max="60" step="1" value="0">
+    <span class="val" id="mout">0</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Raw bytes (UTF-8)</div><div class="v" id="s-bytes">0</div></div>
+    <div class="stat"><div class="k">Tokens to the model</div><div class="v amber" id="s-toks">0</div></div>
+    <div class="stat"><div class="k">Compression</div><div class="v" id="s-comp">1.0×</div></div>
+  </div>
+
+  <div class="rowlabel"><span class="name">What UTF-8 sees</span><span class="note">every character as raw bytes, 0–255 · non-Latin scripts cost up to 3 bytes per character</span></div>
+  <div class="strip" id="bytesrow"></div>
+
+  <div class="rowlabel"><span class="name">What the model sees</span><span class="note">after the merges — this row is what you pay for</span></div>
+  <div class="strip" id="out"></div>
+
+  <div class="rowlabel"><span class="name">Merge dictionary</span><span class="note">which two IDs combined, in creation order</span></div>
+  <div class="log" id="dict">No merges yet — every token is one raw byte.</div>
+
+  <p class="foot">Teaching model only: this trains a fresh tokenizer on the textbox. Claude's real tokenizer uses the same mechanism, trained once on an enormous corpus and frozen — a vastly larger vocabulary. Real usage numbers live in Settings → Usage.</p>
+</div>
+
+<script>
+(function(){
+  var CH=['c0','c1','c2','c3','c4','c5'];
+  var EX={
+    ex1:'the performance test ran and the performance report showed the performance drop',
+    ex2:'JMeter JMX throughput p95 latency regression JMeter JMX baseline',
+    ex3:'\u0D2A\u0D4D\u0D30\u0D15\u0D1F\u0D28\u0D02 \u0D2A\u0D30\u0D3F\u0D36\u0D4B\u0D27\u0D28 \u0D2A\u0D4D\u0D30\u0D15\u0D1F\u0D28\u0D02',
+    ex4:'{\n  "status": "fail",\n  "value": 1240\n}'
+  };
+  var inp=document.getElementById('inp'), mrg=document.getElementById('mrg');
+
+  function train(bytes,n){
+    var seq=bytes.slice(), merges=[], next=256;
+    for(var i=0;i<n;i++){
+      var counts={}, best=null, bc=1;
+      for(var j=0;j<seq.length-1;j++){
+        var k=seq[j]+','+seq[j+1];
+        counts[k]=(counts[k]||0)+1;
+        if(counts[k]>bc){bc=counts[k]; best=k;}
+      }
+      if(!best) break;
+      var pr=best.split(',').map(Number), ns=[], j2=0;
+      while(j2<seq.length){
+        if(j2<seq.length-1 && seq[j2]===pr[0] && seq[j2+1]===pr[1]){ns.push(next); j2+=2;}
+        else{ns.push(seq[j2]); j2++;}
+      }
+      merges.push({id:next, pair:pr, count:bc});
+      seq=ns; next++;
+    }
+    return {seq:seq, merges:merges};
+  }
+
+  function expand(id,map){
+    if(id<256) return [id];
+    var m=map[id]; if(!m) return [id];
+    return expand(m.pair[0],map).concat(expand(m.pair[1],map));
+  }
+  function esc(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/ /g,'\u00B7').replace(/\n/g,'\u21B5');
+  }
+
+  function render(){
+    var txt=inp.value;
+    var bytes=Array.from(new TextEncoder().encode(txt));
+    var n=parseInt(mrg.value,10);
+    document.getElementById('mout').textContent=n;
+    var r=train(bytes,n);
+    var map={}; r.merges.forEach(function(m){map[m.id]=m;});
+
+    document.getElementById('s-bytes').textContent=bytes.length;
+    document.getElementById('s-toks').textContent=r.seq.length;
+    document.getElementById('s-comp').textContent=(r.seq.length?bytes.length/r.seq.length:1).toFixed(1)+'\u00D7';
+
+    var cap=400;
+    var bh=bytes.slice(0,cap).map(function(b){return '<span class="byte">'+b+'</span>';}).join('');
+    if(bytes.length>cap) bh+=' <span class="more">+'+(bytes.length-cap)+' more</span>';
+    document.getElementById('bytesrow').innerHTML=bh||'<span class="more">Type something above.</span>';
+
+    var dec=new TextDecoder();
+    var th=r.seq.map(function(id,i){
+      var s=esc(dec.decode(new Uint8Array(expand(id,map))));
+      var c=i%6;
+      return '<span class="tok" style="background:var(--k'+c+');color:var(--'+CH[c]+');">'+s+'</span>';
+    }).join('');
+    document.getElementById('out').innerHTML=th||'<span class="more">Type something above.</span>';
+
+    if(!r.merges.length){
+      document.getElementById('dict').textContent='No merges yet — every token is one raw byte.';
+    } else {
+      document.getElementById('dict').innerHTML=r.merges.slice(-10).map(function(m,idx,arr){
+        var s=esc(dec.decode(new Uint8Array(expand(m.id,map))));
+        var line=m.id+' \u2190 ('+m.pair[0]+', '+m.pair[1]+')  "'+s+'"  \u00D7'+m.count;
+        return idx===arr.length-1?'<span class="new">'+line+'</span>':line;
+      }).join('<br>');
+    }
+  }
+
+  inp.addEventListener('input',render);
+  mrg.addEventListener('input',render);
+  ['ex1','ex2','ex3','ex4'].forEach(function(k){
+    document.getElementById(k).addEventListener('click',function(){inp.value=EX[k]; render();});
+  });
+  render();
+})();
+</script>
+</body>
+</html>

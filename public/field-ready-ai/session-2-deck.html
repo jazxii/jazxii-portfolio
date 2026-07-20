@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field-Ready AI — Session 02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0E0E; --paper:#FAF6EF; --amber:#B3501F; --amber-lt:#F5A97E;
+    --steel:#57534A; --rule:#E6DFD0; --card:#FFFDF8; --dark-sub:#A7A39B;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0E1419;font-family:'Inter',system-ui,sans-serif;color:var(--ink)}
+  .deck{height:100%;display:flex;align-items:center;justify-content:center}
+  .slide{
+    display:none;width:min(96vw,170vh);aspect-ratio:16/9;background:var(--paper);
+    border-radius:16px;padding:4.5% 5.5%;position:relative;overflow:hidden;
+    flex-direction:column;justify-content:center;
+  }
+  .slide.active{display:flex}
+  .slide.dark{background:var(--ink);color:var(--paper)}
+
+  .eyebrow{font-size:clamp(11px,1.1vw,15px);letter-spacing:.22em;text-transform:uppercase;
+    font-weight:700;color:var(--amber);margin-bottom:1.2em}
+  .dark .eyebrow{color:var(--amber-lt)}
+  h1{font-family:'Inter Tight','Inter',sans-serif;font-weight:800;letter-spacing:-.02em;
+    font-size:clamp(34px,5vw,72px);line-height:1.04}
+  h2{font-family:'Inter Tight','Inter',sans-serif;font-weight:800;letter-spacing:-.015em;
+    font-size:clamp(26px,3.4vw,48px);line-height:1.1;margin-bottom:.7em}
+  .sub{font-size:clamp(14px,1.5vw,21px);color:var(--steel);font-weight:500;margin-top:1.2em;line-height:1.5}
+  .dark .sub{color:var(--dark-sub)}
+  .accent{color:var(--amber)}
+  .dark .accent{color:var(--amber-lt)}
+
+  ul.points{list-style:none;font-size:clamp(14px,1.6vw,22px);line-height:1.55}
+  ul.points li{padding-left:1.3em;position:relative;margin-bottom:.65em}
+  ul.points li::before{content:"";position:absolute;left:0;top:.52em;width:.42em;height:.42em;
+    background:var(--amber);border-radius:2px}
+  ul.points strong{font-weight:700}
+
+  .cards{display:flex;gap:2.2%;margin-top:1em}
+  .card{flex:1;background:var(--card);border:1.5px solid var(--rule);border-radius:16px;padding:1.4em 1.3em}
+  .dark .card{background:#212D37;border-color:#37444F}
+  .card .c-num{font-family:'Inter Tight';font-weight:800;font-size:clamp(20px,2.4vw,34px);color:var(--amber);margin-bottom:.35em}
+  .card .c-title{font-weight:700;font-size:clamp(15px,1.6vw,22px);margin-bottom:.4em;letter-spacing:-.01em}
+  .card .c-body{font-size:clamp(12px,1.25vw,17px);color:var(--steel);line-height:1.5}
+  .dark .card .c-body{color:var(--dark-sub)}
+
+  .statgrid{display:flex;gap:2.5%;margin-top:.5em}
+  .stat{flex:1;border-top:3px solid var(--amber);padding-top:.7em}
+  .stat .s-big{font-family:'Inter Tight';font-weight:800;font-size:clamp(30px,4.2vw,60px);letter-spacing:-.02em}
+  .stat .s-label{font-size:clamp(12px,1.3vw,17px);color:var(--steel);line-height:1.4;margin-top:.3em}
+  .dark .stat .s-label{color:var(--dark-sub)}
+
+  table{width:100%;border-collapse:collapse;font-size:clamp(12px,1.35vw,18px);margin-top:.6em}
+  th{text-align:left;font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);
+    font-weight:700;padding:.5em .8em;border-bottom:2px solid var(--ink)}
+  .dark th{border-bottom-color:var(--paper)}
+  td{padding:.62em .8em;border-bottom:1px solid var(--rule);line-height:1.4;vertical-align:top}
+  .dark td{border-bottom-color:#37444F}
+  td:first-child{font-weight:700;white-space:nowrap}
+
+  .quotebox{background:var(--ink);color:var(--paper);border-radius:16px;padding:1.5em 1.8em;
+    font-family:'Inter Tight';font-weight:700;font-size:clamp(18px,2.3vw,32px);line-height:1.35;
+    letter-spacing:-.01em;margin-top:1em}
+  .quotebox .accent{color:var(--amber-lt)}
+  .dark .quotebox{background:#212D37}
+
+  .demo-tag{display:inline-block;background:var(--amber);color:#fff;font-weight:700;
+    font-size:clamp(11px,1vw,14px);letter-spacing:.18em;text-transform:uppercase;
+    padding:.45em 1em;border-radius:999px;margin-bottom:1.1em}
+  .mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;background:#212D37;color:#F5A97E;
+    padding:.55em .9em;border-radius:8px;font-size:clamp(13px,1.4vw,19px);display:inline-block;margin-top:.5em}
+
+  .foot{position:absolute;bottom:3.2%;left:5.5%;right:5.5%;display:flex;justify-content:space-between;
+    font-size:clamp(10px,.95vw,13px);color:var(--steel);letter-spacing:.06em}
+  .dark .foot{color:var(--dark-sub)}
+  .counter{position:fixed;bottom:14px;right:22px;color:#5B6770;font-size:13px;font-family:'Inter';z-index:10}
+  .hint{position:fixed;bottom:14px;left:22px;color:#5B6770;font-size:12px;z-index:10}
+
+  .ladder{display:flex;flex-direction:column;gap:.7em;margin-top:.4em}
+  .rung{display:flex;align-items:center;gap:1.2em;background:var(--card);
+    border:1.5px solid var(--rule);border-radius:16px;padding:.85em 1.4em}
+  .rung .r-n{font-family:'Inter Tight';font-weight:800;font-size:clamp(18px,2vw,28px);color:var(--amber);width:1.4em}
+  .rung .r-t{font-weight:700;font-size:clamp(15px,1.7vw,23px);width:6.5em;letter-spacing:-.01em}
+  .rung .r-d{font-size:clamp(12px,1.3vw,17px);color:var(--steel);line-height:1.4;flex:1}
+
+  .illus-row{display:flex;gap:1.6%;margin-top:1em;align-items:stretch}
+  .illus-panel{flex:1;background:var(--card);border:1.5px solid var(--rule);border-radius:16px;
+    padding:1.1em .9em;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .illus-panel svg{width:64%;height:auto;margin-bottom:.7em}
+  .illus-panel .p-step{font-size:clamp(9px,.85vw,12px);letter-spacing:.2em;text-transform:uppercase;
+    font-weight:700;color:var(--amber);margin-bottom:.3em}
+  .illus-panel .p-title{font-family:'Inter Tight';font-weight:800;font-size:clamp(13px,1.5vw,21px);
+    letter-spacing:-.01em;margin-bottom:.3em}
+  .illus-panel .p-body{font-size:clamp(10px,1vw,14px);color:var(--steel);line-height:1.4}
+  .arrow-join{display:flex;align-items:center;font-size:clamp(16px,2vw,28px);color:var(--amber);font-weight:800}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 1 · TITLE -->
+<section class="slide dark active">
+  <p class="eyebrow">Session 02 · Field-Ready AI</p>
+  <h1>Meet the<br><span class="accent">Machine.</span></h1>
+  <p class="sub">How Claude actually works, what it costs, which version of it to use —<br>and your first proper brief, written by you.</p>
+  <div class="foot"><span>Field-Ready AI · Cohort 01</span><span>Session 02</span></div>
+</section>
+
+<!-- 2 · CREDIT THE ASK -->
+<section class="slide">
+  <p class="eyebrow">You asked, fairly</p>
+  <h2>"Consider us<br>as interns."</h2>
+  <div class="quotebox">So today is <span class="accent">nothing but the basics</span> —<br>the machine, the money, the tools. Then your hands on the keys.</div>
+  <p class="sub">Off-agenda questions → the parking lot link in chat. Everything gets answered — here or in the notes.</p>
+  <div class="foot"><span>Meet the Machine</span><span>02</span></div>
+</section>
+
+<!-- 3 · AGENDA -->
+<section class="slide">
+  <p class="eyebrow">The next 90 minutes</p>
+  <h2>Three questions, one lab.</h2>
+  <div class="cards">
+    <div class="card"><div class="c-num">01</div><div class="c-title">How does it work?</div><div class="c-body">The pipeline from your keyboard to an answer — and why it explains everything you've complained about.</div></div>
+    <div class="card"><div class="c-num">02</div><div class="c-title">What does it cost?</div><div class="c-body">Tokens, limits, the $20 question — and the one habit that saves more than all the tricks combined.</div></div>
+    <div class="card"><div class="c-num">03</div><div class="c-title">Which tool, when?</div><div class="c-body">Chat vs. Cowork vs. Code, and which model to hand which job.</div></div>
+    <div class="card"><div class="c-num">04</div><div class="c-title">The lab</div><div class="c-body">You write a real brief for a real task from your own week. This is the part that matters.</div></div>
+  </div>
+  <div class="foot"><span>Meet the Machine</span><span>03</span></div>
+</section>
+
+<!-- 4 · PIPELINE -->
+<section class="slide">
+  <p class="eyebrow">What happens when you hit enter</p>
+  <h2>Five boxes. Then a loop.</h2>
+  <div class="illus-row">
+    <div class="illus-panel">
+      <svg viewBox="0 0 100 60"><rect x="8" y="10" width="84" height="12" rx="3" fill="none" stroke="#0E0E0E" stroke-width="2.5"/><rect x="8" y="38" width="22" height="12" rx="3" fill="#B3501F"/><rect x="36" y="38" width="16" height="12" rx="3" fill="#F5A97E"/><rect x="58" y="38" width="34" height="12" rx="3" fill="#B3501F" opacity=".55"/></svg>
+      <div class="p-step">01</div><div class="p-title">Tokenizer</div><div class="p-body">Text becomes numbered chunks. The model never sees letters.</div>
+    </div>
+    <div class="arrow-join">→</div>
+    <div class="illus-panel">
+      <svg viewBox="0 0 100 60"><circle cx="30" cy="22" r="5" fill="#B3501F"/><circle cx="42" cy="30" r="5" fill="#B3501F"/><circle cx="34" cy="42" r="5" fill="#B3501F"/><circle cx="76" cy="18" r="5" fill="#0E0E0E" opacity=".35"/><circle cx="84" cy="46" r="5" fill="#0E0E0E" opacity=".35"/><ellipse cx="35" cy="31" rx="18" ry="16" fill="none" stroke="#B3501F" stroke-width="2" stroke-dasharray="4 3"/></svg>
+      <div class="p-step">02</div><div class="p-title">Embeddings</div><div class="p-body">Numbers become meaning — related concepts cluster together.</div>
+    </div>
+    <div class="arrow-join">→</div>
+    <div class="illus-panel">
+      <svg viewBox="0 0 100 60"><circle cx="15" cy="50" r="4.5" fill="#0E0E0E"/><circle cx="38" cy="50" r="4.5" fill="#0E0E0E"/><circle cx="62" cy="50" r="4.5" fill="#0E0E0E"/><circle cx="85" cy="50" r="4.5" fill="#0E0E0E"/><circle cx="50" cy="12" r="5.5" fill="#B3501F"/><path d="M15 46 L50 17 M38 46 L50 17 M62 46 L50 17 M85 46 L50 17" stroke="#B3501F" stroke-width="2" fill="none"/></svg>
+      <div class="p-step">03</div><div class="p-title">Transformer</div><div class="p-body">Every token asks every other: "how do you change my meaning?"</div>
+    </div>
+    <div class="arrow-join">→</div>
+    <div class="illus-panel">
+      <svg viewBox="0 0 100 60"><rect x="12" y="34" width="12" height="18" fill="#0E0E0E" opacity=".3"/><rect x="30" y="14" width="12" height="38" fill="#B3501F"/><rect x="48" y="26" width="12" height="26" fill="#0E0E0E" opacity=".45"/><rect x="66" y="42" width="12" height="10" fill="#0E0E0E" opacity=".25"/><rect x="84" y="46" width="10" height="6" fill="#0E0E0E" opacity=".18"/></svg>
+      <div class="p-step">04</div><div class="p-title">Probabilities</div><div class="p-body">Every token in the vocabulary gets a score. Then it samples one.</div>
+    </div>
+    <div class="arrow-join">→</div>
+    <div class="illus-panel">
+      <svg viewBox="0 0 100 60"><path d="M50 10 a20 20 0 1 1 -18 11" fill="none" stroke="#B3501F" stroke-width="3.5"/><path d="M28 14 L32 22 L22 24 Z" fill="#B3501F"/></svg>
+      <div class="p-step">05</div><div class="p-title">Decode &amp; loop</div><div class="p-body">One token out, appended to the input — and the whole thing runs again.</div>
+    </div>
+  </div>
+  <p class="sub">It didn't write you a paragraph. It picked one token, re-read everything, and did that a few hundred times.</p>
+  <div class="foot"><span>Meet the Machine</span><span>04</span></div>
+</section>
+
+<!-- 5 · TRANSFORMER MOMENT -->
+<section class="slide">
+  <p class="eyebrow">Why the transformer exists</p>
+  <h2>Same words. Opposite meaning.</h2>
+  <div class="quotebox">"I hate dogs."<br>"I <span class="accent">don't</span> hate dogs."</div>
+  <p class="sub">Nearly identical tokens — one word flips everything. Attention is the machinery that lets each word be changed by its neighbours. That's the "heart" of the model, and its most expensive part.</p>
+  <div class="foot"><span>Meet the Machine</span><span>05</span></div>
+</section>
+
+<!-- 6 · HALLUCINATION -->
+<section class="slide dark">
+  <p class="eyebrow">The question from Session 1</p>
+  <h2>Why is it confident<br>and wrong?</h2>
+  <ul class="points">
+    <li>It picks the most <strong>probable</strong> next token. Probable is not <strong>true</strong>.</li>
+    <li>A fabricated citation is probability-shaped text — same machinery, <strong>no alarm bell</strong>.</li>
+    <li>Confidence is a property of the <strong>sampling</strong>, not of the facts.</li>
+  </ul>
+  <div class="quotebox">Fluency is not knowledge.<br><span class="accent">Trust, but verify — structurally.</span></div>
+  <div class="foot"><span>Meet the Machine</span><span>06</span></div>
+</section>
+
+<!-- 7 · THE DESK -->
+<section class="slide">
+  <p class="eyebrow">Working memory</p>
+  <h2>The intern has a desk.</h2>
+  <div class="statgrid">
+    <div class="stat"><div class="s-big">RAM</div><div class="s-label">The context window is the model's working memory — everything it can "see" right now. (Karpathy's framing: LLM = CPU, context = RAM.)</div></div>
+    <div class="stat"><div class="s-big">Finite</div><div class="s-label">Every token attends to every other token. Attention is a budget, and every token you add competes for it.</div></div>
+    <div class="stat"><div class="s-big">Rot</div><div class="s-label">More context is not better context. Pile on "just in case" files and quality goes down, not up.</div></div>
+  </div>
+  <p class="sub">Three files that matter beat every file in the building. Which intern does better work?</p>
+  <div class="foot"><span>Meet the Machine</span><span>07</span></div>
+</section>
+
+<!-- 8 · DEMO: TOKENIZER -->
+<section class="slide">
+  <span class="demo-tag">Live demo</span>
+  <h2>What it actually sees.</h2>
+  <p class="sub" style="margin-top:.2em">First — a warm-up it shouldn't be able to fail:</p>
+  <span class="mono">Count how many times the digit 7 appears in: DEF-2077-CHK-7719</span>
+  <p class="sub">Then the tokenizer, live: raw bytes → merges → the tokens you pay for.<br>English vs. your jargon vs. Malayalam vs. JSON.</p>
+  <div class="foot"><span>tokenizer-demo.html</span><span>08</span></div>
+</section>
+
+<!-- 9 · THE MONEY -->
+<section class="slide">
+  <p class="eyebrow">What you actually pay for</p>
+  <h2>Everything. Re-sent.<br>Every message.</h2>
+  <ul class="points">
+    <li>Everything you type · every file you attach · <strong>your project instructions</strong> · <strong>the entire conversation so far</strong> — all re-sent, every single message.</li>
+    <li>There is <strong>no memory</strong>. The transcript <em>is</em> the memory.</li>
+    <li>Output tokens cost ~<strong>5×</strong> input tokens.</li>
+  </ul>
+  <div class="quotebox">Message 40 costs vastly more than message 1 —<br>it re-reads <span class="accent">all 39 before it</span>, for every token it writes.</div>
+  <div class="foot"><span>Meet the Machine</span><span>09</span></div>
+</section>
+
+<!-- 10 · DEMO: EXPENSIVE THREAD -->
+<section class="slide">
+  <span class="demo-tag">Live demo</span>
+  <h2>The expensive thread.</h2>
+  <p class="sub" style="margin-top:.2em">One question, asked twice:</p>
+  <span class="mono">quick one — what does p95 mean again?</span>
+  <p class="sub">Once in a fresh chat. Once at the bottom of an afternoon of triage —<br>two CSVs, ten rounds of analysis, two drafted emails.</p>
+  <div class="quotebox">Same eight words. ~100× the cost.<br><span class="accent">New task → new chat.</span> The biggest habit of the day.</div>
+  <div class="foot"><span>Demo 3</span><span>10</span></div>
+</section>
+
+<!-- 11 · HARNESS -->
+<section class="slide">
+  <p class="eyebrow">Sharpening last week's idea</p>
+  <h2>Brain vs. harness.</h2>
+  <div class="cards">
+    <div class="card"><div class="c-num">🧠</div><div class="c-title">The model</div><div class="c-body">Opus, Sonnet, Haiku, Fable — the brain. Lives on Anthropic's servers. Identical wherever you use it.</div></div>
+    <div class="card"><div class="c-num">⚙️</div><div class="c-title">The harness</div><div class="c-body">Everything around the brain: tools, permissions, how context gets assembled and pruned. Claude Code <em>is</em> the harness — terminal, desktop, VS Code, JetBrains are the same engine in different shells.</div></div>
+    <div class="card"><div class="c-num">🪜</div><div class="c-title">You, building one</div><div class="c-body">Project instructions and skills are hand-built harnesses. Last week's ladder — with the machinery now visible.</div></div>
+  </div>
+  <p class="sub">Same brain + different context = different behaviour. The model didn't change. The desk did.</p>
+  <div class="foot"><span>Meet the Machine</span><span>11</span></div>
+</section>
+
+<!-- 12 · PLANS & LIMITS -->
+<section class="slide">
+  <p class="eyebrow">The $20 question, answered</p>
+  <h2>Plans and limits, plainly.</h2>
+  <div class="statgrid">
+    <div class="stat"><div class="s-big">$20</div><div class="s-label">Claude Pro, per month. The Max tiers exist ($100/$200) — nobody here needs them yet.</div></div>
+    <div class="stat"><div class="s-big">5 hr</div><div class="s-label">Usage runs on a rolling 5-hour window, plus a weekly cap. No fixed message count.</div></div>
+    <div class="stat"><div class="s-big">1 pool</div><div class="s-label">Chat, Code, Cowork, mobile — one shared tank. Cowork and Code drain it faster.</div></div>
+    <div class="stat"><div class="s-big">OFF</div><div class="s-label">Usage credits: optional, and we turn them off on day one. Then Pro can never cost more than $20.</div></div>
+  </div>
+  <p class="sub">Don't subscribe yet — after the session we set up together, protections on from minute one.</p>
+  <div class="foot"><span>Meet the Machine</span><span>12</span></div>
+</section>
+
+<!-- 13 · SEVEN HABITS -->
+<section class="slide">
+  <p class="eyebrow">Saving usage — ranked by what actually works</p>
+  <h2>Seven habits. One is huge.</h2>
+  <table>
+    <tr><th>#</th><th>Habit</th><th>Why</th></tr>
+    <tr><td>1</td><td><strong>New task → new chat</strong></td><td>Bigger than everything below combined. Long threads re-read everything, every message.</td></tr>
+    <tr><td>2</td><td>Stable knowledge → project</td><td>Write the SOP once, not in every message.</td></tr>
+    <tr><td>3</td><td>Route by difficulty</td><td>Default model for routine work; escalate only when quality fails.</td></tr>
+    <tr><td>4</td><td>Right info, not all info</td><td>Extra context costs tokens and makes answers worse.</td></tr>
+    <tr><td>5</td><td>Extract before attaching</td><td>One table from a 50-page PDF? Pull the table out first.</td></tr>
+    <tr><td>6</td><td>Front-load the brief</td><td>One good brief beats ten rounds of "no, more like this."</td></tr>
+    <tr><td>7</td><td>Compact formats</td><td>CSV beats markdown tables; compact JSON beats pretty-printed.</td></tr>
+  </table>
+  <div class="foot"><span>Meet the Machine</span><span>13</span></div>
+</section>
+
+<!-- 14 · CHAT / COWORK / CODE -->
+<section class="slide">
+  <p class="eyebrow">Which tool, when</p>
+  <h2>Chat is a conversation.<br>Cowork and Code are handoffs.</h2>
+  <table>
+    <tr><th>You want to…</th><th>Use</th><th>Note</th></tr>
+    <tr><td>Think, draft, analyze, ask</td><td><strong>Chat</strong></td><td>Home base. 90% of your work.</td></tr>
+    <tr><td>Repeat a workflow with standing rules</td><td><strong>Project</strong></td><td>Instructions written once.</td></tr>
+    <tr><td>Hand off a whole task, come back to finished work</td><td><strong>Cowork</strong></td><td>Works only in folders you approve. Burns limits faster — use deliberately.</td></tr>
+    <tr><td>Work in a code repo</td><td><strong>Claude Code</strong></td><td>Its own session later — promised.</td></tr>
+  </table>
+  <div class="foot"><span>Meet the Machine</span><span>14</span></div>
+</section>
+
+<!-- 15 · MODELS -->
+<section class="slide">
+  <p class="eyebrow">Which model, when</p>
+  <h2>Your intern bench.</h2>
+  <table>
+    <tr><th>Model</th><th>Think of it as</th><th>Reach for it when</th></tr>
+    <tr><td>Haiku</td><td>Fast junior</td><td>Simple, well-defined, high-volume work</td></tr>
+    <tr><td>Sonnet</td><td>Solid mid-level — <strong>your default</strong></td><td>Most daily work</td></tr>
+    <tr><td>Opus</td><td>Principal engineer</td><td>Genuinely hard reasoning &amp; architecture</td></tr>
+    <tr><td>Fable</td><td>The frontier</td><td>Long-running, complex agent work</td></tr>
+  </table>
+  <div class="quotebox">Start on the default. Escalate when quality <span class="accent">actually fails</span> —<br>not preemptively. Opus-for-everything is how a week's allowance dies in a day.</div>
+  <div class="foot"><span>Meet the Machine</span><span>15</span></div>
+</section>
+
+<!-- 16 · LAB -->
+<section class="slide">
+  <span class="demo-tag">Hands-on · 15 min</span>
+  <h2>Brief your intern.</h2>
+  <div class="ladder">
+    <div class="rung"><div class="r-n">R</div><div class="r-t">Role</div><div class="r-d">Who should be doing this task? Activates the right expertise.</div></div>
+    <div class="rung"><div class="r-n">C</div><div class="r-t">Context</div><div class="r-d">The facts it can't guess — what a new hire would need to know first.</div></div>
+    <div class="rung"><div class="r-n">T</div><div class="r-t">Task</div><div class="r-d">One unambiguous verb. What exactly gets done.</div></div>
+    <div class="rung"><div class="r-n">F</div><div class="r-t">Format</div><div class="r-d">The shape of the deliverable — table, email, checklist.</div></div>
+    <div class="rung"><div class="r-n">E</div><div class="r-t">Example</div><div class="r-d">One row of "good." The single highest-leverage line in any brief.</div></div>
+  </div>
+  <p class="sub">One recurring task from your own week · synthetic data only · worksheet in the channel.</p>
+  <div class="foot"><span>The lab</span><span>16</span></div>
+</section>
+
+<!-- 17 · NEVER-LIST -->
+<section class="slide dark">
+  <p class="eyebrow">This one is law</p>
+  <h2>The never-list.</h2>
+  <ul class="points">
+    <li>Customer or production data — <strong>never</strong></li>
+    <li>Credentials, tokens, keys — <strong>never</strong></li>
+    <li>Proprietary source code — <strong>never</strong></li>
+    <li>Unreleased business information — <strong>never</strong></li>
+    <li>Colleagues' personal data — <strong>never</strong></li>
+  </ul>
+  <div class="quotebox">Personal account ≠ personal rules.<br><span class="accent">We work beside company policy, not around it.</span></div>
+  <div class="foot"><span>Meet the Machine</span><span>17</span></div>
+</section>
+
+<!-- 18 · CLOSE -->
+<section class="slide dark">
+  <p class="eyebrow">Three facts &amp; one homework</p>
+  <h2>Everything follows<br>from these.</h2>
+  <ul class="points">
+    <li>It predicts <strong>one token at a time</strong> — probable ≠ true, so verify what matters.</li>
+    <li>It <strong>re-reads everything, every time</strong> — new task, new chat.</li>
+    <li>Its desk <strong>gets worse when piled</strong> — right info, not all info.</li>
+  </ul>
+  <div class="quotebox">Homework: brief the app we build next —<br>who it's for · 3–5 features · what <span class="accent">"done"</span> looks like.<br>Post it in the channel. Next time, <span class="accent">your brief</span> is on screen.</div>
+  <div class="foot"><span>Field-Ready AI · Cohort 01</span><span>18</span></div>
+</section>
+
+</div>
+<div class="counter"><span id="cur">1</span> / <span id="tot"></span></div>
+<div class="hint">← → to navigate · F for fullscreen</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];let i=0;
+  document.getElementById('tot').textContent=slides.length;
+  function go(n){slides[i].classList.remove('active');i=(n+slides.length)%slides.length;
+    slides[i].classList.add('active');document.getElementById('cur').textContent=i+1;}
+  addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(i+1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);
+    if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+    if(e.key==='f'||e.key==='F')document.documentElement.requestFullscreen?.();
+  });
+  addEventListener('click',e=>{if(!e.target.closest('a'))go(i+1)});
+</script>
+</body>
+</html>

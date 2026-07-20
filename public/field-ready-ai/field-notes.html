@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Notes — Field-Ready AI</title>
+<meta name="description" content="Session notes, demos, and resources from Field-Ready AI — a hands-on cohort learning to work with AI the way you'd work with a brilliant intern.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0E0E; --paper:#FAF6EF; --amber:#B3501F; --amber-lt:#F5A97E;
+    --steel:#57534A; --rule:#E6DFD0; --card:#FFFDF8; --dark-sub:#A7A39B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+  a{color:var(--amber);text-decoration:none;border-bottom:1.5px solid var(--amber-lt)}
+  a:hover{border-bottom-color:var(--amber)}
+  .wrap{max-width:760px;margin:0 auto;padding:72px 24px 96px}
+
+  .eyebrow{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--amber);margin-bottom:14px}
+  h1{font-family:'Inter Tight',sans-serif;font-weight:800;letter-spacing:-.02em;font-size:clamp(36px,6vw,56px);line-height:1.05;margin-bottom:18px}
+  .lede{font-size:19px;color:var(--steel);font-weight:500;max-width:600px}
+
+  .entry{margin-top:84px;padding-top:44px;border-top:3px solid var(--ink)}
+  .e-date{font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--steel);margin-bottom:8px}
+  h2{font-family:'Inter Tight',sans-serif;font-weight:800;letter-spacing:-.015em;font-size:clamp(28px,4vw,40px);line-height:1.1;margin-bottom:14px}
+  h3{font-family:'Inter Tight',sans-serif;font-weight:800;letter-spacing:-.01em;font-size:21px;margin:40px 0 12px}
+  p{margin-bottom:14px}
+  p.dim{color:var(--steel)}
+
+  ul.pts{list-style:none;margin:6px 0 18px}
+  ul.pts li{padding-left:1.35em;position:relative;margin-bottom:.6em}
+  ul.pts li::before{content:"";position:absolute;left:0;top:.55em;width:.4em;height:.4em;background:var(--amber);border-radius:2px}
+
+  .quote{background:var(--ink);color:var(--paper);border-radius:14px;padding:26px 30px;
+    font-family:'Inter Tight';font-weight:700;font-size:clamp(18px,2.6vw,24px);line-height:1.4;
+    letter-spacing:-.01em;margin:26px 0}
+  .quote .accent{color:var(--amber-lt)}
+
+  .rescard{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;padding:20px 24px;margin-bottom:14px}
+  .rescard .r-t{font-weight:700;font-size:17px;margin-bottom:4px}
+  .rescard .r-d{font-size:15px;color:var(--steel)}
+  .tag{display:inline-block;background:var(--amber);color:#fff;font-weight:700;font-size:11px;
+    letter-spacing:.16em;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+  .mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;background:#212D37;color:#F5A97E;
+    padding:12px 16px;border-radius:8px;font-size:14.5px;display:block;margin:12px 0;overflow-x:auto;white-space:pre-wrap}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0 20px}
+  th{text-align:left;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);
+    font-weight:700;padding:8px 12px;border-bottom:2px solid var(--ink)}
+  td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+  td:first-child{font-weight:700;white-space:nowrap}
+
+  .placeholder{background:#FFF3E8;border:2px dashed var(--amber);border-radius:10px;padding:14px 18px;
+    font-weight:700;color:var(--amber);margin:16px 0;font-size:15px}
+
+  .foot{margin-top:90px;padding-top:28px;border-top:1.5px solid var(--rule);
+    font-size:14px;color:var(--steel);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Field-Ready AI · Cohort 01</p>
+  <h1>Field Notes.</h1>
+  <p class="lede">A hands-on cohort learning to work with AI the way you'd work with a brilliant intern — briefing, delegating, verifying, and building repeatable systems. Notes, demos, and resources from every session live here.</p>
+
+  <!-- ============ SESSION 02 ============ -->
+  <article class="entry" id="session-02">
+    <p class="e-date">Session 02 · July 18, 2026</p>
+    <h2>Meet the Machine</h2>
+    <p class="dim">The fundamentals session — requested by the cohort, delivered in full. How an LLM actually works, what tokens are and why they're your bill, how the harness shapes behaviour, plans and limits in plain terms — a proper introduction to Claude itself. The fundamentals earned the whole session: briefing and ground rules move to next time, where the app build begins.</p>
+
+    <div class="rescard"><div class="r-t"><a href="https://jazxii-my.sharepoint.com/:v:/p/jassim/IQCA6hywRizgQr27ZVucNVCiAdUcFhNnXYxon5IPUVxrMAE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=TLW8tt">Session recording →</a></div><div class="r-d">Field-Ready AI — Claude Fundamentals (July 18, 2026). Hosted on SharePoint; viewing may require sign-in.</div></div>
+
+    <h3>The whole session in three facts</h3>
+    <div class="quote">It predicts <span class="accent">one token at a time</span> — probable is not true, so verify what matters.<br><br>It <span class="accent">re-reads everything, every time</span> — there is no memory; the transcript is the memory. New task → new chat.<br><br>Its desk <span class="accent">gets worse the more you pile on</span> — more context is not better context.</div>
+
+    <h3>What we covered</h3>
+    <ul class="pts">
+      <li><strong>The pipeline.</strong> Tokenizer → embeddings → transformer → probabilities → decode, then loop. The model picks one token, re-reads everything, and repeats — a few hundred times per answer.</li>
+      <li><strong>Why it's confident and wrong.</strong> It selects the most <em>probable</em> next token, and probable ≠ true. Fluency is not knowledge; confidence is a property of the sampling, not the facts.</li>
+      <li><strong>The desk.</strong> The context window is working memory. Attention is a finite budget, and overloading it makes answers worse — context rot is real.</li>
+      <li><strong>The tokenizer.</strong> Byte Pair Encoding merges whatever was frequent — so specialist jargon fragments expensively, and non-English scripts pay twice (heavier bytes, fewer merges).</li>
+      <li><strong>The money.</strong> Everything — your text, your files, your project instructions, the whole conversation — is re-sent on every message. Long threads grow expensive cumulatively.</li>
+      <li><strong>The harness.</strong> The model is the brain; the harness is everything around it — tools, permissions, and how context reaches the desk. Writing project instructions is hand-building a harness.</li>
+      <li><strong>Plans, plainly.</strong> Pro is $20/month; usage runs on a rolling 5-hour window plus a weekly cap, from one shared pool. With optional usage credits switched off, $20 is a hard ceiling.</li>
+      <li><strong>Tools and models.</strong> Chat is a conversation; Cowork and Code are handoffs. Start on the default model; escalate only when quality actually fails.</li>
+    </ul>
+
+    <h3>Demos you can run yourself</h3>
+
+    <div class="rescard">
+      <div class="r-t"><a href="./session-2-tokenizer-demo.html">The live tokenizer →</a></div>
+      <div class="r-d">Watch Byte Pair Encoding compress raw bytes into tokens, merge by merge. Try the presets — plain English vs. technical jargon vs. Malayalam vs. JSON — then type a sentence from your own week and see what it costs.</div>
+    </div>
+
+    <div class="rescard">
+      <div class="r-t">The expensive thread</div>
+      <div class="r-d">Ask a trivial question in a fresh chat, then ask the identical question at the bottom of a long working thread with files attached. Same words — roughly a hundred times the cost, because the whole thread is re-read for every token of the reply. The single biggest habit that follows: <strong>new task → new chat.</strong>
+      <span class="mono">quick one — what does p95 mean again?</span></div>
+    </div>
+
+    <div class="rescard">
+      <div class="r-t">Bare chat vs. a project</div>
+      <div class="r-d">Ask "is this result acceptable?" in an empty chat and you get a hedge. Ask inside a project holding your standing rules and baseline file, and you get a verdict in your mandated format. Same model — different desk.</div>
+    </div>
+
+            <h3>The habits, ranked</h3>
+    <ul class="pts">
+      <li><strong>New task → new chat</strong> — bigger than everything below combined.</li>
+      <li>Stable knowledge lives in a project, written once.</li>
+      <li>Route by difficulty — default model first, escalate on actual failure.</li>
+      <li>Right information, not all information.</li>
+      <li>Extract before you attach.</li>
+      <li>Front-load the brief; don't negotiate over ten rounds.</li>
+      <li>Compact formats — CSV beats pretty-printed anything.</li>
+    </ul>
+
+    <h3>Coming next</h3>
+    <p class="dim">The parts the fundamentals deliberately made room for: how to build a proper brief (the onboarding conversation you'd have with a new hire), the ground rules for what never goes into a personal AI account — and then the build begins: a todo/calendar app, created together from a real brief, once everyone's subscription is set up.</p>
+
+    <h3>Resources</h3>
+    <div class="rescard"><div class="r-t"><a href="./session-2-deck.html">Session 2 slides →</a></div><div class="r-d">The full deck. Arrow keys to navigate, F for fullscreen.</div></div>
+    <div class="rescard"><div class="r-t"><a href="./session-2-excalidrawimg.png">The whiteboard sketch →</a></div><div class="r-d">The pipeline drawn live — prompt → tokenizer → embeddings → transformer (PNG, 3.9&nbsp;MB). The <a href="./session-2.excalidraw" download>Excalidraw source file</a> is here too.</div></div>
+
+    <h3>Before next session</h3>
+    <p>Subscriptions get set up together — Claude Pro, with usage credits switched off from minute one so $20 stays a hard ceiling. Then the building starts.</p>
+  </article>
+
+  <!-- ============ SESSION 01 ============ -->
+  <article class="entry" id="session-01">
+    <p class="e-date">Session 01 · July 11, 2026</p>
+    <h2>Meet the Intern</h2>
+    <p class="dim">The kickoff — where the cohort is, where it's going, and the one mental model everything else hangs on. One real workflow, run four ways, in twenty-five minutes.</p>
+
+    <div class="rescard"><div class="r-t"><a href="https://jazxii-my.sharepoint.com/:v:/p/jassim/IQBePCMcNWdDSL3WLCd2X1xCASW5dqQ2zKd0Ce2rU3w81TQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=oeGCD8">Session recording →</a></div><div class="r-d">Meet the Intern — where you are, where we're going (July 11, 2026). Hosted on SharePoint; viewing may require sign-in.</div></div>
+
+    <h3>The problem this program answers</h3>
+    <p>Every week brings a new tool, a new model, a new thing you're apparently already behind on. Chasing that firehose is a losing game — so this program inverts it:</p>
+    <div class="quote">Instead of you catching up with AI,<br><span class="accent">AI catches up with your work.</span></div>
+
+    <h3>The room</h3>
+    <p>Everyone in this cohort already uses AI weekly. Between them they've tried five-plus tools, and one has already shipped a working app with AI. So there is no beginner script here — the wall this group has hit isn't <em>using</em> AI, it's making it <strong>repeatable</strong>: for themselves, and for their teams. When asked where the program should go, the vote was unanimous — agents and automation, rolling AI out to teams, documents and data, evaluating tools.</p>
+    <div class="quote">That's not my curriculum.<br><span class="accent">That's yours.</span></div>
+
+    <h3>The one mental model</h3>
+    <div class="quote">Working with AI is managing a <span class="accent">brilliant intern</span> — tireless, has read everything, knows nothing about your business until you brief it. And confident even when it's wrong — which is why its work never ships unreviewed.</div>
+    <p>The good news: if you've ever worked with an intern, you already have the core skill — delegation. Brief well, give context, review the work. This program just points that skill at a new hire. As one of the cohort put it in the room — <em>"consider us as interns."</em> That framing shaped everything that followed, including Session 2 itself.</p>
+
+    <h3>The ladder</h3>
+    <p>The program's spine — four steps, each trading a little setup for a lot of repeatability:</p>
+    <table>
+      <tr><th>Step</th><th>What it is</th><th>What changes</th></tr>
+      <tr><td>1 · Prompt</td><td>You brief the intern every time</td><td>Works — but you re-explain everything, every time</td></tr>
+      <tr><td>2 · Project</td><td>A permanent job description</td><td>Instructions and reference files written once, applied always</td></tr>
+      <tr><td>3 · Skill</td><td>The intern owns the whole SOP</td><td>The entire procedure, packaged and callable on demand</td></tr>
+      <tr><td>4 · Agent</td><td>The intern runs it unprompted</td><td>Watches the folder, executes the SOP without being asked</td></tr>
+    </table>
+
+    <h3>The demo: one workflow, three ways</h3>
+    <p>A real performance-engineering workflow — post-test reporting and baseline comparison — run live on synthetic data, up the first three steps of the ladder:</p>
+    <ul class="pts">
+      <li><strong>Step 1 — the prompt.</strong> Baseline and cycle results attached, the full SOP pasted as one long brief. It caught the planted story: a critical +42% regression on the checkout-payment path, a search endpoint breaching its P90 and throughput targets, an error-rate spike — and one transaction that had genuinely <em>improved</em>. Then the limitation, out loud: nobody retypes that paragraph every cycle. So don't.</li>
+      <li><strong>Step 2 — the project.</strong> Same rules written once as project instructions. New cycle attached, and the only thing typed was <em>"Here are this cycle's results."</em> It flagged the new regressions — including a +31% slowdown on a revenue path — and noticed something subtler: last cycle's critical issue was back at baseline. The fix, confirmed. That's half of why baselines exist.</li>
+      <li><strong>Step 3 — the skill.</strong> The whole SOP — validation rules, thresholds, severity, report format — written in plain English in a skill file. Not code. And not hand-written either: it was built by describing the SOP to Claude in one conversation. Fresh chat, files attached, one sentence — <em>"Process this cycle's results."</em> — and out came a downloadable Excel report you'd attach to a stakeholder email.</li>
+    </ul>
+    <div class="quote">One sentence in, a stakeholder-ready file out.<br>That's the difference between <span class="accent">using AI</span> and <span class="accent">owning a workflow</span>.</div>
+    <p class="dim">And wherever the AI stumbled along the way, that was part of the lesson, not a blooper: trust, but verify. The engineer stays in the loop — that's a feature of the ladder, not a bug.</p>
+
+    <h3>How the program runs</h3>
+    <ul class="pts">
+      <li><strong>Saturdays, live</strong> — working sessions on the cohort's actual workflows, not lectures.</li>
+      <li><strong>Field Notes within 48 hours</strong> — recording, notes, and every prompt shown, so nobody takes notes in the room.</li>
+      <li><strong>Light homework</strong> — designed to surface material for the next session.</li>
+      <li><strong>1:1s between sessions</strong> — a small cohort means real bandwidth.</li>
+    </ul>
+
+    <h3>Decisions made together</h3>
+    <ul class="pts">
+      <li>Fundamentals first — the cohort asked, Session 2 delivered.</li>
+      <li>Personal subscriptions set up together, after the fundamentals, with cost protections on from day one.</li>
+      <li>A shared channel as the home for notes, questions, and resources.</li>
+      <li>After fundamentals: building an app together, to see the full thought process of building with AI.</li>
+      <li>Standing recording rule: no company or client names.</li>
+    </ul>
+
+    <h3>Resources</h3>
+    <div class="rescard"><div class="r-t"><a href="./session-1-deck.html">Session 1 slides →</a></div><div class="r-d">The full deck. Arrow keys to navigate, F for fullscreen.</div></div>
+
+    <h3>Homework</h3>
+    <p>The Delegation Diary: through the week, any moment you catch yourself thinking <em>"an intern could have done the first 80% of this"</em> — write it down. Two minutes a day. Those entries are the raw material the ladder gets climbed with.</p>
+  </article>
+
+  <div class="foot">
+    <span>Field-Ready AI · Field Notes</span>
+    <span><a href="https://www.jazxii.com">jazxii.com</a></span>
+  </div>
+
+</div>
+</body>
+</html>
